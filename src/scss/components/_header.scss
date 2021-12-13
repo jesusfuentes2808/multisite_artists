@@ -1,0 +1,135 @@
+.vtr__header {
+	padding: size(15) 0;
+	position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+	background-color: var(--brandPrimary);
+	box-shadow: 0 size(1) size(3) var(--black-06);
+	transition: background-color .3s ease-in-out, box-shadow .3s ease-in-out;
+    z-index: 2000;
+	.vtr__container {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+	&__logo {
+		img {
+            width: size(60);
+        }
+	}
+	&__menu {
+		@include minw($mq-md) {
+			display: flex;
+			align-items: center;
+		}
+		@include maxw($mq-md) {
+			position: absolute;
+			top: 100%;
+			left: 0;
+			opacity: 0;
+			visibility: hidden;
+			overflow-y: auto;
+			width: 100%;
+			background: var(--brandPrimary);
+			height: calc(100vh - 75px);
+			transition: all .3s ease-in-out;
+		}
+		&.active {
+			@include maxw($mq-md) {
+				opacity: 1;
+				visibility: visible;
+			}
+		}
+		ul {
+			margin: 0;
+			padding: 0;
+			li {
+				list-style: none;
+				a {
+					text-decoration: none;
+				}
+			}
+		}
+		& > ul {
+			@include minw($mq-md) {
+				display: flex;
+				align-items: center;
+			}
+			& > li {
+				margin-right: size(25);
+				@include maxw($mq-md) {
+					position: relative;
+					margin-right: 0;
+				}
+				&:last-child {
+					margin-right: 0;
+				}
+				& > a {
+					display: inline-block;
+					text-decoration: none;
+					color: var(--white);
+					font-size: size(18);
+					padding: size(20) 0 size(20) size(20);
+					@include minw($mq-md) {
+						padding: size(25) 0;
+						color: var(--white);
+						position: relative;
+						transition: color ease-in-out .3s;
+					}
+				}
+				&:hover {
+					&.menu-item-has-children > a:after {
+						@include minw($mq-md) {
+							opacity: 1;
+							visibility: visible;
+							transform: translate(-50%,0);
+						}
+					}
+					.sub-menu {
+						@include minw($mq-md) {
+							opacity: 1;
+							visibility: visible;
+							transform: translateY(0);
+						}
+					}
+					& > a {
+						@include minw($mq-md) {
+							color: var(--brandThird);
+						}
+					}
+				}
+				&.current-menu-item a,
+				&.current_page_item a {
+					color: var(--brandThird);
+				}
+			}
+		}
+	}
+	&__hamburguer {
+		width: size(55);
+		position: relative;
+		right: size(-9);
+		@include minw($mq-md) {
+			display: none;
+		}
+		svg {
+			path {
+				transition: all .3s ease-in-out;
+			}
+		}
+		&.active {
+			svg {
+				#top-line {
+					transform: translateX(7px) translateY(35px) rotate(-45deg);
+				}
+				#middle-line {
+					opacity: 0;
+				}
+				#bottom-line {
+					transform: translateX(35px) translateY(-21px) rotate(45deg);
+				}
+			}
+		}
+	}
+}

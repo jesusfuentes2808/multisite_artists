@@ -1,0 +1,13 @@
+@import "variables";
+
+// load plugins
+//@import "../node_modules/normalize.css/normalize.css";
+
+// add mixins
+@import "mixin/_general";
+
+// local styles
+@import "plugins_custom/_general";
+@import "base/_general";
+@import "components/_general";
+@import "pages/_general";

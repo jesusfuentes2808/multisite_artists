@@ -1,0 +1,28 @@
+//image
+$imgs: '../images/';
+
+//size
+$base-size: 16;
+
+//fonts
+$font-path: '../fonts/';
+$gorditaBold: "Gordita-Bold", sans-serif;
+$gorditaMedium: "Gordita-Medium", sans-serif;
+$gorditaRegular: "Gordita-Regular", sans-serif;
+
+:root {
+    --white: #fff;
+    --white-08:  rgba(255, 255, 255, 0.8);
+    --white-06:  rgba(255, 255, 255, 0.6);
+    --white-03:  rgba(255, 255, 255, 0.3);
+    --white-02:  rgba(255, 255, 255, 0.2);
+    --black: #000;
+    --black-06:  rgba(0, 0, 0, 0.3);
+    --brandPrimary: #330D69;
+    --brandSecondary: #30C9CD;
+    --brandThird: #E2581B;
+    --brandFour: #AF48DB;
+    --error: #FF0000;
+    --success: #00AB30;
+    --disabled: #D8D8D8;
+}

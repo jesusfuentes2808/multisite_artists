@@ -1,0 +1,52 @@
+.vtr__footer {
+    background: var(--brandPrimary);
+    padding: size(50) 0;
+    .vtr__item {
+        h4 {
+            color: var(--white);
+            margin: 0 0 size(20);
+        }
+        ul {
+            margin: 0;
+            padding: 0;
+            li {
+                list-style: none;
+                &:not(:last-child) {
+                    margin: 0 0 size(15);
+                }
+                a {
+                    color: var(--white);
+                    transition: all .3s;
+                    &:hover {
+                        color: var(--brandThird);
+                    }
+                }
+            }
+        }
+    }
+    &__bottom {
+        margin-top: size(60);
+        p {
+            text-align: center;
+            color: var(--white);
+            margin: 0 0 size(15);
+        }
+        ul {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 0;
+            padding: 0;
+            li {
+                list-style: none;
+                margin: size(10) size(10) 0;
+                a {
+                    display: block;
+                    img {
+                        width: size(30);
+                    }
+                }
+            }
+        }
+    }
+}

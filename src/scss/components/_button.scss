@@ -1,0 +1,20 @@
+.vtr__button {
+    background: transparent linear-gradient(90deg,var(--brandFour),var(--brandThird)) 0 0;
+    box-shadow: 0px 10px 15px #00000029;
+    border-radius: 35px;
+    width: auto;
+    min-width: size(280);
+    color: var(--white);
+    padding: size(17) size(10);
+    font-size: size(16);
+    transition: all .3s;
+    @include minw($mq-md) {
+        min-width: size(300);
+    }
+    @include maxw($mq-md) {
+        font-size: size(14);
+    }
+    &:hover {
+        box-shadow: initial;
+    }
+}

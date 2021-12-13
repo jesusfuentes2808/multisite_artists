@@ -1,0 +1,368 @@
+::selection {
+	background: rgba(0, 0, 0, 0.8);
+	color: #fff;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+* {
+	outline: none !important;
+	box-sizing: border-box;
+}
+
+html {
+	font-size: $base-size + px;
+}
+
+body {
+	min-height: 100vh;
+    overflow-x: hidden;
+    font-family: $gorditaRegular;
+    &.mb-scroll {
+		@include maxw($mq-md) {
+			overflow: hidden;
+		}
+	}
+}
+
+i {
+	display: inline-block;
+}
+
+img {
+	display: block;
+	max-width: 100%;
+	height: auto;
+}
+
+iframe,
+video {
+    display: block;
+    width: 100%;
+}
+
+button {
+    padding: 0;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+}
+
+h1, h2, h3, h4, h5 {
+	font-family: $gorditaBold;
+}
+
+p {
+    font-family: $gorditaRegular;
+    font-size: size(16);
+    line-height: size(23);
+    color: var(--black);
+}
+
+strong {
+    font-family: $gorditaBold;
+}
+
+ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+.vtr__container {
+    width: 100%;
+    max-width: size(1240);
+    padding: 0 size(20);
+    margin: 0 auto;
+}
+
+.vtr__title {
+    font-size: size(24);
+    line-height: size(26);
+    color: var(--white);
+    font-family: $gorditaRegular;
+    font-weight: 400;
+    position: relative;
+    z-index: 1;
+    margin: 0 0 size(25);
+    @include maxw($mq-md) {
+        font-size: size(22);
+        line-height: size(24);
+    }
+    &--line {
+        span {
+            display: table;
+            position: relative;
+            z-index: 2;
+            padding-right: size(30);
+            background-color: var(--brandPrimary);
+            @include maxw($mq-md) {
+                padding-right: 0;
+                background-color: transparent;
+            }
+        }
+        &:after {
+            content: "";
+            display: block;
+            width: 100%;
+            height: size(2);
+            position: absolute;
+            bottom: size(3);
+            right: 0;
+            background-color: var(--white);
+            @include maxw($mq-md) {
+                content: none;
+            }
+        }
+    }
+}
+
+.vtr__card {
+    position: relative;
+    border-radius: size(10);
+    padding: size(15);
+    overflow: hidden;
+    @include maxw($mq-md) {
+        padding: size(10);
+    }
+    &:after {
+        content:"";
+        display: block;
+        width: 100%;
+        height: 100%;
+        background: #FFFFFF 0% 0% no-repeat ;
+        border: 1px solid #707070;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0.05;
+    }
+    &__image {
+        width: 100%;
+        position: relative;
+        border-radius: size(10);
+        overflow: hidden;
+        & > img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .type {
+            position: absolute;
+            top: size(10);
+            right: size(10);
+            img {
+                width: size(30);
+            }
+        }
+    }
+    &__info {
+        position: relative;
+        z-index: 1;
+        padding-bottom: size(55);
+        &__top {
+            .sub-title,
+            .reproductions {
+                font-family: $gorditaRegular;
+                font-weight: 400;
+            }
+            .title,
+            .sub-title {
+                color: var(--white);
+            }
+            .title {
+                font-family: $gorditaMedium;
+                font-weight: 500;
+                font-size: size(18);
+                line-height: size(22);
+                margin: size(10) 0 size(7);
+                text-overflow: ellipsis;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                display: -webkit-box;
+            }
+            .sub-title {
+                font-size: size(16);
+                line-height: size(22);
+                margin: 0 0 size(7);
+                @include maxw($mq-md) {
+                    font-size: size(14);
+                    line-height: size(20);
+                }
+            }
+            .reproductions {
+                color:var(--white-06);
+                font-size: size(14);
+                @include maxw($mq-md) {
+                    font-size: size(12);
+                }
+
+            }
+            .follo-popu {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap;
+                margin: size(10) 0 0;
+                .followers,
+                .popular {
+                    width: 50%;
+                    padding: 0 size(5);
+                    @include maxw($mq-md) {
+                        width: 100%;
+                    }
+                }
+                .followers {
+                    border-right: size(1) solid var(--white);
+                    @include maxw($mq-md) {
+                        border-right: 0;
+                        border-bottom: size(1) solid var(--white);
+                        margin-bottom: size(10);
+                        padding-bottom: size(10);
+                    }
+                }
+                .number {
+                    color: var(--white);
+                    font-size: size(14);
+                    text-align: center;
+                    display: block;
+                }
+                .text {
+                    color: var(--white-06);
+                    font-size: size(13);
+                    text-align: center;
+                    display: block;
+                    margin: size(5) 0 0;
+                    @include maxw($mq-md) {
+                        font-size: size(12);
+                    }
+                }
+                .boxs {
+                    display: flex;
+                    justify-content: center;
+                    margin-bottom: size(6);
+                    .box {
+                        width: size(15);
+                        height: size(15);
+                        margin: 0 size(1.5);
+                        border-radius: 50%;
+                        background: var(--white);
+                    }
+                }
+            }
+        }
+    }
+    &__bottom {
+        position: absolute;
+        bottom: size(15);
+        left: 0;
+        right: 0;
+        width: calc(100% - 20px);
+        margin: 0 auto;
+        z-index: 1;
+        .button {
+            font-family: $gorditaRegular;
+            font-weight: 400;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            background: var(--white-02);
+            border-radius: size(10);
+            min-height: size(40);
+            font-size: size(16);
+            line-height: size(18);
+            padding: 0 size(10);
+            text-align: center;
+            color: var(--white);
+            transition: all .3s;
+            @include maxw($mq-md) {
+                font-size: size(13);
+            }
+            &:hover {
+                background: var(--white);
+                color: var(--brandPrimary);
+            }
+        }
+    }
+    &--playlist {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .vtr__card__image {
+            width: size(60);
+            height: size(57);
+        }
+        .vtr__card__info {
+            width: calc(100% - 60px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 0;
+            &__top {
+                padding: 0 size(10);
+                width: calc(100% - 48px);
+                @include maxw($mq-md) {
+                    width: calc(100% - 40px);
+                }
+                .title {
+                    font-family: $gorditaRegular;
+                    font-weight: 400;
+                    margin: 0 0 size(5);
+                    font-size: size(16);
+                    line-height: size(20);
+                    @include maxw($mq-md) {
+                        font-size: size(15);
+                        line-height: size(18);
+                    }
+                }
+                .sub-title {
+                    margin: 0;
+                    font-size: size(13);
+                    line-height: size(16);
+                    @include maxw($mq-md) {
+                        font-size: size(12);
+                        line-height: size(15);
+                    }
+                }
+            }
+            &__add {
+                background: var(--white-03) 0% 0% no-repeat padding-box;
+                border-radius: size(5);
+                width: size(48);
+                height: size(48);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all .3s;
+                &:hover {
+                    background: var(--white);
+                }
+                @include maxw($mq-md) {
+                    width: size(40);
+                    height: size(40);
+                }
+                img, svg {
+                    width: size(20);
+                    @include maxw($mq-md) {
+                        width: size(15);
+                    }
+                }
+            }
+        }
+    }
+}

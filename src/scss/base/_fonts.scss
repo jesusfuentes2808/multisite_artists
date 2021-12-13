@@ -1,0 +1,6 @@
+/**
+* Define fonts
+*/
+@include font-face("Gordita-Bold", $font-path + "Gordita-Bold",7400, normal, eot woff woff2 ttf svg);
+@include font-face("Gordita-Medium", $font-path + "Gordita-Medium", 500, normal, eot woff woff2 ttf svg);
+@include font-face("Gordita-Regular", $font-path + "Gordita-Regular", 400, normal, eot woff woff2 ttf svg);
