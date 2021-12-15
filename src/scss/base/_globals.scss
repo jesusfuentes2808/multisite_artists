@@ -188,6 +188,7 @@ a {
                 font-weight: 500;
                 font-size: size(18);
                 line-height: size(22);
+                min-height: size(44);
                 margin: size(10) 0 size(7);
                 text-overflow: ellipsis;
                 -webkit-line-clamp: 2;
@@ -325,6 +326,7 @@ a {
                     margin: 0 0 size(5);
                     font-size: size(16);
                     line-height: size(20);
+                    min-height: auto;
                     @include maxw($mq-md) {
                         font-size: size(15);
                         line-height: size(18);
@@ -374,6 +376,28 @@ a {
         margin: 0 auto;
         @include maxw($mq-md) {
             width: size(70);
+        }
+    }
+}
+
+
+.starRatingContainer {
+    position: relative;
+    &:hover {
+        &:after {
+            content: attr(data-popular);
+            position: absolute;
+            right: 0;
+            bottom: 100%;
+            z-index: 1;
+            white-space: nowrap;
+            background: var(--white-02);
+            box-shadow: 0 size(1) size(3) var(--black-05);
+            color: var(--white);
+            font-size: size(9);
+            padding: size(5) size(8);
+            border-radius: size(5);
+            text-align: center;
         }
     }
 }
