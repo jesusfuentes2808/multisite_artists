@@ -325,7 +325,7 @@ a {
                     font-weight: 400;
                     margin: 0 0 size(5);
                     font-size: size(16);
-                    line-height: size(20);
+                    line-height: size(21);
                     min-height: auto;
                     @include maxw($mq-md) {
                         font-size: size(15);
@@ -366,6 +366,13 @@ a {
                 }
             }
         }
+    }
+}
+
+.overflow-y {
+    @include minw($mq-md) {
+        overflow-y: auto!important;
+        max-height: size(446);
     }
 }
 
