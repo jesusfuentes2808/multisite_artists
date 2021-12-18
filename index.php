@@ -1,3 +1,36 @@
+<?php
+    require ('./backend/helper.php');
+    require ('./backend/request.php');
+
+    $url = URL;
+    $alias = ALIAS;
+
+	$contentArtist = requestUrl( $url . "/artist/" .$alias );
+    $data = responseProcessed( $contentArtist );
+
+	$content = $data->post->post_content;
+
+	$title = $data->post->post_title;
+	$thumbnail = $data->post_thumbnail;
+	$videoYoutubeId = $data->field_custom->video_youtube_id[0];
+
+	// TREND
+    $contentTrend = requestUrl( $url . "/global/trend" );
+    $dataTrend = responseProcessed( $contentTrend );
+    $implodeTrend = implodeArrayGlobalList( $dataTrend );
+
+
+    // RANKING
+
+    $contentRanking = requestUrl( $url . "/global/ranking" );
+    $dataRanking =  $dataTrend = responseProcessed( $contentRanking );
+    $implodeRanking = implodeArrayGlobalList( $dataRanking );
+
+    // Global ARTIST
+    $contentRanking = requestUrl( $url . "/artist" );
+    $dataSites =  $dataTrend = responseProcessed( $contentRanking );
+
+?>
 <!doctype html>
 <html lang="es">
 <head>
@@ -11,6 +44,9 @@
     <title>Vive tu ritmo</title>
 </head>
 <body>
+    <input type="hidden" id="video_youtube_id" value="<?php echo $videoYoutubeId; ?>">
+    <input type="hidden" id="trend_ids" value="<?php echo $implodeTrend; ?>">
+    <input type="hidden" id="ranking_ids" value="<?php echo $implodeRanking; ?>">
     <!--
     <header class="vtr__header">
         <div class="vtr__container">
@@ -73,7 +109,8 @@
                     <div class="vtr__col__8">
                         <h2 class="vtr__title vtr__title--line"><span>En tendencia</span></h2>
                         <div id="trend_content" class="vtr__grid vtr__grid-gap-10 vtr__grid-col-3">
-                            <!--<div class="vtr__card">
+                            <!--
+                            <div class="vtr__card">
                                 <div class="vtr__card__image">
                                     <img loading="lazy" src="./assets/images/img1.jpg" alt="imagen">
                                 </div>
@@ -117,12 +154,13 @@
                                 <div class="vtr__card__bottom">
                                     <a href="#" class="button">Agregar a mi lista</a>
                                 </div>
-                            </div>-->
+                            </div>
+                            -->
                         </div>
                     </div>
                     <div class="vtr__col__4 bg-blur mt-30-mb">
                         <h2 class="vtr__title">Los más escuchados</h2>
-                        <div class="vtr__grid vtr__grid-gap-5">
+                        <div id="ranking_content" class="vtr__grid vtr__grid-gap-5">
                             <div class="vtr__card vtr__card--playlist">
                                 <div class="vtr__card__image">
                                     <img loading="lazy" src="./assets/images/img5.png" alt="imagen">
@@ -398,11 +436,10 @@
                 <div class="vtr__flex vtr__flex__space-between padding-top-50">
                     <div class="vtr__col__8">
                         <h2>Biografia</h2>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
-                        <p>It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                        <?php echo $content; ?>
                     </div>
                     <div class="vtr__col__4 bg-blur mt-30-mb">
-                        <img loading="lazy" src="./assets/images/bio.png" alt="imagen">
+                        <img loading="lazy" src="<?php echo $thumbnail; ?>" alt="imagen">
                     </div>
                 </div>
             </div>
@@ -853,13 +890,16 @@
                     <p>Completa el siguiente formulario para realizar tu consulta</p>
                     <form action="">
                         <div class="input">
-                            <input type="text" placeholder="Nombre y apellidos">
+                            <input name="name" id="name" type="text" placeholder="Nombre y apellidos">
                         </div>
                         <div class="input">
-                            <input type="email" placeholder="Correo">
+                            <input name="email" id="email" type="email" placeholder="Correo">
                         </div>
                         <div class="input">
-                            <textarea placeholder="Mensaje"></textarea>
+                            <input name="telephone" id="telephone" type="text" placeholder="Teléfono">
+                        </div>
+                        <div class="input">
+                            <textarea name="message" id="message" placeholder="Mensaje"></textarea>
                         </div>
                         <button>Enviar</button>
                     </form>
@@ -881,14 +921,16 @@
         <div class="vtr__container">
             <div class="vtr__grid vtr__grid-gap-20 vtr__grid-col-6">
                 <div class="vtr__item">
-                    <h4>Ed Sheeran</h4>
+                    <h4>Sitios</h4>
                     <ul>
-                        <li><a href="#">Enlace 1</a></li>
-                        <li><a href="#">Enlace 2</a></li>
-                        <li><a href="#">Enlace 3</a></li>
-                        <li><a href="#">Enlace 4</a></li>
+                        <?php foreach ($dataSites as $item): ?>
+                        <li>
+                            <a href="<?php echo $item->url; ?>" target="_blank"><?php echo $item->title; ?></a>
+                        </li>
+                        <?php endforeach; ?>
                     </ul>
                 </div>
+                <!--
                 <div class="vtr__item">
                     <h4>Ed Sheeran</h4>
                     <ul>
@@ -934,9 +976,10 @@
                         <li><a href="#">Enlace 4</a></li>
                     </ul>cluding versions of Lorem Ipsum.
                 </div>
+                -->
             </div>
             <div class="vtr__footer__bottom">
-                <p>© 2021 Derechos reservados</p>
+                <p>© <?php echo date("Y"); ?> Derechos reservados</p>
                 <ul>
                     <li>
                         <a href="#" target="_blank">
@@ -968,7 +1011,7 @@
     <script>
         // 2. This code loads the IFrame Player API code asynchronously.
         var tag = document.createElement('script');
-
+        var video_youtube_id = document.getElementById('video_youtube_id').value;
         tag.src = "https://www.youtube.com/iframe_api";
         var firstScriptTag = document.getElementsByTagName('script')[0];
         firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
@@ -980,7 +1023,7 @@
             player = new YT.Player('player', {
                 height: '100%',
                 width: '100%',
-                videoId: 'vwPz_uPahMM',
+                videoId: video_youtube_id,
                 playerVars: { 'autoplay': 1, 'controls': 0, 'mute': 1, 'showinfo': 0, 'rel': 1 },
                 events: {
                     'onReady': onPlayerReady,
