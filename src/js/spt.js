@@ -287,11 +287,19 @@ async function init() {
 
 const initGeneral = async function(){
     let html = '';
-    html += await getPlayList('0UMskgrkEH31Bpg7IRHIVZ');
+
+    let spotify_ids = document.getElementById('spotify_ids').value;
+    spotify_ids = spotify_ids.split(',');
+
+    for(let i=0 ; i < spotify_ids.length; i++){
+        console.log('TRENED TRACK');
+        html += await getPlayList(spotify_ids[i]);
+    }
+    /*html += await getPlayList('0UMskgrkEH31Bpg7IRHIVZ');
     html += await getPlayList('1AcpOlHogKqQEXVn87FV8T');
     html += await getPlayList('2YgSQIE0VcJHWGJRYZplGG');
     html += await getPlayList('0H7hZ3pIPID0w3PD2x2JYf');
-    html += await getPlayList('37i9dQZF1DX6t4zDdAeW2k');
+    html += await getPlayList('37i9dQZF1DX6t4zDdAeW2k');*/
     $("#spt_content").append(html);
 };
 

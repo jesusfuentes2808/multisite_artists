@@ -1311,45 +1311,44 @@ function _init() {
 
 var initGeneral = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-    var html;
+    var html, spotify_ids, i;
     return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
             html = '';
-            _context.t0 = html;
-            _context.next = 4;
-            return getPlayList('0UMskgrkEH31Bpg7IRHIVZ');
+            spotify_ids = document.getElementById('spotify_ids').value;
+            spotify_ids = spotify_ids.split(',');
+            i = 0;
 
           case 4:
+            if (!(i < spotify_ids.length)) {
+              _context.next = 13;
+              break;
+            }
+
+            console.log('TRENED TRACK');
+            _context.t0 = html;
+            _context.next = 9;
+            return getPlayList(spotify_ids[i]);
+
+          case 9:
             html = _context.t0 += _context.sent;
-            _context.t1 = html;
-            _context.next = 8;
-            return getPlayList('1AcpOlHogKqQEXVn87FV8T');
 
-          case 8:
-            html = _context.t1 += _context.sent;
-            _context.t2 = html;
-            _context.next = 12;
-            return getPlayList('2YgSQIE0VcJHWGJRYZplGG');
+          case 10:
+            i++;
+            _context.next = 4;
+            break;
 
-          case 12:
-            html = _context.t2 += _context.sent;
-            _context.t3 = html;
-            _context.next = 16;
-            return getPlayList('0H7hZ3pIPID0w3PD2x2JYf');
-
-          case 16:
-            html = _context.t3 += _context.sent;
-            _context.t4 = html;
-            _context.next = 20;
-            return getPlayList('37i9dQZF1DX6t4zDdAeW2k');
-
-          case 20:
-            html = _context.t4 += _context.sent;
+          case 13:
+            /*html += await getPlayList('0UMskgrkEH31Bpg7IRHIVZ');
+            html += await getPlayList('1AcpOlHogKqQEXVn87FV8T');
+            html += await getPlayList('2YgSQIE0VcJHWGJRYZplGG');
+            html += await getPlayList('0H7hZ3pIPID0w3PD2x2JYf');
+            html += await getPlayList('37i9dQZF1DX6t4zDdAeW2k');*/
             $("#spt_content").append(html);
 
-          case 22:
+          case 14:
           case "end":
             return _context.stop();
         }

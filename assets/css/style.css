@@ -2,9 +2,11 @@
   --white: #fff;
   --white-08: rgba(255, 255, 255, 0.8);
   --white-06: rgba(255, 255, 255, 0.6);
+  --white-005: rgba(255, 255, 255, 0.05);
   --white-03: rgba(255, 255, 255, 0.3);
   --white-02: rgba(255, 255, 255, 0.2);
   --black: #000;
+  --black-05: rgba(0, 0, 0, 0.5);
   --black-06: rgba(0, 0, 0, 0.3);
   --brandPrimary: #330D69;
   --brandSecondary: #30C9CD;
@@ -574,6 +576,7 @@ a {
   font-weight: 500;
   font-size: 1.125rem;
   line-height: 1.375rem;
+  min-height: 2.75rem;
   margin: 0.625rem 0 0.4375rem;
   text-overflow: ellipsis;
   -webkit-line-clamp: 2;
@@ -759,7 +762,8 @@ a {
   font-weight: 400;
   margin: 0 0 0.3125rem;
   font-size: 1rem;
-  line-height: 1.25rem;
+  line-height: 1.3125rem;
+  min-height: auto;
 }
 @media (max-width: 1042px) {
   .vtr__card--playlist .vtr__card__info__top .title {
@@ -813,6 +817,45 @@ a {
   }
 }
 
+@media (min-width: 1042px) {
+  .overflow-y {
+    overflow-y: auto !important;
+    max-height: 27.875rem;
+  }
+}
+
+.vtr__loading {
+  padding: 1.25rem 0;
+}
+.vtr__loading img, .vtr__loading svg {
+  width: 5.625rem;
+  margin: 0 auto;
+}
+@media (max-width: 1042px) {
+  .vtr__loading img, .vtr__loading svg {
+    width: 4.375rem;
+  }
+}
+
+.starRatingContainer {
+  position: relative;
+}
+.starRatingContainer:hover:after {
+  content: attr(data-popular);
+  position: absolute;
+  right: 0;
+  bottom: 100%;
+  z-index: 1;
+  white-space: nowrap;
+  background: var(--white-02);
+  box-shadow: 0 0.0625rem 0.1875rem var(--black-05);
+  color: var(--white);
+  font-size: 0.5625rem;
+  padding: 0.3125rem 0.5rem;
+  border-radius: 0.3125rem;
+  text-align: center;
+}
+
 .padding-top {
   padding-top: 3.125rem;
 }
@@ -848,27 +891,11 @@ a {
   padding: 0.9375rem;
   border-radius: 0.9375rem;
   overflow: hidden;
+  background: var(--white-005) 0% 0% no-repeat;
 }
 @media (max-width: 1042px) {
   .bg-blur {
     padding: 0;
-  }
-}
-.bg-blur:after {
-  content: "";
-  display: block;
-  width: 100%;
-  height: 100%;
-  background: #FFFFFF 0% 0% no-repeat;
-  border: 1px solid #707070;
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0.05;
-}
-@media (max-width: 1042px) {
-  .bg-blur:after {
-    content: none;
   }
 }
 

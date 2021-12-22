@@ -1,10 +1,10 @@
 /******/ (function() { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/js/script.js":
-/*!**************************!*\
-  !*** ./src/js/script.js ***!
-  \**************************/
+/***/ "./src/js/components/core.js":
+/*!***********************************!*\
+  !*** ./src/js/components/core.js ***!
+  \***********************************/
 /***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
 
 window.$ = window.jQuery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
@@ -31,6 +31,93 @@ window.$ = window.jQuery = __webpack_require__(/*! jquery */ "./node_modules/jqu
     });
   });
 })(jQuery);
+
+/***/ }),
+
+/***/ "./src/js/components/rating.js":
+/*!*************************************!*\
+  !*** ./src/js/components/rating.js ***!
+  \*************************************/
+/***/ (function() {
+
+function rateSystem(className, obj) {
+  var fnc = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : function () {};
+
+  /* window.myStarCollection.push(className); */
+  for (var i = 0; i < obj.length; i++) {
+    document.getElementsByClassName(className)[i].style.width = obj[i].rating * obj[i].starSize + "px";
+    document.getElementsByClassName(className)[i].style.height = obj[i].starSize + "px";
+    document.getElementsByClassName(className)[i].style.backgroundSize = obj[i].starSize + "px";
+    document.getElementsByClassName(className)[i].style.backgroundImage = "url('" + obj[i].starImage + "')";
+    document.getElementsByClassName(className)[i].style.backgroundRepeat = "repeat-x";
+    document.getElementsByClassName(className)[i].parentElement.style.width = parseInt(obj[i].starSize) * parseInt(obj[i].maxRating) + "px";
+    document.getElementsByClassName(className)[i].parentElement.style.maxWidth = parseInt(obj[i].starSize) * parseInt(obj[i].maxRating) + "px";
+    document.getElementsByClassName(className)[i].parentElement.style.height = parseInt(obj[i].starSize) + "px";
+
+    if (obj[i].minRating) {
+      document.getElementsByClassName(className)[i].style.minWidth = obj[i].minRating * obj[i].starSize + "px";
+    } else {
+      document.getElementsByClassName(className)[i].style.minWidth = "0px";
+    }
+
+    if (obj[i].backgroundStarImage) {
+      document.getElementsByClassName(className)[i].parentElement.style.backgroundSize = obj[i].starSize + "px";
+      document.getElementsByClassName(className)[i].parentElement.style.backgroundRepeat = "repeat-x";
+      document.getElementsByClassName(className)[i].parentElement.style.backgroundImage = "url('" + obj[i].backgroundStarImage + "')";
+    }
+
+    if (obj[i].emptyStarImage) {
+      document.getElementsByClassName(className)[i].innerHTML = '<div class="emptyStarRating"></div>';
+      document.getElementsByClassName(className)[i].getElementsByClassName("emptyStarRating")[0].style.backgroundSize = parseInt(obj[i].starSize) + "px";
+      document.getElementsByClassName(className)[i].getElementsByClassName("emptyStarRating")[0].style.backgroundImage = "url('" + obj[i].emptyStarImage + "')";
+      document.getElementsByClassName(className)[i].getElementsByClassName("emptyStarRating")[0].style.backgroundRepeat = "repeat-x";
+      document.getElementsByClassName(className)[i].getElementsByClassName("emptyStarRating")[0].style.width = parseInt(obj[i].starSize) * parseInt(obj[i].maxRating) + "px";
+      document.getElementsByClassName(className)[i].getElementsByClassName("emptyStarRating")[0].style.height = parseInt(obj[i].starSize) + "px";
+    }
+
+    document.getElementsByClassName(className)[i].style.maxWidth = obj[i].starSize * obj[i].maxRating + "px";
+    document.getElementsByClassName(className)[i].dataset.rating = obj[i].rating;
+    document.getElementsByClassName(className)[i].dataset.step = obj[i].step;
+  }
+}
+
+window.addEventListener('load', function () {
+  var settings = [{
+    "rating": "3.5",
+    "maxRating": "5",
+    "minRating": "0.1",
+    "starImage": "./assets/images/rating-background.png",
+    "emptyStarImage": "./assets/images/rating-circle.png",
+    "starSize": "18",
+    "step": "0.1"
+  }, {
+    "rating": "1.5",
+    "maxRating": "5",
+    "minRating": "0.1",
+    "starImage": "./assets/images/rating-background.png",
+    "emptyStarImage": "./assets/images/rating-circle.png",
+    "starSize": "18",
+    "step": "0.1"
+  }];
+  rateSystem('vtr__rating', settings);
+});
+
+/***/ }),
+
+/***/ "./src/js/script.js":
+/*!**************************!*\
+  !*** ./src/js/script.js ***!
+  \**************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _components_rating__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/rating */ "./src/js/components/rating.js");
+/* harmony import */ var _components_rating__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_components_rating__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/core */ "./src/js/components/core.js");
+/* harmony import */ var _components_core__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_components_core__WEBPACK_IMPORTED_MODULE_1__);
+
+
 
 /***/ }),
 
@@ -11000,6 +11087,30 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 				}
 /******/ 			}
 /******/ 			return result;
+/******/ 		};
+/******/ 	}();
+/******/ 	
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	!function() {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = function(module) {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				function() { return module['default']; } :
+/******/ 				function() { return module; };
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	}();
+/******/ 	
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	!function() {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = function(exports, definition) {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
 /******/ 		};
 /******/ 	}();
 /******/ 	

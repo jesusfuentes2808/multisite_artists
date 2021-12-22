@@ -2,6 +2,8 @@
     require ('./backend/helper.php');
     require ('./backend/request.php');
 
+
+
     $url = URL;
     $alias = ALIAS;
 
@@ -30,6 +32,16 @@
     $contentRanking = requestUrl( $url . "/artist" );
     $dataSites =  $dataTrend = responseProcessed( $contentRanking );
 
+    // spotify
+    $contentSopotify = requestUrl( $url . "/artist/" .$alias. "/spotify" );
+    $dataSpotify = responseProcessed( $contentSopotify );
+    $implodeSpotify = implodeArrayGlobalList( $dataSpotify );
+
+    // youtube
+    $contentYoutube = requestUrl( $url . "/artist/" .$alias. "/youtube" );
+    $dataYoutube = responseProcessed( $contentYoutube );
+    $implodeYoutube = implodeArrayGlobalList( $dataYoutube );
+
 ?>
 <!doctype html>
 <html lang="es">
@@ -47,6 +59,8 @@
     <input type="hidden" id="video_youtube_id" value="<?php echo $videoYoutubeId; ?>">
     <input type="hidden" id="trend_ids" value="<?php echo $implodeTrend; ?>">
     <input type="hidden" id="ranking_ids" value="<?php echo $implodeRanking; ?>">
+    <input type="hidden" id="spotify_ids" value="<?php echo $implodeSpotify; ?>">
+    <input type="hidden" id="youtube_ids" value="<?php echo $implodeYoutube; ?>">
     <!--
     <header class="vtr__header">
         <div class="vtr__container">
@@ -158,7 +172,7 @@
                             -->
                         </div>
                     </div>
-                    <div class="vtr__col__4 bg-blur mt-30-mb">
+                    <div class="vtr__col__4 bg-blur mt-30-mb  overflow-y">
                         <h2 class="vtr__title">Los más escuchados</h2>
                         <div id="ranking_content" class="vtr__grid vtr__grid-gap-5">
                             <div class="vtr__card vtr__card--playlist">
@@ -223,6 +237,9 @@
 
                 <div class="padding-top-50">
                     <h2 class="vtr__title vtr__title--line"><span>Recien agregadas</span></h2>
+                    <div class="vtr__loading">
+                        <img loading="lazy" src="./assets/images/loading.svg" alt="cargando">
+                    </div>
                     <div id="ytb_content" class="vtr__grid vtr__grid-gap-10 vtr__grid-col-5">
                         <div class="vtr__card">
                             <div class="vtr__card__image">
@@ -888,7 +905,7 @@
                 <div class="content">
                     <h2>Contáctanos</h2>
                     <p>Completa el siguiente formulario para realizar tu consulta</p>
-                    <form action="">
+                    <form onsubmit="sendForm(event)">
                         <div class="input">
                             <input name="name" id="name" type="text" placeholder="Nombre y apellidos">
                         </div>
@@ -901,7 +918,8 @@
                         <div class="input">
                             <textarea name="message" id="message" placeholder="Mensaje"></textarea>
                         </div>
-                        <button>Enviar</button>
+                        <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
+                        <button type="submit">Enviar</button>
                     </form>
                 </div>
             </div>
@@ -1065,5 +1083,52 @@
             }
         });
     </script>
+    <script>
+        function sendForm(e){
+            e.preventDefault();
+            if (grecaptcha === undefined) {
+                alert('Recaptcha not defined');
+                return;
+            }
+
+            var response = grecaptcha.getResponse();
+
+            if (!response) {
+                alert('Coud not get recaptcha response');
+                return;
+            }
+            const formBody = [];
+            formBody.push('g-recaptcha-response=' + response);
+
+            fetch("http://multisite_artists.test:8084/captcha.php", {
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+
+                },
+                method: "POST",
+                body: formBody,
+            })
+                .then(res => res.json())
+                .then((data) => {
+                    console.log(data);
+                });
+
+                return false;
+
+            /*$.ajax({
+                    type: "POST",
+                    url: "captcha.php",
+                    data: {
+                        //This will tell the form if user is captcha varified.
+                        g-recaptcha-response: grecaptcha.getResponse()
+                    },
+                    success: function(response) {
+                        console.log(response);
+                        //console.log("Form successfully submited");
+                    }
+            })*/
+        }
+    </script>
+    <script src='https://www.google.com/recaptcha/api.js' async defer ></script>
 </body>
 </html>
