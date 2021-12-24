@@ -2,8 +2,6 @@
     require ('./backend/helper.php');
     require ('./backend/request.php');
 
-
-
     $url = URL;
     $alias = ALIAS;
 
@@ -42,6 +40,16 @@
     $dataYoutube = responseProcessed( $contentYoutube );
     $implodeYoutube = implodeArrayGlobalList( $dataYoutube );
 
+    $urlSubmit = $url . "/insert";
+
+    // Global ARTIST
+    $contentArtistWeek = requestUrl( $url . "/artist/week" );
+    $dataArtistWeek =  $dataTrend = responseProcessed( $contentArtistWeek );
+
+    $titleArtistWeek = $dataArtistWeek->post->post_title;
+    $itemsArtistItemWeek = $dataArtistWeek->items;
+    $thumbnailArtistWeek = $dataArtistWeek->post_thumbnail;
+    $implodeArtistItemWeek = implodeArrayGlobalList($itemsArtistItemWeek, 'track_id');
 ?>
 <!doctype html>
 <html lang="es">
@@ -61,6 +69,7 @@
     <input type="hidden" id="ranking_ids" value="<?php echo $implodeRanking; ?>">
     <input type="hidden" id="spotify_ids" value="<?php echo $implodeSpotify; ?>">
     <input type="hidden" id="youtube_ids" value="<?php echo $implodeYoutube; ?>">
+    <input type="hidden" id="artist_item_ids" value="<?php echo $implodeArtistItemWeek ; ?>">
     <!--
     <header class="vtr__header">
         <div class="vtr__container">
@@ -116,7 +125,8 @@
         <section id="trend" class="vtr__trend bg-purple padding-top padding-bottom">
             <div class="vtr__container">
                 <div class="vtr__advertising">
-                    <img loading="lazy" width="1200" src="./assets/images/image-pub.jpg" alt="publicidad">
+                    <!--<img loading="lazy" width="1200" src="./assets/images/image-pub.jpg" alt="publicidad">-->
+                    <iframe id='ad9fd84e' name='ad9fd84e' src='http://revive.test:8084/www/delivery/afr.php?zoneid=1&amp;cb=INSERT_RANDOM_NUMBER_HERE' frameborder='0' scrolling='no' width='1200' height='147' allow='autoplay'><a href='http://revive.test:8084/www/delivery/ck.php?n=a0fed1d6&amp;cb=INSERT_RANDOM_NUMBER_HERE' target='_blank'><img src='http://revive.test:8084/www/delivery/avw.php?zoneid=1&amp;cb=INSERT_RANDOM_NUMBER_HERE&amp;n=a0fed1d6' border='0' alt='' /></a></iframe>
                 </div>
 
                 <div class="vtr__flex vtr__flex__space-between padding-top-50">
@@ -423,12 +433,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="vtr__artist__week margin-top-50">
+                <div class="vtr__artist__week margin-top-50" style="<?php echo ($thumbnailArtistWeek !== '') ? 'background-image: url(' . $thumbnailArtistWeek . ');' : ''; ?>" >
                     <div class="info">
                         <h2>Artista de la semana</h2>
-                        <h3>The Wekend</h3>
+                        <h3><?php echo $titleArtistWeek; ?></h3>
                     </div>
-                    <div class="vtr__grid vtr__grid-gap-10 vtr__grid-col-4">
+                    <div id="week_contect" class="vtr__grid vtr__grid-gap-10 vtr__grid-col-4">
+                        <!--
                         <div class="image">
                             <img loading="lazy" src="./assets/images/img4.jpg" alt="imagen">
                         </div>
@@ -441,6 +452,7 @@
                         <div class="image">
                             <img loading="lazy" src="./assets/images/img4.jpg" alt="imagen">
                         </div>
+                        -->
                     </div>
                 </div>
                 <div class="vtr__advertising margin-top-50">
@@ -906,6 +918,7 @@
                     <h2>Contáctanos</h2>
                     <p>Completa el siguiente formulario para realizar tu consulta</p>
                     <form onsubmit="sendForm(event)">
+                        <input name="artist_id" id="artist_id" type="hidden" value="<?php echo $alias ?>" placeholder="Nombre y apellidos">
                         <div class="input">
                             <input name="name" id="name" type="text" placeholder="Nombre y apellidos">
                         </div>
@@ -1110,7 +1123,28 @@
             })
                 .then(res => res.json())
                 .then((data) => {
-                    console.log(data);
+                    if(data == "1"){
+                        const form = new FormData();
+                        form.append( "name", document.getElementById('name').value );
+                        form.append( "email", document.getElementById('email').value );
+                        form.append( "telephone", document.getElementById('telephone').value );
+                        form.append( "message", document.getElementById('message').value );
+                        form.append( "artist_id", document.getElementById('artist_id').value );
+
+                        const urlForm = "<?php echo $urlSubmit; ?>";
+
+                        fetch(urlForm , {
+                            headers: {
+
+                            },
+                            method: "POST",
+                            body: form,
+                        })
+                        .then(res => res.json())
+                        .then((data) => {
+                            console.log(data);
+                        });
+                    }
                 });
 
                 return false;

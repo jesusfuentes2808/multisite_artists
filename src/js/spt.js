@@ -331,8 +331,92 @@ const ranking = async function(){
 };
 
 
+async function getPlayListWeek(listId) {
+    //console.log(listId);
+
+    if (!tokenStorage) {
+        const credentials = await init();
+        //console.log("-------------credentials-------------");
+        //console.log(credentials);
+    }
+
+    let tokenStorage = localStorage.getItem(nameKey);
+    tokenStorage = JSON.parse(tokenStorage);
+    //console.log("etPlayList");
+    //console.log(tokenStorage);
+    const _lsDelete = lsDeleteFn;
+    return await fetch("https://api.spotify.com/v1/tracks/" + listId,
+        {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': tokenStorage ? tokenStorage.token : '',
+            },
+        }
+    )
+        .then(async res => {
+            if (res.status === 404) {
+                return false;
+            } else if (res.status !== 200) {
+                const lsDelete = _lsDelete();
+                if (lsDelete) {
+                    await init();
+                    await getPlayList(listId);
+                }
+                return false;
+            }
+            return res.json();
+        })
+        .then((data) => {
+
+            const {name, album, artists, popularity} = data;
+            const {images} = album;
+
+            const artistList = artists.map((item) => item.name);
+            console.log("TRACK RESPONSE artistList");
+            console.log(artistList);
+
+            let artistListFinal = '';
+            if (artistList.length > 3) {
+                for (let i = 0; i < 3; i++) {
+                    artistListFinal += (artistList[i] + ((i !== 2) ? ', ' : ', +'));
+                }
+            } else {
+                artistListFinal = artistList.join(',');
+            }
+
+            const artistsAll = artistList.join(',');
+            /*const {items} = tracks;
+
+            let popularityProm = 0;
+            const valuePopularity = items.map((item) => item.track.popularity)
+            const totalItemsPopularity = valuePopularity.length;
+            const sumPopularity = valuePopularity.reduce((a, b) => a + b, 0);
+            const promPopularity = (sumPopularity / totalItemsPopularity).toFixed(2);
+*/
+            return `
+                <div class="image">
+                    <img loading="lazy" src="${images[0].url}" alt="${name}">
+                </div>
+            `;
+        });
+}
+
+const artistWeek = async function(){
+
+    let trend_ids = document.getElementById('artist_item_ids').value;
+    let html = '';
+    trend_ids = trend_ids.split(',');
+    console.log("---PEMCM---");
+    for(let i=0 ; i < trend_ids.length; i++){
+        html += await getPlayListWeek(trend_ids[i]);
+    }
+
+    $('#week_contect').html(html);
+};
+
+
 initGeneral();
 trend();
 ranking();
-
+artistWeek();
 

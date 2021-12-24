@@ -877,23 +877,23 @@ function getPlayList(_x) {
 }
 
 function _getPlayList() {
-  _getPlayList = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5(listId) {
+  _getPlayList = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6(listId) {
     var credentials, tokenStorage, _lsDelete;
 
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
       while (1) {
-        switch (_context5.prev = _context5.next) {
+        switch (_context6.prev = _context6.next) {
           case 0:
             if (tokenStorage) {
-              _context5.next = 4;
+              _context6.next = 4;
               break;
             }
 
-            _context5.next = 3;
+            _context6.next = 3;
             return init();
 
           case 3:
-            credentials = _context5.sent;
+            credentials = _context6.sent;
 
           case 4:
             tokenStorage = localStorage.getItem(nameKey);
@@ -901,54 +901,54 @@ function _getPlayList() {
             //console.log(tokenStorage);
 
             _lsDelete = lsDeleteFn;
-            _context5.next = 9;
+            _context6.next = 9;
             return fetch("https://api.spotify.com/v1/playlists/" + listId, {
               headers: {
                 'Content-Type': 'application/json',
                 'Authorization': tokenStorage ? tokenStorage.token : ''
               }
             }).then( /*#__PURE__*/function () {
-              var _ref4 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4(res) {
+              var _ref5 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5(res) {
                 var lsDelete;
-                return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+                return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
                   while (1) {
-                    switch (_context4.prev = _context4.next) {
+                    switch (_context5.prev = _context5.next) {
                       case 0:
                         if (!(res.status !== 200)) {
-                          _context4.next = 8;
+                          _context5.next = 8;
                           break;
                         }
 
                         lsDelete = _lsDelete();
 
                         if (!lsDelete) {
-                          _context4.next = 7;
+                          _context5.next = 7;
                           break;
                         }
 
-                        _context4.next = 5;
+                        _context5.next = 5;
                         return init();
 
                       case 5:
-                        _context4.next = 7;
+                        _context5.next = 7;
                         return getPlayList(listId);
 
                       case 7:
-                        return _context4.abrupt("return", false);
+                        return _context5.abrupt("return", false);
 
                       case 8:
-                        return _context4.abrupt("return", res.json());
+                        return _context5.abrupt("return", res.json());
 
                       case 9:
                       case "end":
-                        return _context4.stop();
+                        return _context5.stop();
                     }
                   }
-                }, _callee4);
+                }, _callee5);
               }));
 
-              return function (_x4) {
-                return _ref4.apply(this, arguments);
+              return function (_x5) {
+                return _ref5.apply(this, arguments);
               };
             }()).then(function (data) {
               var name = data.name,
@@ -971,14 +971,14 @@ function _getPlayList() {
             });
 
           case 9:
-            return _context5.abrupt("return", _context5.sent);
+            return _context6.abrupt("return", _context6.sent);
 
           case 10:
           case "end":
-            return _context5.stop();
+            return _context6.stop();
         }
       }
-    }, _callee5);
+    }, _callee6);
   }));
   return _getPlayList.apply(this, arguments);
 }
@@ -988,23 +988,23 @@ function getPlayListTrend(_x2) {
 }
 
 function _getPlayListTrend() {
-  _getPlayListTrend = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7(listId) {
+  _getPlayListTrend = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8(listId) {
     var credentials, tokenStorage, _lsDelete;
 
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
       while (1) {
-        switch (_context7.prev = _context7.next) {
+        switch (_context8.prev = _context8.next) {
           case 0:
             if (tokenStorage) {
-              _context7.next = 4;
+              _context8.next = 4;
               break;
             }
 
-            _context7.next = 3;
+            _context8.next = 3;
             return init();
 
           case 3:
-            credentials = _context7.sent;
+            credentials = _context8.sent;
 
           case 4:
             tokenStorage = localStorage.getItem(nameKey);
@@ -1012,197 +1012,58 @@ function _getPlayListTrend() {
             //console.log(tokenStorage);
 
             _lsDelete = lsDeleteFn;
-            _context7.next = 9;
+            _context8.next = 9;
             return fetch("https://api.spotify.com/v1/tracks/" + listId, {
               headers: {
                 'Content-Type': 'application/json',
                 'Authorization': tokenStorage ? tokenStorage.token : ''
               }
             }).then( /*#__PURE__*/function () {
-              var _ref5 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee6(res) {
+              var _ref6 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7(res) {
                 var lsDelete;
-                return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee6$(_context6) {
+                return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
                   while (1) {
-                    switch (_context6.prev = _context6.next) {
+                    switch (_context7.prev = _context7.next) {
                       case 0:
                         if (!(res.status === 404)) {
-                          _context6.next = 4;
+                          _context7.next = 4;
                           break;
                         }
 
-                        return _context6.abrupt("return", false);
+                        return _context7.abrupt("return", false);
 
                       case 4:
                         if (!(res.status !== 200)) {
-                          _context6.next = 12;
+                          _context7.next = 12;
                           break;
                         }
 
                         lsDelete = _lsDelete();
 
                         if (!lsDelete) {
-                          _context6.next = 11;
+                          _context7.next = 11;
                           break;
                         }
 
-                        _context6.next = 9;
+                        _context7.next = 9;
                         return init();
 
                       case 9:
-                        _context6.next = 11;
+                        _context7.next = 11;
                         return getPlayList(listId);
 
                       case 11:
-                        return _context6.abrupt("return", false);
+                        return _context7.abrupt("return", false);
 
                       case 12:
-                        return _context6.abrupt("return", res.json());
+                        return _context7.abrupt("return", res.json());
 
                       case 13:
                       case "end":
-                        return _context6.stop();
+                        return _context7.stop();
                     }
                   }
-                }, _callee6);
-              }));
-
-              return function (_x5) {
-                return _ref5.apply(this, arguments);
-              };
-            }()).then(function (data) {
-              var name = data.name,
-                  album = data.album,
-                  artists = data.artists,
-                  popularity = data.popularity;
-              var images = album.images;
-              var artistList = artists.map(function (item) {
-                return item.name;
-              });
-              console.log("TRACK RESPONSE artistList");
-              console.log(artistList);
-              var artistListFinal = '';
-
-              if (artistList.length > 3) {
-                for (var i = 0; i < 3; i++) {
-                  artistListFinal += artistList[i] + (i !== 2 ? ', ' : ', +');
-                }
-              } else {
-                artistListFinal = artistList.join(',');
-              }
-
-              var artistsAll = artistList.join(',');
-              /*const {items} = tracks;
-               let popularityProm = 0;
-              const valuePopularity = items.map((item) => item.track.popularity)
-              const totalItemsPopularity = valuePopularity.length;
-              const sumPopularity = valuePopularity.reduce((a, b) => a + b, 0);
-              const promPopularity = (sumPopularity / totalItemsPopularity).toFixed(2);
-              */
-
-              /*const {items} = tracks;
-               let popularityProm = 0;
-              const valuePopularity = items.map((item) => item.track.popularity)
-              const totalItemsPopularity = valuePopularity.length;
-              const sumPopularity = valuePopularity.reduce((a, b) => a + b, 0);
-              const promPopularity = (sumPopularity / totalItemsPopularity).toFixed(2);
-              */
-              return "\n                <div class=\"vtr__card\">\n                    <div class=\"vtr__card__image\">\n                        <img loading=\"lazy\" src=\"".concat(images[0].url, "\" alt='").concat(artistsAll, "'>\n                    </div>\n                    <div class=\"vtr__card__info\">\n                        <div class=\"vtr__card__info__top\">\n                            <h2 class=\"title\">").concat(name, "</h2>\n                            <h3 class=\"sub-title\" >").concat(artistListFinal, "</h3>\n                            <!--<small class=\"reproductions\">350,000 Reproducciones</small>-->\n                            <small class=\"reproductions\">Popularidad: ").concat(popularity, " %</small>\n                        </div>\n                    </div>\n                    <div class=\"vtr__card__bottom\">\n                        <a href=\"#\" class=\"button\">Agregar a mi lista</a>\n                    </div>\n                </div>\n            ");
-            });
-
-          case 9:
-            return _context7.abrupt("return", _context7.sent);
-
-          case 10:
-          case "end":
-            return _context7.stop();
-        }
-      }
-    }, _callee7);
-  }));
-  return _getPlayListTrend.apply(this, arguments);
-}
-
-function getPlayListRanking(_x3) {
-  return _getPlayListRanking.apply(this, arguments);
-}
-
-function _getPlayListRanking() {
-  _getPlayListRanking = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee9(listId) {
-    var credentials, tokenStorage, _lsDelete;
-
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee9$(_context9) {
-      while (1) {
-        switch (_context9.prev = _context9.next) {
-          case 0:
-            if (tokenStorage) {
-              _context9.next = 4;
-              break;
-            }
-
-            _context9.next = 3;
-            return init();
-
-          case 3:
-            credentials = _context9.sent;
-
-          case 4:
-            tokenStorage = localStorage.getItem(nameKey);
-            tokenStorage = JSON.parse(tokenStorage); //console.log("etPlayList");
-            //console.log(tokenStorage);
-
-            _lsDelete = lsDeleteFn;
-            _context9.next = 9;
-            return fetch("https://api.spotify.com/v1/tracks/" + listId, {
-              headers: {
-                'Content-Type': 'application/json',
-                'Authorization': tokenStorage ? tokenStorage.token : ''
-              }
-            }).then( /*#__PURE__*/function () {
-              var _ref6 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8(res) {
-                var lsDelete;
-                return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
-                  while (1) {
-                    switch (_context8.prev = _context8.next) {
-                      case 0:
-                        if (!(res.status === 404)) {
-                          _context8.next = 4;
-                          break;
-                        }
-
-                        return _context8.abrupt("return", false);
-
-                      case 4:
-                        if (!(res.status !== 200)) {
-                          _context8.next = 12;
-                          break;
-                        }
-
-                        lsDelete = _lsDelete();
-
-                        if (!lsDelete) {
-                          _context8.next = 11;
-                          break;
-                        }
-
-                        _context8.next = 9;
-                        return init();
-
-                      case 9:
-                        _context8.next = 11;
-                        return getPlayList(listId);
-
-                      case 11:
-                        return _context8.abrupt("return", false);
-
-                      case 12:
-                        return _context8.abrupt("return", res.json());
-
-                      case 13:
-                      case "end":
-                        return _context8.stop();
-                    }
-                  }
-                }, _callee8);
+                }, _callee7);
               }));
 
               return function (_x6) {
@@ -1245,18 +1106,157 @@ function _getPlayListRanking() {
               const sumPopularity = valuePopularity.reduce((a, b) => a + b, 0);
               const promPopularity = (sumPopularity / totalItemsPopularity).toFixed(2);
               */
+              return "\n                <div class=\"vtr__card\">\n                    <div class=\"vtr__card__image\">\n                        <img loading=\"lazy\" src=\"".concat(images[0].url, "\" alt='").concat(artistsAll, "'>\n                    </div>\n                    <div class=\"vtr__card__info\">\n                        <div class=\"vtr__card__info__top\">\n                            <h2 class=\"title\">").concat(name, "</h2>\n                            <h3 class=\"sub-title\" >").concat(artistListFinal, "</h3>\n                            <!--<small class=\"reproductions\">350,000 Reproducciones</small>-->\n                            <small class=\"reproductions\">Popularidad: ").concat(popularity, " %</small>\n                        </div>\n                    </div>\n                    <div class=\"vtr__card__bottom\">\n                        <a href=\"#\" class=\"button\">Agregar a mi lista</a>\n                    </div>\n                </div>\n            ");
+            });
+
+          case 9:
+            return _context8.abrupt("return", _context8.sent);
+
+          case 10:
+          case "end":
+            return _context8.stop();
+        }
+      }
+    }, _callee8);
+  }));
+  return _getPlayListTrend.apply(this, arguments);
+}
+
+function getPlayListRanking(_x3) {
+  return _getPlayListRanking.apply(this, arguments);
+}
+
+function _getPlayListRanking() {
+  _getPlayListRanking = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee10(listId) {
+    var credentials, tokenStorage, _lsDelete;
+
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee10$(_context10) {
+      while (1) {
+        switch (_context10.prev = _context10.next) {
+          case 0:
+            if (tokenStorage) {
+              _context10.next = 4;
+              break;
+            }
+
+            _context10.next = 3;
+            return init();
+
+          case 3:
+            credentials = _context10.sent;
+
+          case 4:
+            tokenStorage = localStorage.getItem(nameKey);
+            tokenStorage = JSON.parse(tokenStorage); //console.log("etPlayList");
+            //console.log(tokenStorage);
+
+            _lsDelete = lsDeleteFn;
+            _context10.next = 9;
+            return fetch("https://api.spotify.com/v1/tracks/" + listId, {
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': tokenStorage ? tokenStorage.token : ''
+              }
+            }).then( /*#__PURE__*/function () {
+              var _ref7 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee9(res) {
+                var lsDelete;
+                return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee9$(_context9) {
+                  while (1) {
+                    switch (_context9.prev = _context9.next) {
+                      case 0:
+                        if (!(res.status === 404)) {
+                          _context9.next = 4;
+                          break;
+                        }
+
+                        return _context9.abrupt("return", false);
+
+                      case 4:
+                        if (!(res.status !== 200)) {
+                          _context9.next = 12;
+                          break;
+                        }
+
+                        lsDelete = _lsDelete();
+
+                        if (!lsDelete) {
+                          _context9.next = 11;
+                          break;
+                        }
+
+                        _context9.next = 9;
+                        return init();
+
+                      case 9:
+                        _context9.next = 11;
+                        return getPlayList(listId);
+
+                      case 11:
+                        return _context9.abrupt("return", false);
+
+                      case 12:
+                        return _context9.abrupt("return", res.json());
+
+                      case 13:
+                      case "end":
+                        return _context9.stop();
+                    }
+                  }
+                }, _callee9);
+              }));
+
+              return function (_x7) {
+                return _ref7.apply(this, arguments);
+              };
+            }()).then(function (data) {
+              var name = data.name,
+                  album = data.album,
+                  artists = data.artists,
+                  popularity = data.popularity;
+              var images = album.images;
+              var artistList = artists.map(function (item) {
+                return item.name;
+              });
+              console.log("TRACK RESPONSE artistList");
+              console.log(artistList);
+              var artistListFinal = '';
+
+              if (artistList.length > 3) {
+                for (var i = 0; i < 3; i++) {
+                  artistListFinal += artistList[i] + (i !== 2 ? ', ' : ', +');
+                }
+              } else {
+                artistListFinal = artistList.join(',');
+              }
+
+              var artistsAll = artistList.join(',');
+              /*const {items} = tracks;
+               let popularityProm = 0;
+              const valuePopularity = items.map((item) => item.track.popularity)
+              const totalItemsPopularity = valuePopularity.length;
+              const sumPopularity = valuePopularity.reduce((a, b) => a + b, 0);
+              const promPopularity = (sumPopularity / totalItemsPopularity).toFixed(2);
+              */
+
+              /*const {items} = tracks;
+               let popularityProm = 0;
+              const valuePopularity = items.map((item) => item.track.popularity)
+              const totalItemsPopularity = valuePopularity.length;
+              const sumPopularity = valuePopularity.reduce((a, b) => a + b, 0);
+              const promPopularity = (sumPopularity / totalItemsPopularity).toFixed(2);
+              */
               return "\n                <div class=\"vtr__card vtr__card--playlist\">\n                    <div class=\"vtr__card__image\">\n                        <img loading=\"lazy\" src=\"".concat(images[0].url, "\" alt='").concat(artistsAll, "'>\n                    </div>\n                    <div class=\"vtr__card__info\">\n                        <div class=\"vtr__card__info__top\">\n                            <h2 class=\"title\">").concat(name, "</h2>\n                            <h3 class=\"sub-title\">").concat(artistListFinal, "</h3>\n                        </div>\n                        <a href=\"#\" class=\"vtr__card__info__add\">\n                            <img loading=\"lazy\" src=\"./assets/images/icon-open-plus.svg\" alt=\"imagen\">\n                        </a>\n                    </div>\n                </div>\n            ");
             });
 
           case 9:
-            return _context9.abrupt("return", _context9.sent);
+            return _context10.abrupt("return", _context10.sent);
 
           case 10:
           case "end":
-            return _context9.stop();
+            return _context10.stop();
         }
       }
-    }, _callee9);
+    }, _callee10);
   }));
   return _getPlayListRanking.apply(this, arguments);
 }
@@ -1266,15 +1266,15 @@ function init() {
 }
 
 function _init() {
-  _init = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee10() {
+  _init = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee11() {
     var formBody;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee10$(_context10) {
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee11$(_context11) {
       while (1) {
-        switch (_context10.prev = _context10.next) {
+        switch (_context11.prev = _context11.next) {
           case 0:
             formBody = [];
             formBody.push('grant_type=client_credentials');
-            _context10.next = 4;
+            _context11.next = 4;
             return fetch("https://accounts.spotify.com/api/token", {
               headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
@@ -1297,14 +1297,14 @@ function _init() {
             });
 
           case 4:
-            return _context10.abrupt("return", _context10.sent);
+            return _context11.abrupt("return", _context11.sent);
 
           case 5:
           case "end":
-            return _context10.stop();
+            return _context11.stop();
         }
       }
-    }, _callee10);
+    }, _callee11);
   }));
   return _init.apply(this, arguments);
 }
@@ -1454,9 +1454,196 @@ var ranking = /*#__PURE__*/function () {
   };
 }();
 
+function getPlayListWeek(_x4) {
+  return _getPlayListWeek.apply(this, arguments);
+}
+
+function _getPlayListWeek() {
+  _getPlayListWeek = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee13(listId) {
+    var credentials, tokenStorage, _lsDelete;
+
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee13$(_context13) {
+      while (1) {
+        switch (_context13.prev = _context13.next) {
+          case 0:
+            if (tokenStorage) {
+              _context13.next = 4;
+              break;
+            }
+
+            _context13.next = 3;
+            return init();
+
+          case 3:
+            credentials = _context13.sent;
+
+          case 4:
+            tokenStorage = localStorage.getItem(nameKey);
+            tokenStorage = JSON.parse(tokenStorage); //console.log("etPlayList");
+            //console.log(tokenStorage);
+
+            _lsDelete = lsDeleteFn;
+            _context13.next = 9;
+            return fetch("https://api.spotify.com/v1/tracks/" + listId, {
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': tokenStorage ? tokenStorage.token : ''
+              }
+            }).then( /*#__PURE__*/function () {
+              var _ref8 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee12(res) {
+                var lsDelete;
+                return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee12$(_context12) {
+                  while (1) {
+                    switch (_context12.prev = _context12.next) {
+                      case 0:
+                        if (!(res.status === 404)) {
+                          _context12.next = 4;
+                          break;
+                        }
+
+                        return _context12.abrupt("return", false);
+
+                      case 4:
+                        if (!(res.status !== 200)) {
+                          _context12.next = 12;
+                          break;
+                        }
+
+                        lsDelete = _lsDelete();
+
+                        if (!lsDelete) {
+                          _context12.next = 11;
+                          break;
+                        }
+
+                        _context12.next = 9;
+                        return init();
+
+                      case 9:
+                        _context12.next = 11;
+                        return getPlayList(listId);
+
+                      case 11:
+                        return _context12.abrupt("return", false);
+
+                      case 12:
+                        return _context12.abrupt("return", res.json());
+
+                      case 13:
+                      case "end":
+                        return _context12.stop();
+                    }
+                  }
+                }, _callee12);
+              }));
+
+              return function (_x8) {
+                return _ref8.apply(this, arguments);
+              };
+            }()).then(function (data) {
+              var name = data.name,
+                  album = data.album,
+                  artists = data.artists,
+                  popularity = data.popularity;
+              var images = album.images;
+              var artistList = artists.map(function (item) {
+                return item.name;
+              });
+              console.log("TRACK RESPONSE artistList");
+              console.log(artistList);
+              var artistListFinal = '';
+
+              if (artistList.length > 3) {
+                for (var i = 0; i < 3; i++) {
+                  artistListFinal += artistList[i] + (i !== 2 ? ', ' : ', +');
+                }
+              } else {
+                artistListFinal = artistList.join(',');
+              }
+
+              var artistsAll = artistList.join(',');
+              /*const {items} = tracks;
+               let popularityProm = 0;
+              const valuePopularity = items.map((item) => item.track.popularity)
+              const totalItemsPopularity = valuePopularity.length;
+              const sumPopularity = valuePopularity.reduce((a, b) => a + b, 0);
+              const promPopularity = (sumPopularity / totalItemsPopularity).toFixed(2);
+              */
+
+              /*const {items} = tracks;
+               let popularityProm = 0;
+              const valuePopularity = items.map((item) => item.track.popularity)
+              const totalItemsPopularity = valuePopularity.length;
+              const sumPopularity = valuePopularity.reduce((a, b) => a + b, 0);
+              const promPopularity = (sumPopularity / totalItemsPopularity).toFixed(2);
+              */
+              return "\n                <div class=\"image\">\n                    <img loading=\"lazy\" src=\"".concat(images[0].url, "\" alt=\"").concat(name, "\">\n                </div>\n            ");
+            });
+
+          case 9:
+            return _context13.abrupt("return", _context13.sent);
+
+          case 10:
+          case "end":
+            return _context13.stop();
+        }
+      }
+    }, _callee13);
+  }));
+  return _getPlayListWeek.apply(this, arguments);
+}
+
+var artistWeek = /*#__PURE__*/function () {
+  var _ref4 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee4() {
+    var trend_ids, html, i;
+    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee4$(_context4) {
+      while (1) {
+        switch (_context4.prev = _context4.next) {
+          case 0:
+            trend_ids = document.getElementById('artist_item_ids').value;
+            html = '';
+            trend_ids = trend_ids.split(',');
+            console.log("---PEMCM---");
+            i = 0;
+
+          case 5:
+            if (!(i < trend_ids.length)) {
+              _context4.next = 13;
+              break;
+            }
+
+            _context4.t0 = html;
+            _context4.next = 9;
+            return getPlayListWeek(trend_ids[i]);
+
+          case 9:
+            html = _context4.t0 += _context4.sent;
+
+          case 10:
+            i++;
+            _context4.next = 5;
+            break;
+
+          case 13:
+            $('#week_contect').html(html);
+
+          case 14:
+          case "end":
+            return _context4.stop();
+        }
+      }
+    }, _callee4);
+  }));
+
+  return function artistWeek() {
+    return _ref4.apply(this, arguments);
+  };
+}();
+
 initGeneral();
 trend();
 ranking();
+artistWeek();
 }();
 /******/ })()
 ;
