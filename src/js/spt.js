@@ -1,3 +1,208 @@
+//[{"title":"Salsa","codigo_de_playlist":"7bzmal7pgKQccKqfaxzYaJ","response":{"error":{"status":404,"message":"Not found."}}}]
+function listTrend(){
+    //fetch(window.urlJson + "/" + window.alias + "/.json")
+    fetch(window.urlJson + "/in_trend/in_trend.json")
+        .then(async res => {
+            return res.json();
+        })
+        .then(async data => {
+            data.forEach((item) => {
+                //console.log("-------------------ITEM---------------------");
+                //console.log(item.response);
+                const {name, album, artists, popularity} = item.response;
+                const {images} = album;
+
+                const artistList = artists.map((item)=> item.name);
+
+
+                let artistListFinal = '';
+                if(artistList.length > 3){
+                    for (let i=0; i < 3; i++){
+                        artistListFinal += (artistList[i] + ((i !== 2)? ', ' : ', +'));
+                    }
+                } else {
+                    artistListFinal  = artistList.join(',');
+                }
+
+                const artistsAll = artistList.join(',');
+
+                $('#trend_content').append(
+                    `<div class="vtr__card">
+                        <div class="vtr__card__image">
+                            <img loading="lazy" src="${images[0].url}" alt='${artistsAll}'>
+                        </div>
+                        <div class="vtr__card__info">
+                            <div class="vtr__card__info__top">
+                                <h2 class="title">${name}</h2>
+                                <h3 class="sub-title" >${artistListFinal}</h3>
+                                <!--<small class="reproductions">350,000 Reproducciones</small>-->
+                                <small class="reproductions">Popularidad: ${popularity} %</small>
+                            </div>
+                        </div>
+                        <div class="vtr__card__bottom">
+                            <a href="#" class="button">Agregar a mi lista</a>
+                        </div>
+                    </div>`);
+            });
+        });
+}
+
+//[{"title":"Salsa","codigo_de_playlist":"7bzmal7pgKQccKqfaxzYaJ","response":{"error":{"status":404,"message":"Not found."}}}]
+function listRanking(){
+    //fetch(window.urlJson + "/" + window.alias + "/.json")
+    fetch(window.urlJson + "/ranking/ranking.json")
+        .then(async res => {
+            return res.json();
+        })
+        .then(async data => {
+            data.forEach((item) => {
+                //console.log("-------------------ITEM RANKING---------------------");
+                //console.log(item.response);
+                const {name, album, artists, popularity} = item.response;
+                const {images} = album;
+
+                const artistList = artists.map((item)=> item.name);
+
+                let artistListFinal = '';
+                if(artistList.length > 3){
+                    for (let i=0; i < 3; i++){
+                        artistListFinal += (artistList[i] + ((i !== 2)? ', ' : ', +'));
+                    }
+                } else {
+                    artistListFinal  = artistList.join(',');
+                }
+
+                const artistsAll = artistList.join(',');
+
+                $('#ranking_content').append(`
+                        <div class="vtr__card vtr__card--playlist">
+                            <div class="vtr__card__image">
+                                <img loading="lazy" src="${images[0].url}" alt='${artistsAll}'>
+                            </div>
+                            <div class="vtr__card__info">
+                                <div class="vtr__card__info__top">
+                                    <h2 class="title">${name}</h2>
+                                    <h3 class="sub-title">${artistListFinal}</h3>
+                                </div>
+                                <a href="#" class="vtr__card__info__add">
+                                    <img loading="lazy" src="./assets/images/icon-open-plus.svg" alt="imagen">
+                                </a>
+                            </div>
+                        </div>
+                    `);
+            });
+        });
+}
+
+function listArtistWeek(){
+    fetch(window.urlJson + "/page_artist_item/page_artist_item.json")
+        .then(async res => {
+            return res.json();
+        })
+        .then(async data => {
+            data.forEach((item) => {
+                //console.log("-------------------ITEM listArtistWeek---------------------");
+                //console.log(item.response);
+                const {name, album, artists, popularity} = item.response;
+                const {images} = album;
+
+                const artistList = artists.map((item) => item.name);
+
+                let artistListFinal = '';
+                if (artistList.length > 3) {
+                    for (let i = 0; i < 3; i++) {
+                        artistListFinal += (artistList[i] + ((i !== 2) ? ', ' : ', +'));
+                    }
+                } else {
+                    artistListFinal = artistList.join(',');
+                }
+
+                const artistsAll = artistList.join(',');
+
+                $('#week_contect').append(`
+                            <div class="image">
+                                <img loading="lazy" src="${images[0].url}" alt="${name}">
+                            </div>
+                        `);
+            });
+        });
+}
+
+function listPlayListSP(){
+    fetch(window.urlJson + "/" + window.alias + "/playlist_sp.json" )
+        .then(async res => {
+            return res.json();
+        })
+        .then(async data => {
+            data.forEach((item) => {
+                const {name, description, images, followers, tracks} = item.response;
+                const {items} = tracks;
+
+                let popularityProm = 0;
+                const valuePopularity = items.map((item) => item.track.popularity)
+                const totalItemsPopularity = valuePopularity.length;
+                const sumPopularity = valuePopularity.reduce((a, b) => a + b, 0);
+                const promPopularity = (sumPopularity / totalItemsPopularity).toFixed(2);
+
+                $("#spt_content").append( `
+                                <div class="vtr__card">
+                                    <div class="vtr__card__image">
+                                        <img loading="lazy" src="${images[0].url}" alt="imagen">
+                                        <div class="type">
+                                            <img loading="lazy" src="./assets/images/play-spotify.svg" alt="imagen">
+                                        </div>
+                                    </div>
+                                    <div class="vtr__card__info">
+                                        <div class="vtr__card__info__top">
+                                            <h2 class="title text-center">${name}</h2>
+                                           <div class="follo-popu">
+                                               <div class="followers">
+                                                   <span class="number">${followers.total}</span>
+                                                   <span class="text">Seguidores</span>
+                                               </div>
+                                               <div class="popular">
+                                                   <div class="boxs">
+                                                       <div class="box"></div>
+                                                       <div class="box"></div>
+                                                       <div class="box"></div>
+                                                       <div class="box"></div>
+                                                       <div class="box"></div>
+                                                   </div>
+                                                   <span class="text">Popularidad: ${promPopularity} % </span>
+                                               </div>
+                                           </div>
+                                        </div>
+                                    </div>
+                                    <div class="vtr__card__bottom">
+                                        <a href="#" class="button">Agregar a mi lista</a>
+                                    </div>
+                                </div>
+                            `);
+            });
+        });
+}
+
+listTrend();
+listRanking();
+listArtistWeek();
+
+listPlayListSP();
+
+
+/*
+
+console.log("COMIENZO");
+fetch("http://artistas.test:8084/wp-content/json/ricardomontaner_123/playlist_sp.json")
+//fetch("http://artistas.test:8084/wp-json/v1/global/trend")
+    .then(async res => {
+        console.log("COMIENZO 2");
+        console.log(res);
+        return res.json();
+    })
+    .then(async data => {
+        console.log(data);
+    });*/
+
 const nameKey = 'token_auth';
 
 const tokenStorage = localStorage.getItem(nameKey);
@@ -415,8 +620,9 @@ const artistWeek = async function(){
 };
 
 
-initGeneral();
-trend();
-ranking();
-artistWeek();
+//
+// ();
+//trend();
+//ranking();
+//artistWeek();
 

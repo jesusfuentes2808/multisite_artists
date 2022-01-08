@@ -4,6 +4,7 @@
 
     $url = URL;
     $alias = ALIAS;
+    $urlJson = URL_JSON;
 
 	$contentArtist = requestUrl( $url . "/artist/" .$alias );
     $data = responseProcessed( $contentArtist );
@@ -62,6 +63,11 @@
     <link rel="icon" type="image/png" sizes="144x144" href="./assets/images/favicon.png">
     <link rel="stylesheet" href="./assets/css/style.css">
     <title>Vive tu ritmo</title>
+    <script>
+        window.url = "<?php echo $url; ?>";
+        window.urlJson = "<?php echo $urlJson; ?>";
+        window.alias = "<?php echo $alias; ?>";
+    </script>
 </head>
 <body>
     <input type="hidden" id="video_youtube_id" value="<?php echo $videoYoutubeId; ?>">
@@ -126,7 +132,30 @@
             <div class="vtr__container">
                 <div class="vtr__advertising">
                     <!--<img loading="lazy" width="1200" src="./assets/images/image-pub.jpg" alt="publicidad">-->
-                    <iframe id='ad9fd84e' name='ad9fd84e' src='http://revive.test:8084/www/delivery/afr.php?zoneid=1&amp;cb=INSERT_RANDOM_NUMBER_HERE' frameborder='0' scrolling='no' width='1200' height='147' allow='autoplay'><a href='http://revive.test:8084/www/delivery/ck.php?n=a0fed1d6&amp;cb=INSERT_RANDOM_NUMBER_HERE' target='_blank'><img src='http://revive.test:8084/www/delivery/avw.php?zoneid=1&amp;cb=INSERT_RANDOM_NUMBER_HERE&amp;n=a0fed1d6' border='0' alt='' /></a></iframe>
+                    <!-- Revive Adserver Etiqueta iFrame - Generated with Revive Adserver v5.3.1 -->
+                    <iframe id='a46c3b8e' name='a46c3b8e' src='http://revive.test:8084/www/delivery/afr.php?zoneid=1&amp;cb=INSERT_RANDOM_NUMBER_HERE' frameborder='0' scrolling='no' width='1200' height='147' allow='autoplay'>
+                        <a href='http://revive.test:8084/www/delivery/ck.php?n=aaca5aed&amp;cb=INSERT_RANDOM_NUMBER_HERE' target='_blank'>
+                            <img src='http://revive.test:8084/www/delivery/avw.php?zoneid=1&amp;cb=INSERT_RANDOM_NUMBER_HERE&amp;n=aaca5aed' border='0' alt='' />
+                        </a>
+                    </iframe>
+                    <!-- Revive Adserver Tag de Javascript - Generated with Revive Adserver v5.3.1 -->
+                    <script type='text/javascript'><!--//<![CDATA[
+                        var m3_u = (location.protocol=='https:'?'https://revive.test:8084/www/delivery/ajs.php':'http://revive.test:8084/www/delivery/ajs.php');
+                        var m3_r = Math.floor(Math.random()*99999999999);
+                        if (!document.MAX_used) document.MAX_used = ',';
+                        document.write ("<scr"+"ipt type='text/javascript' src='"+m3_u);
+                        document.write ("?zoneid=1");
+                        document.write ('&amp;cb=' + m3_r);
+                        if (document.MAX_used != ',') document.write ("&amp;exclude=" + document.MAX_used);
+                        document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));
+                        document.write ("&amp;loc=" + escape(window.location));
+                        if (document.referrer) document.write ("&amp;referer=" + escape(document.referrer));
+                        if (document.context) document.write ("&context=" + escape(document.context));
+                        document.write ("'><\/scr"+"ipt>");
+                        //]]>--></script><noscript><a href='http://revive.test:8084/www/delivery/ck.php?n=a8aa6ad0&amp;cb=INSERT_RANDOM_NUMBER_HERE' target='_blank'><img src='http://revive.test:8084/www/delivery/avw.php?zoneid=1&amp;cb=INSERT_RANDOM_NUMBER_HERE&amp;n=a8aa6ad0' border='0' alt='' /></a></noscript>
+
+
+
                 </div>
 
                 <div class="vtr__flex vtr__flex__space-between padding-top-50">
@@ -804,6 +833,8 @@
         <section class="vtr__instagram padding-top padding-bottom">
             <div class="vtr__container">
                 <h2>Instagram</h2>
+                <script src="https://apps.elfsight.com/p/platform.js" defer></script>
+                <div class="elfsight-app-199c6011-c594-45f2-b081-9107b41a8355"></div>
                 <div class="vtr__grid vtr__grid-gap-20 vtr__grid-col-4">
                     <a href="#" class="item">
                         <img loading="lazy" src="./assets/images/instagram1.jpg" alt="imagen">
