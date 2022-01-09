@@ -1,3 +1,45 @@
+function listPlayListYT(){
+    //ytb_content__loading
+    $("#ytb_content").css('display', 'none');
+    $(".ytb_content__loading").css('display', 'block');
+
+    fetch(window.urlJson + "/" + window.alias + "/playlist_yt.json" )
+        .then(async res => {
+            return res.json();
+        })
+        .then(async data => {
+            data.forEach((item) => {
+
+                item.response.items.forEach((itemYt) => {
+                    const {id, snippet} = itemYt;
+                    const {title, description, channelTitle, thumbnails} = snippet;
+                    $("#ytb_content").append(`<div class="vtr__card">
+                            <div class="vtr__card__image">
+                                <img loading="lazy" src="${thumbnails.high.url}" alt="imagen">
+                                <div class="type">
+                                    <img loading="lazy" src="./assets/images/play-youtube.svg" alt="imagen">
+                                </div>
+                            </div>
+                            <div class="vtr__card__info">
+                                <div class="vtr__card__info__top">
+                                    <h2 class="title">${title}</h2>
+                                    <h3 class="sub-title">${channelTitle}</h3>
+                                    <!--<small class="reproductions">350,000 Reproducciones</small>-->
+                                </div>
+                            </div>
+                            <div class="vtr__card__bottom">
+                                <a href="#" class="button">Agregar a mi lista</a>
+                            </div>
+                        </div>`);
+                });
+            });
+            $("#ytb_content").css('display', 'grid');
+            $(".ytb_content__loading").css('display', 'none');
+        });
+}
+
+listPlayListYT();
+/*
 let youtube_ids = document.getElementById('youtube_ids').value;
     youtube_ids = youtube_ids.split(',');
 
@@ -10,7 +52,7 @@ array_youtube_ids = array_youtube_ids.join('&');
 
 console.log("array_youtube_ids");
 console.log(array_youtube_ids);
-
+*/
 /*
 fetch("https://youtube.googleapis.com/youtube/v3/playlistItems?part=id&part=snippet&part=contentDetails%20&part=status&maxResults=50&playlistId=PLanrn6bPgjsaNw_IdAf90xRU6pQs-kF3v&key=AIzaSyA5hWJ8FJrTZr412seBlVgzCIoykzBm8yM")
     .then(res => res.json())
@@ -56,7 +98,7 @@ fetch("https://youtube.googleapis.com/youtube/v3/playlistItems?part=id&part=snip
 //https://youtube.googleapis.com/youtube/v3/playlists?part=snippet%20&id=PLanrn6bPgjsaR1_bAV5-3aUAxOH-p9aNq&maxResults=10&key=[YOUR_API_KEY]
 */
 //fetch("https://youtube.googleapis.com/youtube/v3/playlists?part=snippet%20&channelId=UCsTl5H5X4SvTUkCCaMbAWyg&maxResults=10&key=AIzaSyA5hWJ8FJrTZr412seBlVgzCIoykzBm8yM")
-fetch("https://youtube.googleapis.com/youtube/v3/playlists?part=snippet%20&" + array_youtube_ids + "&maxResults=10&key=AIzaSyA5hWJ8FJrTZr412seBlVgzCIoykzBm8yM")
+/*fetch("https://youtube.googleapis.com/youtube/v3/playlists?part=snippet%20&" + array_youtube_ids + "&maxResults=10&key=AIzaSyA5hWJ8FJrTZr412seBlVgzCIoykzBm8yM")
     .then(res => res.json())
     .then( (data) => {
         //console.log(data);
@@ -92,4 +134,4 @@ fetch("https://youtube.googleapis.com/youtube/v3/channels?part=snippet&part=stat
     .then(res => res.json())
     .then( (data) => {
         console.log(data);
-    });
+    });*/

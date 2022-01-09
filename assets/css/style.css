@@ -826,6 +826,7 @@ a {
 
 .vtr__loading {
   padding: 1.25rem 0;
+  display: none;
 }
 .vtr__loading img, .vtr__loading svg {
   width: 5.625rem;
@@ -1362,8 +1363,7 @@ a {
   width: 100%;
   height: 100%;
   border: 0;
-  -webkit-filter: grayscale(1);
-          filter: grayscale(1);
+  /*filter: grayscale(1);*/
 }
 .vtr__video:after {
   content: "";
@@ -1373,8 +1373,7 @@ a {
   width: 100%;
   height: 100%;
   display: block;
-  background: transparent -webkit-gradient(linear, left top, left bottom, from(var(--brandPrimary)), to(var(--brandSecondary))) 0 0;
-  background: transparent linear-gradient(180deg, var(--brandPrimary), var(--brandSecondary)) 0 0;
+  /*background: transparent linear-gradient(180deg,var(--brandPrimary),var(--brandSecondary)) 0 0;*/
   mix-blend-mode: lighten;
 }
 .vtr__video__content {

@@ -862,7 +862,8 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 //[{"title":"Salsa","codigo_de_playlist":"7bzmal7pgKQccKqfaxzYaJ","response":{"error":{"status":404,"message":"Not found."}}}]
 function listTrend() {
-  //fetch(window.urlJson + "/" + window.alias + "/.json")
+  $("#trend_content").css('display', 'none');
+  $(".in_trend_content__loading").css('display', 'block');
   fetch(window.urlJson + "/in_trend/in_trend.json").then( /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(res) {
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
@@ -913,8 +914,10 @@ function listTrend() {
                 var artistsAll = artistList.join(',');
                 $('#trend_content').append("<div class=\"vtr__card\">\n                        <div class=\"vtr__card__image\">\n                            <img loading=\"lazy\" src=\"".concat(images[0].url, "\" alt='").concat(artistsAll, "'>\n                        </div>\n                        <div class=\"vtr__card__info\">\n                            <div class=\"vtr__card__info__top\">\n                                <h2 class=\"title\">").concat(name, "</h2>\n                                <h3 class=\"sub-title\" >").concat(artistListFinal, "</h3>\n                                <!--<small class=\"reproductions\">350,000 Reproducciones</small>-->\n                                <small class=\"reproductions\">Popularidad: ").concat(popularity, " %</small>\n                            </div>\n                        </div>\n                        <div class=\"vtr__card__bottom\">\n                            <a href=\"#\" class=\"button\">Agregar a mi lista</a>\n                        </div>\n                    </div>"));
               });
+              $("#trend_content").css('display', 'grid');
+              $(".in_trend_content__loading").css('display', 'none');
 
-            case 1:
+            case 3:
             case "end":
               return _context2.stop();
           }
@@ -926,11 +929,12 @@ function listTrend() {
       return _ref2.apply(this, arguments);
     };
   }());
-} //[{"title":"Salsa","codigo_de_playlist":"7bzmal7pgKQccKqfaxzYaJ","response":{"error":{"status":404,"message":"Not found."}}}]
-
+}
 
 function listRanking() {
-  //fetch(window.urlJson + "/" + window.alias + "/.json")
+  $("#ranking_content").css('display', 'none');
+  $(".ranking_content__loading").css('display', 'block'); //fetch(window.urlJson + "/" + window.alias + "/.json")
+
   fetch(window.urlJson + "/ranking/ranking.json").then( /*#__PURE__*/function () {
     var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3(res) {
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
@@ -981,8 +985,10 @@ function listRanking() {
                 var artistsAll = artistList.join(',');
                 $('#ranking_content').append("\n                        <div class=\"vtr__card vtr__card--playlist\">\n                            <div class=\"vtr__card__image\">\n                                <img loading=\"lazy\" src=\"".concat(images[0].url, "\" alt='").concat(artistsAll, "'>\n                            </div>\n                            <div class=\"vtr__card__info\">\n                                <div class=\"vtr__card__info__top\">\n                                    <h2 class=\"title\">").concat(name, "</h2>\n                                    <h3 class=\"sub-title\">").concat(artistListFinal, "</h3>\n                                </div>\n                                <a href=\"#\" class=\"vtr__card__info__add\">\n                                    <img loading=\"lazy\" src=\"./assets/images/icon-open-plus.svg\" alt=\"imagen\">\n                                </a>\n                            </div>\n                        </div>\n                    "));
               });
+              $("#ranking_content").css('display', 'grid');
+              $(".ranking_content__loading").css('display', 'none');
 
-            case 1:
+            case 3:
             case "end":
               return _context4.stop();
           }
@@ -997,6 +1003,8 @@ function listRanking() {
 }
 
 function listArtistWeek() {
+  $("#week_contect").css('display', 'none');
+  $(".week_contect_content__loading").css('display', 'block');
   fetch(window.urlJson + "/page_artist_item/page_artist_item.json").then( /*#__PURE__*/function () {
     var _ref5 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5(res) {
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
@@ -1047,8 +1055,10 @@ function listArtistWeek() {
                 var artistsAll = artistList.join(',');
                 $('#week_contect').append("\n                            <div class=\"image\">\n                                <img loading=\"lazy\" src=\"".concat(images[0].url, "\" alt=\"").concat(name, "\">\n                            </div>\n                        "));
               });
+              $("#week_contect").css('display', 'grid');
+              $(".week_contect_content__loading").css('display', 'none');
 
-            case 1:
+            case 3:
             case "end":
               return _context6.stop();
           }
@@ -1063,6 +1073,8 @@ function listArtistWeek() {
 }
 
 function listPlayListSP() {
+  $("#spt_content").css('display', 'none');
+  $(".spt_content_content__loading").css('display', 'block');
   fetch(window.urlJson + "/" + window.alias + "/playlist_sp.json").then( /*#__PURE__*/function () {
     var _ref7 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7(res) {
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
@@ -1107,8 +1119,10 @@ function listPlayListSP() {
                 var promPopularity = (sumPopularity / totalItemsPopularity).toFixed(2);
                 $("#spt_content").append("\n                                <div class=\"vtr__card\">\n                                    <div class=\"vtr__card__image\">\n                                        <img loading=\"lazy\" src=\"".concat(images[0].url, "\" alt=\"imagen\">\n                                        <div class=\"type\">\n                                            <img loading=\"lazy\" src=\"./assets/images/play-spotify.svg\" alt=\"imagen\">\n                                        </div>\n                                    </div>\n                                    <div class=\"vtr__card__info\">\n                                        <div class=\"vtr__card__info__top\">\n                                            <h2 class=\"title text-center\">").concat(name, "</h2>\n                                           <div class=\"follo-popu\">\n                                               <div class=\"followers\">\n                                                   <span class=\"number\">").concat(followers.total, "</span>\n                                                   <span class=\"text\">Seguidores</span>\n                                               </div>\n                                               <div class=\"popular\">\n                                                   <div class=\"boxs\">\n                                                       <div class=\"box\"></div>\n                                                       <div class=\"box\"></div>\n                                                       <div class=\"box\"></div>\n                                                       <div class=\"box\"></div>\n                                                       <div class=\"box\"></div>\n                                                   </div>\n                                                   <span class=\"text\">Popularidad: ").concat(promPopularity, " % </span>\n                                               </div>\n                                           </div>\n                                        </div>\n                                    </div>\n                                    <div class=\"vtr__card__bottom\">\n                                        <a href=\"#\" class=\"button\">Agregar a mi lista</a>\n                                    </div>\n                                </div>\n                            "));
               });
+              $("#spt_content").css('display', 'grid');
+              $(".spt_content_content__loading").css('display', 'none');
 
-            case 1:
+            case 3:
             case "end":
               return _context8.stop();
           }
@@ -1126,803 +1140,6 @@ listTrend();
 listRanking();
 listArtistWeek();
 listPlayListSP();
-/*
-
-console.log("COMIENZO");
-fetch("http://artistas.test:8084/wp-content/json/ricardomontaner_123/playlist_sp.json")
-//fetch("http://artistas.test:8084/wp-json/v1/global/trend")
-    .then(async res => {
-        console.log("COMIENZO 2");
-        console.log(res);
-        return res.json();
-    })
-    .then(async data => {
-        console.log(data);
-    });*/
-
-var nameKey = 'token_auth';
-var tokenStorage = localStorage.getItem(nameKey);
-
-var lsDeleteFn = function lsDeleteFn() {
-  try {
-    localStorage.removeItem(nameKey);
-    return true;
-  } catch (e) {
-    return false;
-  }
-};
-
-function getPlayList(_x9) {
-  return _getPlayList.apply(this, arguments);
-}
-
-function _getPlayList() {
-  _getPlayList = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee14(listId) {
-    var credentials, tokenStorage, _lsDelete;
-
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee14$(_context14) {
-      while (1) {
-        switch (_context14.prev = _context14.next) {
-          case 0:
-            if (tokenStorage) {
-              _context14.next = 4;
-              break;
-            }
-
-            _context14.next = 3;
-            return init();
-
-          case 3:
-            credentials = _context14.sent;
-
-          case 4:
-            tokenStorage = localStorage.getItem(nameKey);
-            tokenStorage = JSON.parse(tokenStorage); //console.log("etPlayList");
-            //console.log(tokenStorage);
-
-            _lsDelete = lsDeleteFn;
-            _context14.next = 9;
-            return fetch("https://api.spotify.com/v1/playlists/" + listId, {
-              headers: {
-                'Content-Type': 'application/json',
-                'Authorization': tokenStorage ? tokenStorage.token : ''
-              }
-            }).then( /*#__PURE__*/function () {
-              var _ref13 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee13(res) {
-                var lsDelete;
-                return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee13$(_context13) {
-                  while (1) {
-                    switch (_context13.prev = _context13.next) {
-                      case 0:
-                        if (!(res.status !== 200)) {
-                          _context13.next = 8;
-                          break;
-                        }
-
-                        lsDelete = _lsDelete();
-
-                        if (!lsDelete) {
-                          _context13.next = 7;
-                          break;
-                        }
-
-                        _context13.next = 5;
-                        return init();
-
-                      case 5:
-                        _context13.next = 7;
-                        return getPlayList(listId);
-
-                      case 7:
-                        return _context13.abrupt("return", false);
-
-                      case 8:
-                        return _context13.abrupt("return", res.json());
-
-                      case 9:
-                      case "end":
-                        return _context13.stop();
-                    }
-                  }
-                }, _callee13);
-              }));
-
-              return function (_x13) {
-                return _ref13.apply(this, arguments);
-              };
-            }()).then(function (data) {
-              var name = data.name,
-                  description = data.description,
-                  images = data.images,
-                  followers = data.followers,
-                  tracks = data.tracks;
-              console.log(data);
-              var items = tracks.items;
-              var popularityProm = 0;
-              var valuePopularity = items.map(function (item) {
-                return item.track.popularity;
-              });
-              var totalItemsPopularity = valuePopularity.length;
-              var sumPopularity = valuePopularity.reduce(function (a, b) {
-                return a + b;
-              }, 0);
-              var promPopularity = (sumPopularity / totalItemsPopularity).toFixed(2);
-              return "\n                <div class=\"vtr__card\">\n                    <div class=\"vtr__card__image\">\n                        <img loading=\"lazy\" src=\"".concat(images[0].url, "\" alt=\"imagen\">\n                        <div class=\"type\">\n                            <img loading=\"lazy\" src=\"./assets/images/play-spotify.svg\" alt=\"imagen\">\n                        </div>\n                    </div>\n                    <div class=\"vtr__card__info\">\n                        <div class=\"vtr__card__info__top\">\n                            <h2 class=\"title text-center\">").concat(name, "</h2>\n                           <div class=\"follo-popu\">\n                               <div class=\"followers\">\n                                   <span class=\"number\">").concat(followers.total, "</span>\n                                   <span class=\"text\">Seguidores</span>\n                               </div>\n                               <div class=\"popular\">\n                                   <div class=\"boxs\">\n                                       <div class=\"box\"></div>\n                                       <div class=\"box\"></div>\n                                       <div class=\"box\"></div>\n                                       <div class=\"box\"></div>\n                                       <div class=\"box\"></div>\n                                   </div>\n                                   <span class=\"text\">Popularidad: ").concat(promPopularity, " % </span>\n                               </div>\n                           </div>\n                        </div>\n                    </div>\n                    <div class=\"vtr__card__bottom\">\n                        <a href=\"#\" class=\"button\">Agregar a mi lista</a>\n                    </div>\n                </div>\n            ");
-            });
-
-          case 9:
-            return _context14.abrupt("return", _context14.sent);
-
-          case 10:
-          case "end":
-            return _context14.stop();
-        }
-      }
-    }, _callee14);
-  }));
-  return _getPlayList.apply(this, arguments);
-}
-
-function getPlayListTrend(_x10) {
-  return _getPlayListTrend.apply(this, arguments);
-}
-
-function _getPlayListTrend() {
-  _getPlayListTrend = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee16(listId) {
-    var credentials, tokenStorage, _lsDelete;
-
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee16$(_context16) {
-      while (1) {
-        switch (_context16.prev = _context16.next) {
-          case 0:
-            if (tokenStorage) {
-              _context16.next = 4;
-              break;
-            }
-
-            _context16.next = 3;
-            return init();
-
-          case 3:
-            credentials = _context16.sent;
-
-          case 4:
-            tokenStorage = localStorage.getItem(nameKey);
-            tokenStorage = JSON.parse(tokenStorage); //console.log("etPlayList");
-            //console.log(tokenStorage);
-
-            _lsDelete = lsDeleteFn;
-            _context16.next = 9;
-            return fetch("https://api.spotify.com/v1/tracks/" + listId, {
-              headers: {
-                'Content-Type': 'application/json',
-                'Authorization': tokenStorage ? tokenStorage.token : ''
-              }
-            }).then( /*#__PURE__*/function () {
-              var _ref14 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee15(res) {
-                var lsDelete;
-                return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee15$(_context15) {
-                  while (1) {
-                    switch (_context15.prev = _context15.next) {
-                      case 0:
-                        if (!(res.status === 404)) {
-                          _context15.next = 4;
-                          break;
-                        }
-
-                        return _context15.abrupt("return", false);
-
-                      case 4:
-                        if (!(res.status !== 200)) {
-                          _context15.next = 12;
-                          break;
-                        }
-
-                        lsDelete = _lsDelete();
-
-                        if (!lsDelete) {
-                          _context15.next = 11;
-                          break;
-                        }
-
-                        _context15.next = 9;
-                        return init();
-
-                      case 9:
-                        _context15.next = 11;
-                        return getPlayList(listId);
-
-                      case 11:
-                        return _context15.abrupt("return", false);
-
-                      case 12:
-                        return _context15.abrupt("return", res.json());
-
-                      case 13:
-                      case "end":
-                        return _context15.stop();
-                    }
-                  }
-                }, _callee15);
-              }));
-
-              return function (_x14) {
-                return _ref14.apply(this, arguments);
-              };
-            }()).then(function (data) {
-              var name = data.name,
-                  album = data.album,
-                  artists = data.artists,
-                  popularity = data.popularity;
-              var images = album.images;
-              var artistList = artists.map(function (item) {
-                return item.name;
-              });
-              console.log("TRACK RESPONSE artistList");
-              console.log(artistList);
-              var artistListFinal = '';
-
-              if (artistList.length > 3) {
-                for (var i = 0; i < 3; i++) {
-                  artistListFinal += artistList[i] + (i !== 2 ? ', ' : ', +');
-                }
-              } else {
-                artistListFinal = artistList.join(',');
-              }
-
-              var artistsAll = artistList.join(',');
-              /*const {items} = tracks;
-               let popularityProm = 0;
-              const valuePopularity = items.map((item) => item.track.popularity)
-              const totalItemsPopularity = valuePopularity.length;
-              const sumPopularity = valuePopularity.reduce((a, b) => a + b, 0);
-              const promPopularity = (sumPopularity / totalItemsPopularity).toFixed(2);
-              */
-
-              /*const {items} = tracks;
-               let popularityProm = 0;
-              const valuePopularity = items.map((item) => item.track.popularity)
-              const totalItemsPopularity = valuePopularity.length;
-              const sumPopularity = valuePopularity.reduce((a, b) => a + b, 0);
-              const promPopularity = (sumPopularity / totalItemsPopularity).toFixed(2);
-              */
-              return "\n                <div class=\"vtr__card\">\n                    <div class=\"vtr__card__image\">\n                        <img loading=\"lazy\" src=\"".concat(images[0].url, "\" alt='").concat(artistsAll, "'>\n                    </div>\n                    <div class=\"vtr__card__info\">\n                        <div class=\"vtr__card__info__top\">\n                            <h2 class=\"title\">").concat(name, "</h2>\n                            <h3 class=\"sub-title\" >").concat(artistListFinal, "</h3>\n                            <!--<small class=\"reproductions\">350,000 Reproducciones</small>-->\n                            <small class=\"reproductions\">Popularidad: ").concat(popularity, " %</small>\n                        </div>\n                    </div>\n                    <div class=\"vtr__card__bottom\">\n                        <a href=\"#\" class=\"button\">Agregar a mi lista</a>\n                    </div>\n                </div>\n            ");
-            });
-
-          case 9:
-            return _context16.abrupt("return", _context16.sent);
-
-          case 10:
-          case "end":
-            return _context16.stop();
-        }
-      }
-    }, _callee16);
-  }));
-  return _getPlayListTrend.apply(this, arguments);
-}
-
-function getPlayListRanking(_x11) {
-  return _getPlayListRanking.apply(this, arguments);
-}
-
-function _getPlayListRanking() {
-  _getPlayListRanking = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee18(listId) {
-    var credentials, tokenStorage, _lsDelete;
-
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee18$(_context18) {
-      while (1) {
-        switch (_context18.prev = _context18.next) {
-          case 0:
-            if (tokenStorage) {
-              _context18.next = 4;
-              break;
-            }
-
-            _context18.next = 3;
-            return init();
-
-          case 3:
-            credentials = _context18.sent;
-
-          case 4:
-            tokenStorage = localStorage.getItem(nameKey);
-            tokenStorage = JSON.parse(tokenStorage); //console.log("etPlayList");
-            //console.log(tokenStorage);
-
-            _lsDelete = lsDeleteFn;
-            _context18.next = 9;
-            return fetch("https://api.spotify.com/v1/tracks/" + listId, {
-              headers: {
-                'Content-Type': 'application/json',
-                'Authorization': tokenStorage ? tokenStorage.token : ''
-              }
-            }).then( /*#__PURE__*/function () {
-              var _ref15 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee17(res) {
-                var lsDelete;
-                return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee17$(_context17) {
-                  while (1) {
-                    switch (_context17.prev = _context17.next) {
-                      case 0:
-                        if (!(res.status === 404)) {
-                          _context17.next = 4;
-                          break;
-                        }
-
-                        return _context17.abrupt("return", false);
-
-                      case 4:
-                        if (!(res.status !== 200)) {
-                          _context17.next = 12;
-                          break;
-                        }
-
-                        lsDelete = _lsDelete();
-
-                        if (!lsDelete) {
-                          _context17.next = 11;
-                          break;
-                        }
-
-                        _context17.next = 9;
-                        return init();
-
-                      case 9:
-                        _context17.next = 11;
-                        return getPlayList(listId);
-
-                      case 11:
-                        return _context17.abrupt("return", false);
-
-                      case 12:
-                        return _context17.abrupt("return", res.json());
-
-                      case 13:
-                      case "end":
-                        return _context17.stop();
-                    }
-                  }
-                }, _callee17);
-              }));
-
-              return function (_x15) {
-                return _ref15.apply(this, arguments);
-              };
-            }()).then(function (data) {
-              var name = data.name,
-                  album = data.album,
-                  artists = data.artists,
-                  popularity = data.popularity;
-              var images = album.images;
-              var artistList = artists.map(function (item) {
-                return item.name;
-              });
-              console.log("TRACK RESPONSE artistList");
-              console.log(artistList);
-              var artistListFinal = '';
-
-              if (artistList.length > 3) {
-                for (var i = 0; i < 3; i++) {
-                  artistListFinal += artistList[i] + (i !== 2 ? ', ' : ', +');
-                }
-              } else {
-                artistListFinal = artistList.join(',');
-              }
-
-              var artistsAll = artistList.join(',');
-              /*const {items} = tracks;
-               let popularityProm = 0;
-              const valuePopularity = items.map((item) => item.track.popularity)
-              const totalItemsPopularity = valuePopularity.length;
-              const sumPopularity = valuePopularity.reduce((a, b) => a + b, 0);
-              const promPopularity = (sumPopularity / totalItemsPopularity).toFixed(2);
-              */
-
-              /*const {items} = tracks;
-               let popularityProm = 0;
-              const valuePopularity = items.map((item) => item.track.popularity)
-              const totalItemsPopularity = valuePopularity.length;
-              const sumPopularity = valuePopularity.reduce((a, b) => a + b, 0);
-              const promPopularity = (sumPopularity / totalItemsPopularity).toFixed(2);
-              */
-              return "\n                <div class=\"vtr__card vtr__card--playlist\">\n                    <div class=\"vtr__card__image\">\n                        <img loading=\"lazy\" src=\"".concat(images[0].url, "\" alt='").concat(artistsAll, "'>\n                    </div>\n                    <div class=\"vtr__card__info\">\n                        <div class=\"vtr__card__info__top\">\n                            <h2 class=\"title\">").concat(name, "</h2>\n                            <h3 class=\"sub-title\">").concat(artistListFinal, "</h3>\n                        </div>\n                        <a href=\"#\" class=\"vtr__card__info__add\">\n                            <img loading=\"lazy\" src=\"./assets/images/icon-open-plus.svg\" alt=\"imagen\">\n                        </a>\n                    </div>\n                </div>\n            ");
-            });
-
-          case 9:
-            return _context18.abrupt("return", _context18.sent);
-
-          case 10:
-          case "end":
-            return _context18.stop();
-        }
-      }
-    }, _callee18);
-  }));
-  return _getPlayListRanking.apply(this, arguments);
-}
-
-function init() {
-  return _init.apply(this, arguments);
-}
-
-function _init() {
-  _init = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee19() {
-    var formBody;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee19$(_context19) {
-      while (1) {
-        switch (_context19.prev = _context19.next) {
-          case 0:
-            formBody = [];
-            formBody.push('grant_type=client_credentials');
-            _context19.next = 4;
-            return fetch("https://accounts.spotify.com/api/token", {
-              headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                'Authorization': 'Basic  OGJmOGZhODUzYTM2NGZjYjlkOTk4Y2MyMjk1MGM5YzU6NzdiMGI3MzA3ZTE3NDMwMzk2ZDBmNDA3OTQxNmRkZjM='
-              },
-              method: "POST",
-              body: formBody
-            }).then(function (res) {
-              return res.json();
-            }).then(function (data) {
-              var access_token = data.access_token,
-                  token_type = data.token_type;
-              localStorage.setItem(nameKey, JSON.stringify({
-                token: "".concat(token_type, " ").concat(access_token)
-              }));
-              return {
-                access_token: access_token,
-                token_type: token_type
-              };
-            });
-
-          case 4:
-            return _context19.abrupt("return", _context19.sent);
-
-          case 5:
-          case "end":
-            return _context19.stop();
-        }
-      }
-    }, _callee19);
-  }));
-  return _init.apply(this, arguments);
-}
-
-var initGeneral = /*#__PURE__*/function () {
-  var _ref9 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee9() {
-    var html, spotify_ids, i;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee9$(_context9) {
-      while (1) {
-        switch (_context9.prev = _context9.next) {
-          case 0:
-            html = '';
-            spotify_ids = document.getElementById('spotify_ids').value;
-            spotify_ids = spotify_ids.split(',');
-            i = 0;
-
-          case 4:
-            if (!(i < spotify_ids.length)) {
-              _context9.next = 13;
-              break;
-            }
-
-            console.log('TRENED TRACK');
-            _context9.t0 = html;
-            _context9.next = 9;
-            return getPlayList(spotify_ids[i]);
-
-          case 9:
-            html = _context9.t0 += _context9.sent;
-
-          case 10:
-            i++;
-            _context9.next = 4;
-            break;
-
-          case 13:
-            /*html += await getPlayList('0UMskgrkEH31Bpg7IRHIVZ');
-            html += await getPlayList('1AcpOlHogKqQEXVn87FV8T');
-            html += await getPlayList('2YgSQIE0VcJHWGJRYZplGG');
-            html += await getPlayList('0H7hZ3pIPID0w3PD2x2JYf');
-            html += await getPlayList('37i9dQZF1DX6t4zDdAeW2k');*/
-            $("#spt_content").append(html);
-
-          case 14:
-          case "end":
-            return _context9.stop();
-        }
-      }
-    }, _callee9);
-  }));
-
-  return function initGeneral() {
-    return _ref9.apply(this, arguments);
-  };
-}();
-
-var trend = /*#__PURE__*/function () {
-  var _ref10 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee10() {
-    var trend_ids, html, i;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee10$(_context10) {
-      while (1) {
-        switch (_context10.prev = _context10.next) {
-          case 0:
-            trend_ids = document.getElementById('trend_ids').value;
-            html = '';
-            trend_ids = trend_ids.split(',');
-            i = 0;
-
-          case 4:
-            if (!(i < trend_ids.length)) {
-              _context10.next = 13;
-              break;
-            }
-
-            console.log('TRENED TRACK');
-            _context10.t0 = html;
-            _context10.next = 9;
-            return getPlayListTrend(trend_ids[i]);
-
-          case 9:
-            html = _context10.t0 += _context10.sent;
-
-          case 10:
-            i++;
-            _context10.next = 4;
-            break;
-
-          case 13:
-            $('#trend_content').html(html);
-
-          case 14:
-          case "end":
-            return _context10.stop();
-        }
-      }
-    }, _callee10);
-  }));
-
-  return function trend() {
-    return _ref10.apply(this, arguments);
-  };
-}();
-
-var ranking = /*#__PURE__*/function () {
-  var _ref11 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee11() {
-    var trend_ids, html, i;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee11$(_context11) {
-      while (1) {
-        switch (_context11.prev = _context11.next) {
-          case 0:
-            trend_ids = document.getElementById('ranking_ids').value;
-            html = '';
-            trend_ids = trend_ids.split(',');
-            i = 0;
-
-          case 4:
-            if (!(i < trend_ids.length)) {
-              _context11.next = 12;
-              break;
-            }
-
-            _context11.t0 = html;
-            _context11.next = 8;
-            return getPlayListRanking(trend_ids[i]);
-
-          case 8:
-            html = _context11.t0 += _context11.sent;
-
-          case 9:
-            i++;
-            _context11.next = 4;
-            break;
-
-          case 12:
-            $('#ranking_content').html(html);
-
-          case 13:
-          case "end":
-            return _context11.stop();
-        }
-      }
-    }, _callee11);
-  }));
-
-  return function ranking() {
-    return _ref11.apply(this, arguments);
-  };
-}();
-
-function getPlayListWeek(_x12) {
-  return _getPlayListWeek.apply(this, arguments);
-}
-
-function _getPlayListWeek() {
-  _getPlayListWeek = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee21(listId) {
-    var credentials, tokenStorage, _lsDelete;
-
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee21$(_context21) {
-      while (1) {
-        switch (_context21.prev = _context21.next) {
-          case 0:
-            if (tokenStorage) {
-              _context21.next = 4;
-              break;
-            }
-
-            _context21.next = 3;
-            return init();
-
-          case 3:
-            credentials = _context21.sent;
-
-          case 4:
-            tokenStorage = localStorage.getItem(nameKey);
-            tokenStorage = JSON.parse(tokenStorage); //console.log("etPlayList");
-            //console.log(tokenStorage);
-
-            _lsDelete = lsDeleteFn;
-            _context21.next = 9;
-            return fetch("https://api.spotify.com/v1/tracks/" + listId, {
-              headers: {
-                'Content-Type': 'application/json',
-                'Authorization': tokenStorage ? tokenStorage.token : ''
-              }
-            }).then( /*#__PURE__*/function () {
-              var _ref16 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee20(res) {
-                var lsDelete;
-                return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee20$(_context20) {
-                  while (1) {
-                    switch (_context20.prev = _context20.next) {
-                      case 0:
-                        if (!(res.status === 404)) {
-                          _context20.next = 4;
-                          break;
-                        }
-
-                        return _context20.abrupt("return", false);
-
-                      case 4:
-                        if (!(res.status !== 200)) {
-                          _context20.next = 12;
-                          break;
-                        }
-
-                        lsDelete = _lsDelete();
-
-                        if (!lsDelete) {
-                          _context20.next = 11;
-                          break;
-                        }
-
-                        _context20.next = 9;
-                        return init();
-
-                      case 9:
-                        _context20.next = 11;
-                        return getPlayList(listId);
-
-                      case 11:
-                        return _context20.abrupt("return", false);
-
-                      case 12:
-                        return _context20.abrupt("return", res.json());
-
-                      case 13:
-                      case "end":
-                        return _context20.stop();
-                    }
-                  }
-                }, _callee20);
-              }));
-
-              return function (_x16) {
-                return _ref16.apply(this, arguments);
-              };
-            }()).then(function (data) {
-              var name = data.name,
-                  album = data.album,
-                  artists = data.artists,
-                  popularity = data.popularity;
-              var images = album.images;
-              var artistList = artists.map(function (item) {
-                return item.name;
-              });
-              console.log("TRACK RESPONSE artistList");
-              console.log(artistList);
-              var artistListFinal = '';
-
-              if (artistList.length > 3) {
-                for (var i = 0; i < 3; i++) {
-                  artistListFinal += artistList[i] + (i !== 2 ? ', ' : ', +');
-                }
-              } else {
-                artistListFinal = artistList.join(',');
-              }
-
-              var artistsAll = artistList.join(',');
-              /*const {items} = tracks;
-               let popularityProm = 0;
-              const valuePopularity = items.map((item) => item.track.popularity)
-              const totalItemsPopularity = valuePopularity.length;
-              const sumPopularity = valuePopularity.reduce((a, b) => a + b, 0);
-              const promPopularity = (sumPopularity / totalItemsPopularity).toFixed(2);
-              */
-
-              /*const {items} = tracks;
-               let popularityProm = 0;
-              const valuePopularity = items.map((item) => item.track.popularity)
-              const totalItemsPopularity = valuePopularity.length;
-              const sumPopularity = valuePopularity.reduce((a, b) => a + b, 0);
-              const promPopularity = (sumPopularity / totalItemsPopularity).toFixed(2);
-              */
-              return "\n                <div class=\"image\">\n                    <img loading=\"lazy\" src=\"".concat(images[0].url, "\" alt=\"").concat(name, "\">\n                </div>\n            ");
-            });
-
-          case 9:
-            return _context21.abrupt("return", _context21.sent);
-
-          case 10:
-          case "end":
-            return _context21.stop();
-        }
-      }
-    }, _callee21);
-  }));
-  return _getPlayListWeek.apply(this, arguments);
-}
-
-var artistWeek = /*#__PURE__*/function () {
-  var _ref12 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee12() {
-    var trend_ids, html, i;
-    return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee12$(_context12) {
-      while (1) {
-        switch (_context12.prev = _context12.next) {
-          case 0:
-            trend_ids = document.getElementById('artist_item_ids').value;
-            html = '';
-            trend_ids = trend_ids.split(',');
-            console.log("---PEMCM---");
-            i = 0;
-
-          case 5:
-            if (!(i < trend_ids.length)) {
-              _context12.next = 13;
-              break;
-            }
-
-            _context12.t0 = html;
-            _context12.next = 9;
-            return getPlayListWeek(trend_ids[i]);
-
-          case 9:
-            html = _context12.t0 += _context12.sent;
-
-          case 10:
-            i++;
-            _context12.next = 5;
-            break;
-
-          case 13:
-            $('#week_contect').html(html);
-
-          case 14:
-          case "end":
-            return _context12.stop();
-        }
-      }
-    }, _callee12);
-  }));
-
-  return function artistWeek() {
-    return _ref12.apply(this, arguments);
-  };
-}(); //
-// ();
-//trend();
-//ranking();
-//artistWeek();
 }();
 /******/ })()
 ;

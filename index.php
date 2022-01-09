@@ -15,31 +15,26 @@
 	$thumbnail = $data->post_thumbnail;
 	$videoYoutubeId = $data->field_custom->video_youtube_id[0];
 
-	// TREND
-    $contentTrend = requestUrl( $url . "/global/trend" );
-    $dataTrend = responseProcessed( $contentTrend );
-    $implodeTrend = implodeArrayGlobalList( $dataTrend );
+	$banner = $data->field_custom->html_banner[0];
+	$banner = trim($banner);
+
+	$bannerSec = $data->field_custom->html_banner_sec[0];
+    $bannerSec = trim($bannerSec);
 
 
-    // RANKING
+    //SEO
+    $title = $data->field_custom->seo_title[0];
+    $title = trim($title);
 
-    $contentRanking = requestUrl( $url . "/global/ranking" );
-    $dataRanking =  $dataTrend = responseProcessed( $contentRanking );
-    $implodeRanking = implodeArrayGlobalList( $dataRanking );
+    $description = $data->field_custom->seo_description[0];
+    $description = trim($description);
+
+    $keywords = $data->field_custom->seo_keywords[0];
+    $keywords = trim($keywords);
 
     // Global ARTIST
     $contentRanking = requestUrl( $url . "/artist" );
     $dataSites =  $dataTrend = responseProcessed( $contentRanking );
-
-    // spotify
-    $contentSopotify = requestUrl( $url . "/artist/" .$alias. "/spotify" );
-    $dataSpotify = responseProcessed( $contentSopotify );
-    $implodeSpotify = implodeArrayGlobalList( $dataSpotify );
-
-    // youtube
-    $contentYoutube = requestUrl( $url . "/artist/" .$alias. "/youtube" );
-    $dataYoutube = responseProcessed( $contentYoutube );
-    $implodeYoutube = implodeArrayGlobalList( $dataYoutube );
 
     $urlSubmit = $url . "/insert";
 
@@ -56,6 +51,9 @@
 <html lang="es">
 <head>
     <meta charset="utf-8">
+    <meta name="description" content="Free Web tutorials">
+    <meta name="description" content="<?php echo $content ?>">
+    <meta name="keywords" content="<?php echo $keywords ?>">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=edge"/>
 	<meta name="theme-color" content="#ffffff">
@@ -71,11 +69,6 @@
 </head>
 <body>
     <input type="hidden" id="video_youtube_id" value="<?php echo $videoYoutubeId; ?>">
-    <input type="hidden" id="trend_ids" value="<?php echo $implodeTrend; ?>">
-    <input type="hidden" id="ranking_ids" value="<?php echo $implodeRanking; ?>">
-    <input type="hidden" id="spotify_ids" value="<?php echo $implodeSpotify; ?>">
-    <input type="hidden" id="youtube_ids" value="<?php echo $implodeYoutube; ?>">
-    <input type="hidden" id="artist_item_ids" value="<?php echo $implodeArtistItemWeek ; ?>">
     <!--
     <header class="vtr__header">
         <div class="vtr__container">
@@ -130,37 +123,17 @@
         </section>
         <section id="trend" class="vtr__trend bg-purple padding-top padding-bottom">
             <div class="vtr__container">
-                <div class="vtr__advertising">
-                    <!--<img loading="lazy" width="1200" src="./assets/images/image-pub.jpg" alt="publicidad">-->
-                    <!-- Revive Adserver Etiqueta iFrame - Generated with Revive Adserver v5.3.1 -->
-                    <iframe id='a46c3b8e' name='a46c3b8e' src='http://revive.test:8084/www/delivery/afr.php?zoneid=1&amp;cb=INSERT_RANDOM_NUMBER_HERE' frameborder='0' scrolling='no' width='1200' height='147' allow='autoplay'>
-                        <a href='http://revive.test:8084/www/delivery/ck.php?n=aaca5aed&amp;cb=INSERT_RANDOM_NUMBER_HERE' target='_blank'>
-                            <img src='http://revive.test:8084/www/delivery/avw.php?zoneid=1&amp;cb=INSERT_RANDOM_NUMBER_HERE&amp;n=aaca5aed' border='0' alt='' />
-                        </a>
-                    </iframe>
-                    <!-- Revive Adserver Tag de Javascript - Generated with Revive Adserver v5.3.1 -->
-                    <script type='text/javascript'><!--//<![CDATA[
-                        var m3_u = (location.protocol=='https:'?'https://revive.test:8084/www/delivery/ajs.php':'http://revive.test:8084/www/delivery/ajs.php');
-                        var m3_r = Math.floor(Math.random()*99999999999);
-                        if (!document.MAX_used) document.MAX_used = ',';
-                        document.write ("<scr"+"ipt type='text/javascript' src='"+m3_u);
-                        document.write ("?zoneid=1");
-                        document.write ('&amp;cb=' + m3_r);
-                        if (document.MAX_used != ',') document.write ("&amp;exclude=" + document.MAX_used);
-                        document.write (document.charset ? '&amp;charset='+document.charset : (document.characterSet ? '&amp;charset='+document.characterSet : ''));
-                        document.write ("&amp;loc=" + escape(window.location));
-                        if (document.referrer) document.write ("&amp;referer=" + escape(document.referrer));
-                        if (document.context) document.write ("&context=" + escape(document.context));
-                        document.write ("'><\/scr"+"ipt>");
-                        //]]>--></script><noscript><a href='http://revive.test:8084/www/delivery/ck.php?n=a8aa6ad0&amp;cb=INSERT_RANDOM_NUMBER_HERE' target='_blank'><img src='http://revive.test:8084/www/delivery/avw.php?zoneid=1&amp;cb=INSERT_RANDOM_NUMBER_HERE&amp;n=a8aa6ad0' border='0' alt='' /></a></noscript>
-
-
-
-                </div>
-
+                <?php if($banner !== ''): ?>
+                    <div class="vtr__advertising">
+                        <?php echo $banner; ?>
+                    </div>
+                <?php endif ?>
                 <div class="vtr__flex vtr__flex__space-between padding-top-50">
                     <div class="vtr__col__8">
                         <h2 class="vtr__title vtr__title--line"><span>En tendencia</span></h2>
+                         <div class="vtr__loading in_trend_content__loading">
+                            <img loading="lazy" src="./assets/images/loading.svg" alt="cargando">
+                        </div>
                         <div id="trend_content" class="vtr__grid vtr__grid-gap-10 vtr__grid-col-3">
                             <!--
                             <div class="vtr__card">
@@ -213,253 +186,20 @@
                     </div>
                     <div class="vtr__col__4 bg-blur mt-30-mb  overflow-y">
                         <h2 class="vtr__title">Los más escuchados</h2>
+                        <div class="vtr__loading ranking_content__loading">
+                            <img loading="lazy" src="./assets/images/loading.svg" alt="cargando">
+                        </div>
                         <div id="ranking_content" class="vtr__grid vtr__grid-gap-5">
-                            <div class="vtr__card vtr__card--playlist">
-                                <div class="vtr__card__image">
-                                    <img loading="lazy" src="./assets/images/img5.png" alt="imagen">
-                                </div>
-                                <div class="vtr__card__info">
-                                    <div class="vtr__card__info__top">
-                                        <h2 class="title">All i want for christmas is you</h2>
-                                        <h3 class="sub-title">Mariah Carey</h3>
-                                    </div>
-                                    <a href="#" class="vtr__card__info__add">
-                                        <img loading="lazy" src="./assets/images/icon-open-plus.svg" alt="imagen">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="vtr__card vtr__card--playlist">
-                                <div class="vtr__card__image">
-                                    <img loading="lazy" src="./assets/images/img4.jpg" alt="imagen">
-                                </div>
-                                <div class="vtr__card__info">
-                                    <div class="vtr__card__info__top">
-                                        <h2 class="title">Yonaguni</h2>
-                                        <h3 class="sub-title">Toto</h3>
-                                    </div>
-                                    <a href="#" class="vtr__card__info__add">
-                                        <img loading="lazy" src="./assets/images/icon-open-plus.svg" alt="imagen">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="vtr__card vtr__card--playlist">
-                                <div class="vtr__card__image">
-                                    <img loading="lazy" src="./assets/images/img8.jpg" alt="imagen">
-                                </div>
-                                <div class="vtr__card__info">
-                                    <div class="vtr__card__info__top">
-                                        <h2 class="title">Yonaguni</h2>
-                                        <h3 class="sub-title">Toto</h3>
-                                    </div>
-                                    <a href="#" class="vtr__card__info__add">
-                                        <img loading="lazy" src="./assets/images/icon-open-plus.svg" alt="imagen">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="vtr__card vtr__card--playlist">
-                                <div class="vtr__card__image">
-                                    <img loading="lazy" src="./assets/images/img6.png" alt="imagen">
-                                </div>
-                                <div class="vtr__card__info">
-                                    <div class="vtr__card__info__top">
-                                        <h2 class="title">Yonaguni</h2>
-                                        <h3 class="sub-title">Toto</h3>
-                                    </div>
-                                    <a href="#" class="vtr__card__info__add">
-                                        <img loading="lazy" src="./assets/images/icon-open-plus.svg" alt="imagen">
-                                    </a>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="padding-top-50">
                     <h2 class="vtr__title vtr__title--line"><span>Recien agregadas</span></h2>
-                    <div class="vtr__loading">
+                    <div class="vtr__loading ytb_content__loading">
                         <img loading="lazy" src="./assets/images/loading.svg" alt="cargando">
                     </div>
                     <div id="ytb_content" class="vtr__grid vtr__grid-gap-10 vtr__grid-col-5">
-                        <div class="vtr__card">
-                            <div class="vtr__card__image">
-                                <img loading="lazy" src="./assets/images/img8.jpg" alt="imagen">
-                                <div class="type">
-                                    <img loading="lazy" src="./assets/images/play-youtube.svg" alt="imagen">
-                                </div>
-                            </div>
-                            <div class="vtr__card__info">
-                                <div class="vtr__card__info__top">
-                                    <h2 class="title">Taonoces Rojos</h2>
-                                    <h3 class="sub-title">Sebastian Yatra</h3>
-                                    <small class="reproductions">350,000 Reproducciones</small>
-                                </div>
-                            </div>
-                            <div class="vtr__card__bottom">
-                                <a href="#" class="button">Agregar a mi lista</a>
-                            </div>
-                        </div>
-                        <div class="vtr__card">
-                            <div class="vtr__card__image">
-                                <img loading="lazy" src="./assets/images/img7.jpg" alt="imagen">
-                                <div class="type">
-                                    <img loading="lazy" src="./assets/images/play-youtube.svg" alt="imagen">
-                                </div>
-                            </div>
-                            <div class="vtr__card__info">
-                                <div class="vtr__card__info__top">
-                                    <h2 class="title">Yonaguni</h2>
-                                    <h3 class="sub-title">Toto</h3>
-                                    <small class="reproductions">350,000 Reproducciones</small>
-                                </div>
-                            </div>
-                            <div class="vtr__card__bottom">
-                                <a href="#" class="button">Agregar a mi lista</a>
-                            </div>
-                        </div>
-                        <div class="vtr__card">
-                            <div class="vtr__card__image">
-                                <img loading="lazy" src="./assets/images/img6.png" alt="imagen">
-                                <div class="type">
-                                    <img loading="lazy" src="./assets/images/play-youtube.svg" alt="imagen">
-                                </div>
-                            </div>
-                            <div class="vtr__card__info">
-                                <div class="vtr__card__info__top">
-                                    <h2 class="title">Demo para saber la altura</h2>
-                                    <h3 class="sub-title">Maluma</h3>
-                                    <small class="reproductions">350,000 Reproducciones</small>
-                                </div>
-                            </div>
-                            <div class="vtr__card__bottom">
-                                <a href="#" class="button">Agregar a mi lista</a>
-                            </div>
-                        </div>
-                        <div class="vtr__card">
-                            <div class="vtr__card__image">
-                                <img loading="lazy" src="./assets/images/img5.png" alt="imagen">
-                                <div class="type">
-                                    <img loading="lazy" src="./assets/images/play-youtube.svg" alt="imagen">
-                                </div>
-                            </div>
-                            <div class="vtr__card__info">
-                                <div class="vtr__card__info__top">
-                                    <h2 class="title">Demo para saber la altura</h2>
-                                    <h3 class="sub-title">Maluma</h3>
-                                    <small class="reproductions">350,000 Reproducciones</small>
-                                </div>
-                            </div>
-                            <div class="vtr__card__bottom">
-                                <a href="#" class="button">Agregar a mi lista</a>
-                            </div>
-                        </div>
-                        <div class="vtr__card">
-                            <div class="vtr__card__image">
-                                <img loading="lazy" src="./assets/images/img4.jpg" alt="imagen">
-                                <div class="type">
-                                    <img loading="lazy" src="./assets/images/play-youtube.svg" alt="imagen">
-                                </div>
-                            </div>
-                            <div class="vtr__card__info">
-                                <div class="vtr__card__info__top">
-                                    <h2 class="title">Demo para saber la altura</h2>
-                                    <h3 class="sub-title">Maluma</h3>
-                                    <small class="reproductions">350,000 Reproducciones</small>
-                                </div>
-                            </div>
-                            <div class="vtr__card__bottom">
-                                <a href="#" class="button">Agregar a mi lista</a>
-                            </div>
-                        </div>
-                        <div class="vtr__card">
-                            <div class="vtr__card__image">
-                                <img loading="lazy" src="./assets/images/img3.png" alt="imagen">
-                                <div class="type">
-                                    <img loading="lazy" src="./assets/images/play-youtube.svg" alt="imagen">
-                                </div>
-                            </div>
-                            <div class="vtr__card__info">
-                                <div class="vtr__card__info__top">
-                                    <h2 class="title">Demo para saber la altura</h2>
-                                    <h3 class="sub-title">Maluma</h3>
-                                    <small class="reproductions">350,000 Reproducciones</small>
-                                </div>
-                            </div>
-                            <div class="vtr__card__bottom">
-                                <a href="#" class="button">Agregar a mi lista</a>
-                            </div>
-                        </div>
-                        <div class="vtr__card">
-                            <div class="vtr__card__image">
-                                <img loading="lazy" src="./assets/images/img2.png" alt="imagen">
-                                <div class="type">
-                                    <img loading="lazy" src="./assets/images/play-youtube.svg" alt="imagen">
-                                </div>
-                            </div>
-                            <div class="vtr__card__info">
-                                <div class="vtr__card__info__top">
-                                    <h2 class="title">Demo para saber la altura</h2>
-                                    <h3 class="sub-title">Maluma</h3>
-                                    <small class="reproductions">350,000 Reproducciones</small>
-                                </div>
-                            </div>
-                            <div class="vtr__card__bottom">
-                                <a href="#" class="button">Agregar a mi lista</a>
-                            </div>
-                        </div>
-                        <div class="vtr__card">
-                            <div class="vtr__card__image">
-                                <img loading="lazy" src="./assets/images/img1.jpg" alt="imagen">
-                                <div class="type">
-                                    <img loading="lazy" src="./assets/images/play-youtube.svg" alt="imagen">
-                                </div>
-                            </div>
-                            <div class="vtr__card__info">
-                                <div class="vtr__card__info__top">
-                                    <h2 class="title">Demo para saber la altura</h2>
-                                    <h3 class="sub-title">Maluma</h3>
-                                    <small class="reproductions">350,000 Reproducciones</small>
-                                </div>
-                            </div>
-                            <div class="vtr__card__bottom">
-                                <a href="#" class="button">Agregar a mi lista</a>
-                            </div>
-                        </div>
-                        <div class="vtr__card">
-                            <div class="vtr__card__image">
-                                <img loading="lazy" src="./assets/images/img5.png" alt="imagen">
-                                <div class="type">
-                                    <img loading="lazy" src="./assets/images/play-youtube.svg" alt="imagen">
-                                </div>
-                            </div>
-                            <div class="vtr__card__info">
-                                <div class="vtr__card__info__top">
-                                    <h2 class="title">Demo para saber la altura</h2>
-                                    <h3 class="sub-title">Maluma</h3>
-                                    <small class="reproductions">350,000 Reproducciones</small>
-                                </div>
-                            </div>
-                            <div class="vtr__card__bottom">
-                                <a href="#" class="button">Agregar a mi lista</a>
-                            </div>
-                        </div>
-                        <div class="vtr__card">
-                            <div class="vtr__card__image">
-                                <img loading="lazy" src="./assets/images/img4.jpg" alt="imagen">
-                                <div class="type">
-                                    <img loading="lazy" src="./assets/images/play-youtube.svg" alt="imagen">
-                                </div>
-                            </div>
-                            <div class="vtr__card__info">
-                                <div class="vtr__card__info__top">
-                                    <h2 class="title">Demo para saber la altura</h2>
-                                    <h3 class="sub-title">Maluma</h3>
-                                    <small class="reproductions">350,000 Reproducciones</small>
-                                </div>
-                            </div>
-                            <div class="vtr__card__bottom">
-                                <a href="#" class="button">Agregar a mi lista</a>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div class="vtr__artist__week margin-top-50" style="<?php echo ($thumbnailArtistWeek !== '') ? 'background-image: url(' . $thumbnailArtistWeek . ');' : ''; ?>" >
@@ -467,26 +207,18 @@
                         <h2>Artista de la semana</h2>
                         <h3><?php echo $titleArtistWeek; ?></h3>
                     </div>
+                     <div class="vtr__loading week_contect_content__loading">
+                        <img loading="lazy" src="./assets/images/loading.svg" alt="cargando">
+                    </div>
                     <div id="week_contect" class="vtr__grid vtr__grid-gap-10 vtr__grid-col-4">
-                        <!--
-                        <div class="image">
-                            <img loading="lazy" src="./assets/images/img4.jpg" alt="imagen">
-                        </div>
-                        <div class="image">
-                            <img loading="lazy" src="./assets/images/img4.jpg" alt="imagen">
-                        </div>
-                        <div class="image">
-                            <img loading="lazy" src="./assets/images/img4.jpg" alt="imagen">
-                        </div>
-                        <div class="image">
-                            <img loading="lazy" src="./assets/images/img4.jpg" alt="imagen">
-                        </div>
-                        -->
+
                     </div>
                 </div>
-                <div class="vtr__advertising margin-top-50">
-                    <img loading="lazy" width="1200" src="./assets/images/image-pub.jpg" alt="publicidad">
-                </div>
+                <?php if($bannerSec !== ''): ?>
+                    <div class="vtr__advertising margin-top-50">
+                        <?php echo $bannerSec; ?>
+                    </div>
+                <?php endif ?>
             </div>
         </section>
         <section class="vtr__bio">
@@ -505,6 +237,9 @@
         <section class="vtr__trend bg-purple padding-top padding-bottom">
             <div class="vtr__container">
                 <h2 class="vtr__title vtr__title--line"><span>Nuevos lanzamientos</span></h2>
+                <div class="vtr__loading spt_content_content__loading">
+                    <img loading="lazy" src="./assets/images/loading.svg" alt="cargando">
+                </div>
                 <div id="spt_content" class="vtr__grid vtr__grid-gap-10 vtr__grid-col-5">
                     <!--
                     <div class="vtr__card">
