@@ -805,6 +805,7 @@
     <script src="assets/js/script.js" ></script>
     <script src="assets/js/ytb.js" ></script>
     <script src="assets/js/spt.js" ></script>
+    <script src="assets/js/follow.js" ></script>
     <script>
         // 2. This code loads the IFrame Player API code asynchronously.
         var tag = document.createElement('script');

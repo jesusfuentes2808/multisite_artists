@@ -890,13 +890,14 @@ function listTrend() {
           switch (_context2.prev = _context2.next) {
             case 0:
               data.forEach(function (item) {
-                //console.log("-------------------ITEM---------------------");
-                //console.log(item.response);
+                console.log("-------------------ITEM---------------------");
+                console.log(item.response);
                 var _item$response = item.response,
                     name = _item$response.name,
                     album = _item$response.album,
                     artists = _item$response.artists,
-                    popularity = _item$response.popularity;
+                    popularity = _item$response.popularity,
+                    id = _item$response.id;
                 var images = album.images;
                 var artistList = artists.map(function (item) {
                   return item.name;
@@ -912,7 +913,7 @@ function listTrend() {
                 }
 
                 var artistsAll = artistList.join(',');
-                $('#trend_content').append("<div class=\"vtr__card\">\n                        <div class=\"vtr__card__image\">\n                            <img loading=\"lazy\" src=\"".concat(images[0].url, "\" alt='").concat(artistsAll, "'>\n                        </div>\n                        <div class=\"vtr__card__info\">\n                            <div class=\"vtr__card__info__top\">\n                                <h2 class=\"title\">").concat(name, "</h2>\n                                <h3 class=\"sub-title\" >").concat(artistListFinal, "</h3>\n                                <!--<small class=\"reproductions\">350,000 Reproducciones</small>-->\n                                <small class=\"reproductions\">Popularidad: ").concat(popularity, " %</small>\n                            </div>\n                        </div>\n                        <div class=\"vtr__card__bottom\">\n                            <a href=\"#\" class=\"button\">Agregar a mi lista</a>\n                        </div>\n                    </div>"));
+                $('#trend_content').append("<div class=\"vtr__card\">\n                        <div class=\"vtr__card__image\">\n                            <img loading=\"lazy\" src=\"".concat(images[0].url, "\" alt='").concat(artistsAll, "'>\n                        </div>\n                        <div class=\"vtr__card__info\">\n                            <div class=\"vtr__card__info__top\">\n                                <h2 class=\"title\">").concat(name, "</h2>\n                                <h3 class=\"sub-title\" >").concat(artistListFinal, "</h3>\n                                <!--<small class=\"reproductions\">350,000 Reproducciones</small>-->\n                                <small class=\"reproductions\">Popularidad: ").concat(popularity, " %</small>\n                            </div>\n                        </div>\n                        <div class=\"vtr__card__bottom\">\n                            <a href=\"#\" class=\"button follow_track_spotify_link\" data-id=\"").concat(id, "\">Agregar a mi lista</a>\n                        </div>\n                    </div>"));
               });
               $("#trend_content").css('display', 'grid');
               $(".in_trend_content__loading").css('display', 'none');
@@ -1106,7 +1107,8 @@ function listPlayListSP() {
                     description = _item$response4.description,
                     images = _item$response4.images,
                     followers = _item$response4.followers,
-                    tracks = _item$response4.tracks;
+                    tracks = _item$response4.tracks,
+                    id = _item$response4.id;
                 var items = tracks.items;
                 var popularityProm = 0;
                 var valuePopularity = items.map(function (item) {
@@ -1117,7 +1119,7 @@ function listPlayListSP() {
                   return a + b;
                 }, 0);
                 var promPopularity = (sumPopularity / totalItemsPopularity).toFixed(2);
-                $("#spt_content").append("\n                                <div class=\"vtr__card\">\n                                    <div class=\"vtr__card__image\">\n                                        <img loading=\"lazy\" src=\"".concat(images[0].url, "\" alt=\"imagen\">\n                                        <div class=\"type\">\n                                            <img loading=\"lazy\" src=\"./assets/images/play-spotify.svg\" alt=\"imagen\">\n                                        </div>\n                                    </div>\n                                    <div class=\"vtr__card__info\">\n                                        <div class=\"vtr__card__info__top\">\n                                            <h2 class=\"title text-center\">").concat(name, "</h2>\n                                           <div class=\"follo-popu\">\n                                               <div class=\"followers\">\n                                                   <span class=\"number\">").concat(followers.total, "</span>\n                                                   <span class=\"text\">Seguidores</span>\n                                               </div>\n                                               <div class=\"popular\">\n                                                   <div class=\"boxs\">\n                                                       <div class=\"box\"></div>\n                                                       <div class=\"box\"></div>\n                                                       <div class=\"box\"></div>\n                                                       <div class=\"box\"></div>\n                                                       <div class=\"box\"></div>\n                                                   </div>\n                                                   <span class=\"text\">Popularidad: ").concat(promPopularity, " % </span>\n                                               </div>\n                                           </div>\n                                        </div>\n                                    </div>\n                                    <div class=\"vtr__card__bottom\">\n                                        <a href=\"#\" class=\"button\">Agregar a mi lista</a>\n                                    </div>\n                                </div>\n                            "));
+                $("#spt_content").append("\n                                <div class=\"vtr__card\">\n                                    <div class=\"vtr__card__image\">\n                                        <img loading=\"lazy\" src=\"".concat(images[0].url, "\" alt=\"imagen\">\n                                        <div class=\"type\">\n                                            <img loading=\"lazy\" src=\"./assets/images/play-spotify.svg\" alt=\"imagen\">\n                                        </div>\n                                    </div>\n                                    <div class=\"vtr__card__info\">\n                                        <div class=\"vtr__card__info__top\">\n                                            <h2 class=\"title text-center\">").concat(name, "</h2>\n                                           <div class=\"follo-popu\">\n                                               <div class=\"followers\">\n                                                   <span class=\"number\">").concat(followers.total, "</span>\n                                                   <span class=\"text\">Seguidores</span>\n                                               </div>\n                                               <div class=\"popular\">\n                                                   <div class=\"boxs\">\n                                                       <div class=\"box\"></div>\n                                                       <div class=\"box\"></div>\n                                                       <div class=\"box\"></div>\n                                                       <div class=\"box\"></div>\n                                                       <div class=\"box\"></div>\n                                                   </div>\n                                                   <span class=\"text\">Popularidad: ").concat(promPopularity, " % </span>\n                                               </div>\n                                           </div>\n                                        </div>\n                                    </div>\n                                    <div class=\"vtr__card__bottom\">\n                                        <a href=\"#\" class=\"button follow_playlist_spotify_link\" data-id=\"").concat(id, "\">Agregar a mi lista</a>\n                                    </div>\n                                </div>\n                            "));
               });
               $("#spt_content").css('display', 'grid');
               $(".spt_content_content__loading").css('display', 'none');

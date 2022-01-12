@@ -9,9 +9,9 @@ function listTrend(){
         })
         .then(async data => {
             data.forEach((item) => {
-                //console.log("-------------------ITEM---------------------");
-                //console.log(item.response);
-                const {name, album, artists, popularity} = item.response;
+                console.log("-------------------ITEM---------------------");
+                console.log(item.response);
+                const {name, album, artists, popularity, id} = item.response;
                 const {images} = album;
 
                 const artistList = artists.map((item)=> item.name);
@@ -42,7 +42,7 @@ function listTrend(){
                             </div>
                         </div>
                         <div class="vtr__card__bottom">
-                            <a href="#" class="button">Agregar a mi lista</a>
+                            <a href="#" class="button follow_track_spotify_link" data-id="${id}">Agregar a mi lista</a>
                         </div>
                     </div>`);
             });
@@ -155,7 +155,7 @@ function listPlayListSP(){
         })
         .then(async data => {
             data.forEach((item) => {
-                const {name, description, images, followers, tracks} = item.response;
+                const {name, description, images, followers, tracks, id} = item.response;
                 const {items} = tracks;
 
                 let popularityProm = 0;
@@ -194,7 +194,7 @@ function listPlayListSP(){
                                         </div>
                                     </div>
                                     <div class="vtr__card__bottom">
-                                        <a href="#" class="button">Agregar a mi lista</a>
+                                        <a href="#" class="button follow_playlist_spotify_link" data-id="${id}">Agregar a mi lista</a>
                                     </div>
                                 </div>
                             `);

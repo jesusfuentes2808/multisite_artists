@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+redirect...
+<script type="text/javascript">
+    const separator = '#access_token=';
+    const redirect = localStorage.getItem('redirect_callback');
+    const track_id = localStorage.getItem('track_id');
+    const playlist_id = localStorage.getItem('playlist_id');
+    if(redirect){
+        if(track_id){
+            localStorage.removeItem('redirect_callback')
+            window.location.href = redirect + '?' + separator + window.location.href.split(separator)[1];
+        } else if(playlist_id){
+            localStorage.removeItem('redirect_callback')
+            window.location.href = redirect + '?' + separator + window.location.href.split(separator)[1];
+        }
+        //localStorage.removeItem('redirect_callback')
+        //window.location.href = redirect + '?' + separator + window.location.href.split(separator)[1];
+    } else {
+        //window.location.href = 'https://ricardomontaner.com';
+    }
+    /*-------------------------------------------------------------------------------------------------*/
+
+</script>
+
+</body>
+</html>
