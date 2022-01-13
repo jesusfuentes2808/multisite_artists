@@ -1303,7 +1303,7 @@ a {
   visibility: visible;
 }
 .vtr__modal.open:before {
-  background-color: rgba(var(--black), 0.6);
+  background-color: var(--black-06);
   opacity: 1;
 }
 .vtr__modal__close {
@@ -1715,4 +1715,10 @@ a {
 }
 .vtr__contact .content button:hover {
   box-shadow: initial;
+}
+
+.error_message {
+  margin-top: 5px;
+  color: #b1a4a4;
+  display: none;
 }

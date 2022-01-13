@@ -570,6 +570,7 @@
                 <h2>Instagram</h2>
                 <script src="https://apps.elfsight.com/p/platform.js" defer></script>
                 <div class="elfsight-app-199c6011-c594-45f2-b081-9107b41a8355"></div>
+                <!--
                 <div class="vtr__grid vtr__grid-gap-20 vtr__grid-col-4">
                     <a href="#" class="item">
                         <img loading="lazy" src="./assets/images/instagram1.jpg" alt="imagen">
@@ -676,6 +677,7 @@
                         </div>
                     </a>
                 </div>
+                -->
             </div>
         </section>
         <section class="vtr__contact padding-top padding-bottom">
@@ -683,28 +685,35 @@
                 <div class="content">
                     <h2>Contáctanos</h2>
                     <p>Completa el siguiente formulario para realizar tu consulta</p>
-                    <form onsubmit="sendForm(event)">
+                    <form id="form_user">
                         <input name="artist_id" id="artist_id" type="hidden" value="<?php echo $alias ?>" placeholder="Nombre y apellidos">
                         <div class="input">
                             <input name="name" id="name" type="text" placeholder="Nombre y apellidos">
+                            <span id="name_error" class="error_message"></span>
                         </div>
                         <div class="input">
                             <input name="email" id="email" type="email" placeholder="Correo">
+                            <span id="email_error" class="error_message"></span>
                         </div>
                         <div class="input">
                             <input name="telephone" id="telephone" type="text" placeholder="Teléfono">
+                            <span id="telephone_error" class="error_message"></span>
                         </div>
                         <div class="input">
                             <textarea name="message" id="message" placeholder="Mensaje"></textarea>
                         </div>
                         <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
+                        <div class="input">
+
+                            <span id="recaptcha_error" class="error_message"></span>
+                        </div>
                         <button type="submit">Enviar</button>
                     </form>
                 </div>
             </div>
         </section>
         <!--darle la clase open-->
-        <div class="vtr__modal">
+        <div id="register_user" class="vtr__modal">
             <button class="vtr__modal__close">
                 <img loading="lazy" src="./assets/images/close.svg" alt="imagen">
             </button>
@@ -806,6 +815,7 @@
     <script src="assets/js/ytb.js" ></script>
     <script src="assets/js/spt.js" ></script>
     <script src="assets/js/follow.js" ></script>
+    <script src="assets/js/home.js" ></script>
     <script>
         // 2. This code loads the IFrame Player API code asynchronously.
         var tag = document.createElement('script');
@@ -863,73 +873,7 @@
             }
         });
     </script>
-    <script>
-        function sendForm(e){
-            e.preventDefault();
-            if (grecaptcha === undefined) {
-                alert('Recaptcha not defined');
-                return;
-            }
-
-            var response = grecaptcha.getResponse();
-
-            if (!response) {
-                alert('Coud not get recaptcha response');
-                return;
-            }
-            const formBody = [];
-            formBody.push('g-recaptcha-response=' + response);
-
-            fetch("http://multisite_artists.test:8084/captcha.php", {
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-
-                },
-                method: "POST",
-                body: formBody,
-            })
-                .then(res => res.json())
-                .then((data) => {
-                    if(data == "1"){
-                        const form = new FormData();
-                        form.append( "name", document.getElementById('name').value );
-                        form.append( "email", document.getElementById('email').value );
-                        form.append( "telephone", document.getElementById('telephone').value );
-                        form.append( "message", document.getElementById('message').value );
-                        form.append( "artist_id", document.getElementById('artist_id').value );
-
-                        const urlForm = "<?php echo $urlSubmit; ?>";
-
-                        fetch(urlForm , {
-                            headers: {
-
-                            },
-                            method: "POST",
-                            body: form,
-                        })
-                        .then(res => res.json())
-                        .then((data) => {
-                            console.log(data);
-                        });
-                    }
-                });
-
-                return false;
-
-            /*$.ajax({
-                    type: "POST",
-                    url: "captcha.php",
-                    data: {
-                        //This will tell the form if user is captcha varified.
-                        g-recaptcha-response: grecaptcha.getResponse()
-                    },
-                    success: function(response) {
-                        console.log(response);
-                        //console.log("Form successfully submited");
-                    }
-            })*/
-        }
-    </script>
     <script src='https://www.google.com/recaptcha/api.js' async defer ></script>
+    <input id="url_form" type="hidden" value="<?php echo $urlSubmit; ?>">
 </body>
 </html>
