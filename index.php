@@ -51,7 +51,6 @@
 <html lang="es">
 <head>
     <meta charset="utf-8">
-    <meta name="description" content="Free Web tutorials">
     <meta name="description" content="<?php echo $content ?>">
     <meta name="keywords" content="<?php echo $keywords ?>">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -60,7 +59,7 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <link rel="icon" type="image/png" sizes="144x144" href="./assets/images/favicon.png">
     <link rel="stylesheet" href="./assets/css/style.css">
-    <title>Vive tu ritmo</title>
+    <title><?php echo $title ?></title>
     <script>
         window.url = "<?php echo $url; ?>";
         window.urlJson = "<?php echo $urlJson; ?>";

@@ -15,13 +15,18 @@ if (accessToken !== '' && playlist_id) {
 }
 
 function fetchFollow(id, type){
-    console.log("trackCustom");
+
     let url = '';
     if(type === 'track'){
         url = 'https://api.spotify.com/v1/me/tracks?ids=' + id
-    } else if(type ===' playtlist'){
+    } else if(type === 'playtlist'){
+        console.log("trackCustom|");
         url = 'https://api.spotify.com/v1/playlists/' + id + '/followers'
     }
+    console.log("trackCustom");
+    console.log(type);
+    console.log(url);
+
     //fetch('https://api.spotify.com/v1/playlists/' + playList + '/followers',
     fetch(url,
         {
