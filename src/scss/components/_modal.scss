@@ -30,7 +30,7 @@
 		opacity: 1;
 		visibility: visible;
 		&:before {
-			background-color: rgba(var(--black), 0.6);
+			background-color: var(--black-06);
 			opacity: 1;
 		}
 	}
