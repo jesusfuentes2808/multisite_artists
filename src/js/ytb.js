@@ -8,8 +8,7 @@ function listPlayListYT(){
             return res.json();
         })
         .then(async data => {
-            data.forEach((item) => {
-
+            data.items.forEach((item) => {
                 item.response.items.forEach((itemYt) => {
                     const {id, snippet} = itemYt;
                     const {title, description, channelTitle, thumbnails} = snippet;

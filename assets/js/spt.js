@@ -890,8 +890,6 @@ function listTrend() {
           switch (_context2.prev = _context2.next) {
             case 0:
               data.forEach(function (item) {
-                console.log("-------------------ITEM---------------------");
-                console.log(item.response);
                 var _item$response = item.response,
                     name = _item$response.name,
                     album = _item$response.album,
@@ -1031,9 +1029,11 @@ function listArtistWeek() {
         while (1) {
           switch (_context6.prev = _context6.next) {
             case 0:
-              data.forEach(function (item) {
-                //console.log("-------------------ITEM listArtistWeek---------------------");
-                //console.log(item.response);
+              console.log("-------------------DATA ITEM listArtistWeek---------------------");
+              console.log(data.items);
+              data.items.forEach(function (item) {
+                console.log("-------------------ITEM listArtistWeek---------------------");
+                console.log(item);
                 var _item$response3 = item.response,
                     name = _item$response3.name,
                     album = _item$response3.album,
@@ -1059,7 +1059,7 @@ function listArtistWeek() {
               $("#week_contect").css('display', 'grid');
               $(".week_contect_content__loading").css('display', 'none');
 
-            case 3:
+            case 5:
             case "end":
               return _context6.stop();
           }
@@ -1101,7 +1101,7 @@ function listPlayListSP() {
         while (1) {
           switch (_context8.prev = _context8.next) {
             case 0:
-              data.forEach(function (item) {
+              data.items.forEach(function (item) {
                 var _item$response4 = item.response,
                     name = _item$response4.name,
                     description = _item$response4.description,

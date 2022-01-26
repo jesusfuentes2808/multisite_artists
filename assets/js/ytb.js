@@ -889,7 +889,7 @@ function listPlayListYT() {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              data.forEach(function (item) {
+              data.items.forEach(function (item) {
                 item.response.items.forEach(function (itemYt) {
                   var id = itemYt.id,
                       snippet = itemYt.snippet;

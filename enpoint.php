@@ -5,6 +5,10 @@ $response = array();
 $response['data']['url'] = $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
 
 if($_FILES['file'] && $_POST['filename']){
+    if (!dirname(__FILE__) . '/assets/json/') {
+        mkdir(dirname(__FILE__) . '/assets/json/');
+    }
+
     if (move_uploaded_file($_FILES['file']['tmp_name'], dirname(__FILE__) . '/assets/json/' . $_POST['filename'])) {
         $response['status'] = "ok";
         $response['data']['message'] = $_POST['filename'];

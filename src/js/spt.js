@@ -9,8 +9,6 @@ function listTrend(){
         })
         .then(async data => {
             data.forEach((item) => {
-                console.log("-------------------ITEM---------------------");
-                console.log(item.response);
                 const {name, album, artists, popularity, id} = item.response;
                 const {images} = album;
 
@@ -114,9 +112,11 @@ function listArtistWeek(){
             return res.json();
         })
         .then(async data => {
-            data.forEach((item) => {
-                //console.log("-------------------ITEM listArtistWeek---------------------");
-                //console.log(item.response);
+            console.log("-------------------DATA ITEM listArtistWeek---------------------");
+            console.log(data.items);
+            data.items.forEach((item) => {
+                console.log("-------------------ITEM listArtistWeek---------------------");
+                console.log(item);
                 const {name, album, artists, popularity} = item.response;
                 const {images} = album;
 
@@ -154,7 +154,7 @@ function listPlayListSP(){
             return res.json();
         })
         .then(async data => {
-            data.forEach((item) => {
+            data.items.forEach((item) => {
                 const {name, description, images, followers, tracks, id} = item.response;
                 const {items} = tracks;
 
