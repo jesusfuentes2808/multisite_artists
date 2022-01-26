@@ -1,6 +1,7 @@
 <?php
 require('./backend/helper.php');
 require('./backend/request.php');
+require('./backend/youtube.php');
 
 $url = URL;
 $alias = ALIAS;
@@ -86,36 +87,71 @@ if (file_exists($filename)) {
     $dataYoutube = json_decode($contentYoutube);
 }
 
-$htmlYoutube = '';
-foreach($dataYoutube->items as $item){
-    $codePlaylist = $item->codigo_de_playlist;
-    foreach ($item->response->items as $itemYT){
-        $channelId = $itemYT->snippet->channelId;
-        $thumbnailsUrl = $itemYT->snippet->thumbnails->high->url;
-        $snippetTitle = $itemYT->snippet->title;
-        $channelTitle = $itemYT->snippet->channelTitle;
+$htmlYoutube = itemsYoutube($dataYoutube);
 
-        $htmlYoutube .= '<div class="vtr__card">
-            <div class="vtr__card__image">
-                <img loading="lazy" src="' . $thumbnailsUrl . '" alt="imagen">
-                <div class="type">
-                    <img loading="lazy" src="./assets/images/play-youtube.svg" alt="imagen">
-                </div>
-            </div>
-            <div class="vtr__card__info">
-                <div class="vtr__card__info__top">
-                    <h2 class="title">' . $snippetTitle . '</h2>
-                    <h3 class="sub-title">' . $channelTitle . '</h3>
-                    <!--<small class="reproductions">350,000 Reproducciones</small>-->
-                </div>
-            </div>
-            <div class="vtr__card__bottom">
-                <a href="https://www.youtube.com/playlist?list=' . $codePlaylist . '" target="_blank" class="button">Agregar a mi lista</a>
-            </div>
-        </div>';
-    }
+
+// Lista YOUTUBE
+
+$filename = dirname(__FILE__) . '/assets/json/playlist_sp.json';
+$dataSpotify = null;
+if (file_exists($filename)) {
+    $contentSpotify = file_get_contents($filename);
+    $dataSpotify = json_decode($contentSpotify);
 }
 
+$htmlSpotify = '';
+
+foreach ($dataSpotify->items as $item){
+    $followers = $item->response->followers;
+    $id = $item->response->id;
+    $name = $item->response->name;
+    $images = $item->response->images;
+    $popularityProm = 0;
+
+    $valuePopularity = array_map(function($item){
+        return $item->track->popularity;
+    }, $item->response->tracks->items);
+
+    $totalItemsPopularity = count($valuePopularity);
+    $sumPopularity = array_reduce($valuePopularity, function($a, $b) { return $a + $b; }, 0);
+    $promPopularity = ($sumPopularity / $totalItemsPopularity);
+    $promPopularity = number_format($promPopularity, 2, '.', '');
+
+    $htmlSpotify .= '
+    <div class="vtr__card">
+        <div class="vtr__card__image">
+            <img loading="lazy" src="' . $images[0]->url . '" alt="imagen">
+            <div class="type">
+                <img loading="lazy" src="./assets/images/play-spotify.svg" alt="imagen">
+            </div>
+        </div>
+        <div class="vtr__card__info">
+            <div class="vtr__card__info__top">
+                <h2 class="title text-center">' . $name . '</h2>
+               <div class="follo-popu">
+                   <div class="followers">
+                       <span class="number">' . $followers->total . '</span>
+                       <span class="text">Seguidores</span>
+                   </div>
+                   <div class="popular">
+                       <div class="boxs">
+                           <div class="box"></div>
+                           <div class="box"></div>
+                           <div class="box"></div>
+                           <div class="box"></div>
+                           <div class="box"></div>
+                       </div>
+                       <span class="text">Popularidad: ' . $promPopularity . ' % </span>
+                   </div>
+               </div>
+            </div>
+        </div>
+        <div class="vtr__card__bottom">
+            <a href="#" class="button follow_playlist_spotify_link" data-id="' . $id . '">Agregar a mi lista</a>
+        </div>
+    </div>
+    ';
+}
 ?>
 <!doctype html>
 <html lang="es">
@@ -316,6 +352,9 @@ foreach($dataYoutube->items as $item){
                 <img loading="lazy" src="./assets/images/loading.svg" alt="cargando">
             </div>
             <div id="spt_content" class="vtr__grid vtr__grid-gap-10 vtr__grid-col-5">
+                <?php if( !empty($dataSpotify) ): ?>
+                    <?php echo $htmlSpotify; ?>
+                <?php endif; ?>
                 <!--
                 <div class="vtr__card">
                     <div class="vtr__card__image">
