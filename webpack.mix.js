@@ -12,6 +12,8 @@ mix.js('src/js/home.js', 'js');
 mix.js('src/js/ytb.js', 'js');
 mix.js('src/js/spt.js', 'js');
 mix.js('src/js/spt_ranking.js', 'js');
+mix.js('src/js/spt_trend.js', 'js');
+mix.js('src/js/spt_item_artist.js', 'js');
 mix.js('src/js/follow.js', 'js');
 mix.sass('src/scss/style.scss', 'css').options({
 	processCssUrls: false,

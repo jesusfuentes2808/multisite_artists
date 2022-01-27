@@ -73,13 +73,14 @@ function getPopularity ($item) {
     return $promPopularity;
 }
 
-function itemSpotifyRanking($dataRanking){
+function itemSpotifyRanking($dataRanking, $template = 'ranking'){
     if(empty($dataRanking)){
         return '';
     }
     $htmlRanking = '';
 
     foreach($dataRanking->items as $item){
+        $id = $item->response->id;
         $name = $item->response->name;
         $album = $item->response->album;
         $artists = $item->response->artists;
@@ -102,7 +103,21 @@ function itemSpotifyRanking($dataRanking){
 
         $artistsAll = implode(", ",$artistList);
 
-        $htmlRanking .= '<div class="vtr__card vtr__card--playlist">
+        if($template === 'ranking'){
+            $htmlRanking .= templateRanking($name, $artistListFinal, $images, $artistsAll);
+        } else if($template === 'items') {
+            $htmlRanking .= templateItems($name, $images);
+        } else {
+            $htmlRanking .= templateTrend($name, $artistListFinal, $images, $artistsAll, $popularity, $id);
+        }
+
+    }
+
+    return $htmlRanking;
+}
+
+function templateRanking($name, $artistListFinal, $images, $artistsAll){
+     return '<div class="vtr__card vtr__card--playlist">
                             <div class="vtr__card__image">
                                 <img loading="lazy" src="' . $images[0]->url . '" alt="' . $artistsAll . '">
                             </div>
@@ -116,7 +131,29 @@ function itemSpotifyRanking($dataRanking){
                                 </a>
                             </div>
                         </div>';
-    }
+}
 
-    return $htmlRanking;
+function templateTrend($name, $artistListFinal, $images, $artistsAll, $popularity, $id){
+    return '<div class="vtr__card">
+                        <div class="vtr__card__image">
+                            <img loading="lazy" src="' . $images[0]->url . '" alt="' . $artistsAll . '">
+                        </div>
+                        <div class="vtr__card__info">
+                            <div class="vtr__card__info__top">
+                                <h2 class="title">' . $name . '</h2>
+                                <h3 class="sub-title" >' . $artistListFinal . '</h3>
+                                <!--<small class="reproductions">350,000 Reproducciones</small>-->
+                                <small class="reproductions">Popularidad: ' . $popularity . ' %</small>
+                            </div>
+                        </div>
+                        <div class="vtr__card__bottom">
+                            <a href="#" class="button follow_track_spotify_link" data-id="' . $id . '">Agregar a mi lista</a>
+                        </div>
+                    </div>';
+}
+
+function templateItems($name, $images){
+    return '<div class="image">
+                <img loading="lazy" src="' . $images[0]->url . '" alt="' . $name . '">
+            </div>';
 }

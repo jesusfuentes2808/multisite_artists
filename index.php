@@ -47,39 +47,39 @@ $bannerSec = trim($bannerSec);
 // Global RANKING
 $filename = dirname(__FILE__) . '/assets/json/ranking.json';
 
-$contentRanking = null;
+$dataRanking = null;
+
 if (file_exists($filename)) {
     $contentRanking = file_get_contents($filename);
     $dataRanking = json_decode($contentRanking);
-} /*else {
-    $contentRanking = requestUrl(URL_JSON . "/ranking/ranking.json");
-    //$dataRanking = $dataTrend = responseProcessed($contentRanking);
-    $dataRanking = json_decode($contentRanking);
-}*/
+}
 
 $htmlRanking = itemSpotifyRanking($dataRanking);
 
 //ERROR RESPONSE;
 //string(149) "{"code":"rest_no_route","message":"No se ha encontrado ninguna ruta que coincida con la URL y el m\u00e9todo de la solicitud.","data":{"status":404}}"
-
 // END Global RANKING
 
 // Global ARTIST AND ITEMS
+$dataArtistWeek = null;
 $filename = dirname(__FILE__) . '/assets/json/page_artist_item.json';
 
 if (file_exists($filename)) {
     $contentArtistWeek = file_get_contents($filename);
     $dataArtistWeek = json_decode($contentArtistWeek);
-
+    $titleArtistWeek = $dataArtistWeek->post->post_title;
+    $itemsArtistItemWeek = $dataArtistWeek->items;
 } else {
-    $contentArtistWeek = requestUrl($url . "/artist/week");
-    $dataArtistWeek = $dataTrend = responseProcessed($contentArtistWeek);
+    $contentArtistWeek = requestUrl(URL_JSON . "/page_artist_item/page_artist_item.json");
+    $dataArtistWeek = json_decode($contentArtistWeek);
+    $titleArtistWeek = $dataArtistWeek->post->post_title;
+    $itemsArtistItemWeek = $dataArtistWeek->items;
 }
 
-$titleArtistWeek = $dataArtistWeek->post->post_title;
-$itemsArtistItemWeek = $dataArtistWeek->items;
 $thumbnailArtistWeek = $dataArtistWeek->post_thumbnail;
 $implodeArtistItemWeek = implodeArrayGlobalList($itemsArtistItemWeek, 'track_id');
+
+$htmlArtistWeek = itemSpotifyRanking($dataArtistWeek, 'items');
 
 // END Global ARTIST AND ITEMS
 
@@ -99,7 +99,7 @@ if (file_exists($filename)) {
 $htmlYoutube = itemsYoutube($dataYoutube);
 
 
-// Lista YOUTUBE
+// Lista SPOTIFY
 
 $htmlSpotify = '';
 $filename = dirname(__FILE__) . '/assets/json/playlist_sp.json';
@@ -110,6 +110,19 @@ if (file_exists($filename)) {
 }
 
 $htmlSpotify = itemsSpotify($dataSpotify);
+
+// Lista SPOTIFY
+
+$htmlTrend = '';
+$filename = dirname(__FILE__) . '/assets/json/in_trend.json';
+$dataTrend = null;
+if (!file_exists($filename)) {
+    $contentTrend = file_get_contents($filename);
+    $dataTrend = json_decode($contentTrend);
+}
+
+$htmlTrend = itemSpotifyRanking($dataTrend, 'trend');
+
 ?>
 <!doctype html>
 <html lang="es">
@@ -200,6 +213,9 @@ $htmlSpotify = itemsSpotify($dataSpotify);
                         <img loading="lazy" src="./assets/images/loading.svg" alt="cargando">
                     </div>
                     <div id="trend_content" class="vtr__grid vtr__grid-gap-10 vtr__grid-col-3">
+                        <?php if ( ! is_null($dataTrend) ) : ?>
+                            <?php echo $htmlTrend; ?>
+                        <?php endif ?>
                         <!--
                         <div class="vtr__card">
                             <div class="vtr__card__image">
@@ -283,7 +299,9 @@ $htmlSpotify = itemsSpotify($dataSpotify);
                     <img loading="lazy" src="./assets/images/loading.svg" alt="cargando">
                 </div>
                 <div id="week_contect" class="vtr__grid vtr__grid-gap-10 vtr__grid-col-4">
-
+                    <?php if ( ! is_null($dataArtistWeek) ) : ?>
+                        <?php echo $htmlArtistWeek; ?>
+                    <?php endif ?>
                 </div>
             </div>
             <?php if ($bannerSec !== ''): ?>
@@ -901,6 +919,15 @@ $htmlSpotify = itemsSpotify($dataSpotify);
 <?php if ( is_null($contentRanking) ) : ?>
 <script src="assets/js/spt_ranking.js"></script>
 <?php endif; ?>
+
+<?php if ( is_null($dataTrend) ) : ?>
+<script src="assets/js/spt_trend.js"></script>
+<?php endif; ?>
+
+<?php if ( is_null($dataArtistWeek) ) : ?>
+<!--<script src="assets/js/spt_item_artist.js"></script>-->
+<?php endif; ?>
+
 <script src="assets/js/follow.js"></script>
 <script src="assets/js/home.js"></script>
 <script>

@@ -4,6 +4,8 @@
     "/js/ytb.js": "/js/ytb.js",
     "/js/spt.js": "/js/spt.js",
     "/js/spt_ranking.js": "/js/spt_ranking.js",
+    "/js/spt_trend.js": "/js/spt_trend.js",
+    "/js/spt_item_artist.js": "/js/spt_item_artist.js",
     "/js/follow.js": "/js/follow.js",
     "/css/style.css": "/css/style.css"
 }

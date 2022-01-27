@@ -848,9 +848,9 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.
 !function() {
 "use strict";
-/*!*******************************!*\
-  !*** ./src/js/spt_ranking.js ***!
-  \*******************************/
+/*!*****************************!*\
+  !*** ./src/js/spt_trend.js ***!
+  \*****************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
@@ -860,12 +860,10 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-function listRanking() {
-  $("#ranking_content").css('display', 'none');
-  $(".ranking_content__loading").css('display', 'block'); //fetch(window.urlJson + "/" + window.alias + "/.json")
-  //fetch(window.urlJson + "/ranking/ranking.json")
-
-  fetch(window.urlJson + "/ranking/ranking.json").then( /*#__PURE__*/function () {
+function listTrend() {
+  $("#trend_content").css('display', 'none');
+  $(".in_trend_content__loading").css('display', 'block');
+  fetch(window.urlJson + "/in_trend/in_trend.json").then( /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(res) {
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {
@@ -890,14 +888,13 @@ function listRanking() {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
-              data.forEach(function (item) {
-                //console.log("-------------------ITEM RANKING---------------------");
-                //console.log(item.response);
+              data.items.forEach(function (item) {
                 var _item$response = item.response,
                     name = _item$response.name,
                     album = _item$response.album,
                     artists = _item$response.artists,
-                    popularity = _item$response.popularity;
+                    popularity = _item$response.popularity,
+                    id = _item$response.id;
                 var images = album.images;
                 var artistList = artists.map(function (item) {
                   return item.name;
@@ -913,10 +910,10 @@ function listRanking() {
                 }
 
                 var artistsAll = artistList.join(',');
-                $('#ranking_content').append("\n                        <div class=\"vtr__card vtr__card--playlist\">\n                            <div class=\"vtr__card__image\">\n                                <img loading=\"lazy\" src=\"".concat(images[0].url, "\" alt='").concat(artistsAll, "'>\n                            </div>\n                            <div class=\"vtr__card__info\">\n                                <div class=\"vtr__card__info__top\">\n                                    <h2 class=\"title\">").concat(name, "</h2>\n                                    <h3 class=\"sub-title\">").concat(artistListFinal, "</h3>\n                                </div>\n                                <a href=\"#\" class=\"vtr__card__info__add\">\n                                    <img loading=\"lazy\" src=\"./assets/images/icon-open-plus.svg\" alt=\"imagen\">\n                                </a>\n                            </div>\n                        </div>\n                    "));
+                $('#trend_content').append("<div class=\"vtr__card\">\n                        <div class=\"vtr__card__image\">\n                            <img loading=\"lazy\" src=\"".concat(images[0].url, "\" alt='").concat(artistsAll, "'>\n                        </div>\n                        <div class=\"vtr__card__info\">\n                            <div class=\"vtr__card__info__top\">\n                                <h2 class=\"title\">").concat(name, "</h2>\n                                <h3 class=\"sub-title\" >").concat(artistListFinal, "</h3>\n                                <!--<small class=\"reproductions\">350,000 Reproducciones</small>-->\n                                <small class=\"reproductions\">Popularidad: ").concat(popularity, " %</small>\n                            </div>\n                        </div>\n                        <div class=\"vtr__card__bottom\">\n                            <a href=\"#\" class=\"button follow_track_spotify_link\" data-id=\"").concat(id, "\">Agregar a mi lista</a>\n                        </div>\n                    </div>"));
               });
-              $("#ranking_content").css('display', 'grid');
-              $(".ranking_content__loading").css('display', 'none');
+              $("#trend_content").css('display', 'grid');
+              $(".in_trend_content__loading").css('display', 'none');
 
             case 3:
             case "end":
@@ -932,7 +929,7 @@ function listRanking() {
   }());
 }
 
-listRanking();
+listTrend();
 }();
 /******/ })()
 ;
