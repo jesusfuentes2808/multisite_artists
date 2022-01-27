@@ -2,6 +2,7 @@
 require('./backend/helper.php');
 require('./backend/request.php');
 require('./backend/youtube.php');
+require('./backend/spotify.php');
 
 $url = URL;
 $alias = ALIAS;
@@ -46,13 +47,21 @@ $bannerSec = trim($bannerSec);
 // Global RANKING
 $filename = dirname(__FILE__) . '/assets/json/ranking.json';
 
+$contentRanking = null;
 if (file_exists($filename)) {
     $contentRanking = file_get_contents($filename);
-    $dataSites = json_decode($contentRanking);
-} else {
-    $contentRanking = requestUrl($url . "/artist");
-    $dataSites = $dataTrend = responseProcessed($contentRanking);
-}
+    $dataRanking = json_decode($contentRanking);
+} /*else {
+    $contentRanking = requestUrl(URL_JSON . "/ranking/ranking.json");
+    //$dataRanking = $dataTrend = responseProcessed($contentRanking);
+    $dataRanking = json_decode($contentRanking);
+}*/
+
+$htmlRanking = itemSpotifyRanking($dataRanking);
+
+//ERROR RESPONSE;
+//string(149) "{"code":"rest_no_route","message":"No se ha encontrado ninguna ruta que coincida con la URL y el m\u00e9todo de la solicitud.","data":{"status":404}}"
+
 // END Global RANKING
 
 // Global ARTIST AND ITEMS
@@ -92,6 +101,7 @@ $htmlYoutube = itemsYoutube($dataYoutube);
 
 // Lista YOUTUBE
 
+$htmlSpotify = '';
 $filename = dirname(__FILE__) . '/assets/json/playlist_sp.json';
 $dataSpotify = null;
 if (file_exists($filename)) {
@@ -99,59 +109,7 @@ if (file_exists($filename)) {
     $dataSpotify = json_decode($contentSpotify);
 }
 
-$htmlSpotify = '';
-
-foreach ($dataSpotify->items as $item){
-    $followers = $item->response->followers;
-    $id = $item->response->id;
-    $name = $item->response->name;
-    $images = $item->response->images;
-    $popularityProm = 0;
-
-    $valuePopularity = array_map(function($item){
-        return $item->track->popularity;
-    }, $item->response->tracks->items);
-
-    $totalItemsPopularity = count($valuePopularity);
-    $sumPopularity = array_reduce($valuePopularity, function($a, $b) { return $a + $b; }, 0);
-    $promPopularity = ($sumPopularity / $totalItemsPopularity);
-    $promPopularity = number_format($promPopularity, 2, '.', '');
-
-    $htmlSpotify .= '
-    <div class="vtr__card">
-        <div class="vtr__card__image">
-            <img loading="lazy" src="' . $images[0]->url . '" alt="imagen">
-            <div class="type">
-                <img loading="lazy" src="./assets/images/play-spotify.svg" alt="imagen">
-            </div>
-        </div>
-        <div class="vtr__card__info">
-            <div class="vtr__card__info__top">
-                <h2 class="title text-center">' . $name . '</h2>
-               <div class="follo-popu">
-                   <div class="followers">
-                       <span class="number">' . $followers->total . '</span>
-                       <span class="text">Seguidores</span>
-                   </div>
-                   <div class="popular">
-                       <div class="boxs">
-                           <div class="box"></div>
-                           <div class="box"></div>
-                           <div class="box"></div>
-                           <div class="box"></div>
-                           <div class="box"></div>
-                       </div>
-                       <span class="text">Popularidad: ' . $promPopularity . ' % </span>
-                   </div>
-               </div>
-            </div>
-        </div>
-        <div class="vtr__card__bottom">
-            <a href="#" class="button follow_playlist_spotify_link" data-id="' . $id . '">Agregar a mi lista</a>
-        </div>
-    </div>
-    ';
-}
+$htmlSpotify = itemsSpotify($dataSpotify);
 ?>
 <!doctype html>
 <html lang="es">
@@ -297,6 +255,9 @@ foreach ($dataSpotify->items as $item){
                         <img loading="lazy" src="./assets/images/loading.svg" alt="cargando">
                     </div>
                     <div id="ranking_content" class="vtr__grid vtr__grid-gap-5">
+                        <?php if ( ! is_null($dataRanking) ) : ?>
+                            <?php echo $htmlRanking; ?>
+                        <?php endif ?>
                     </div>
                 </div>
             </div>
@@ -931,8 +892,15 @@ foreach ($dataSpotify->items as $item){
 <script src="assets/js/script.js"></script>
 <?php if ( is_null($dataYoutube) ) : ?>
 <script src="assets/js/ytb.js"></script>
-<?php endif ?>
+<?php endif; ?>
+
+<?php if ( is_null($dataSpotify) ) : ?>
 <script src="assets/js/spt.js"></script>
+<?php endif; ?>
+
+<?php if ( is_null($contentRanking) ) : ?>
+<script src="assets/js/spt_ranking.js"></script>
+<?php endif; ?>
 <script src="assets/js/follow.js"></script>
 <script src="assets/js/home.js"></script>
 <script>

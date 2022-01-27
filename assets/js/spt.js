@@ -930,11 +930,10 @@ function listTrend() {
   }());
 }
 
-function listRanking() {
-  $("#ranking_content").css('display', 'none');
-  $(".ranking_content__loading").css('display', 'block'); //fetch(window.urlJson + "/" + window.alias + "/.json")
-
-  fetch(window.urlJson + "/ranking/ranking.json").then( /*#__PURE__*/function () {
+function listArtistWeek() {
+  $("#week_contect").css('display', 'none');
+  $(".week_contect_content__loading").css('display', 'block');
+  fetch(window.urlJson + "/page_artist_item/page_artist_item.json").then( /*#__PURE__*/function () {
     var _ref3 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3(res) {
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
         while (1) {
@@ -959,9 +958,11 @@ function listRanking() {
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
-              data.forEach(function (item) {
-                //console.log("-------------------ITEM RANKING---------------------");
-                //console.log(item.response);
+              console.log("-------------------DATA ITEM listArtistWeek---------------------");
+              console.log(data.items);
+              data.items.forEach(function (item) {
+                console.log("-------------------ITEM listArtistWeek---------------------");
+                console.log(item);
                 var _item$response2 = item.response,
                     name = _item$response2.name,
                     album = _item$response2.album,
@@ -982,12 +983,12 @@ function listRanking() {
                 }
 
                 var artistsAll = artistList.join(',');
-                $('#ranking_content').append("\n                        <div class=\"vtr__card vtr__card--playlist\">\n                            <div class=\"vtr__card__image\">\n                                <img loading=\"lazy\" src=\"".concat(images[0].url, "\" alt='").concat(artistsAll, "'>\n                            </div>\n                            <div class=\"vtr__card__info\">\n                                <div class=\"vtr__card__info__top\">\n                                    <h2 class=\"title\">").concat(name, "</h2>\n                                    <h3 class=\"sub-title\">").concat(artistListFinal, "</h3>\n                                </div>\n                                <a href=\"#\" class=\"vtr__card__info__add\">\n                                    <img loading=\"lazy\" src=\"./assets/images/icon-open-plus.svg\" alt=\"imagen\">\n                                </a>\n                            </div>\n                        </div>\n                    "));
+                $('#week_contect').append("\n                            <div class=\"image\">\n                                <img loading=\"lazy\" src=\"".concat(images[0].url, "\" alt=\"").concat(name, "\">\n                            </div>\n                        "));
               });
-              $("#ranking_content").css('display', 'grid');
-              $(".ranking_content__loading").css('display', 'none');
+              $("#week_contect").css('display', 'grid');
+              $(".week_contect_content__loading").css('display', 'none');
 
-            case 3:
+            case 5:
             case "end":
               return _context4.stop();
           }
@@ -1001,10 +1002,10 @@ function listRanking() {
   }());
 }
 
-function listArtistWeek() {
-  $("#week_contect").css('display', 'none');
-  $(".week_contect_content__loading").css('display', 'block');
-  fetch(window.urlJson + "/page_artist_item/page_artist_item.json").then( /*#__PURE__*/function () {
+function listPlayListSP() {
+  $("#spt_content").css('display', 'none');
+  $(".spt_content_content__loading").css('display', 'block');
+  fetch(window.urlJson + "/" + window.alias + "/playlist_sp.json").then( /*#__PURE__*/function () {
     var _ref5 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee5(res) {
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee5$(_context5) {
         while (1) {
@@ -1029,86 +1030,14 @@ function listArtistWeek() {
         while (1) {
           switch (_context6.prev = _context6.next) {
             case 0:
-              console.log("-------------------DATA ITEM listArtistWeek---------------------");
-              console.log(data.items);
               data.items.forEach(function (item) {
-                console.log("-------------------ITEM listArtistWeek---------------------");
-                console.log(item);
                 var _item$response3 = item.response,
                     name = _item$response3.name,
-                    album = _item$response3.album,
-                    artists = _item$response3.artists,
-                    popularity = _item$response3.popularity;
-                var images = album.images;
-                var artistList = artists.map(function (item) {
-                  return item.name;
-                });
-                var artistListFinal = '';
-
-                if (artistList.length > 3) {
-                  for (var i = 0; i < 3; i++) {
-                    artistListFinal += artistList[i] + (i !== 2 ? ', ' : ', +');
-                  }
-                } else {
-                  artistListFinal = artistList.join(',');
-                }
-
-                var artistsAll = artistList.join(',');
-                $('#week_contect').append("\n                            <div class=\"image\">\n                                <img loading=\"lazy\" src=\"".concat(images[0].url, "\" alt=\"").concat(name, "\">\n                            </div>\n                        "));
-              });
-              $("#week_contect").css('display', 'grid');
-              $(".week_contect_content__loading").css('display', 'none');
-
-            case 5:
-            case "end":
-              return _context6.stop();
-          }
-        }
-      }, _callee6);
-    }));
-
-    return function (_x6) {
-      return _ref6.apply(this, arguments);
-    };
-  }());
-}
-
-function listPlayListSP() {
-  $("#spt_content").css('display', 'none');
-  $(".spt_content_content__loading").css('display', 'block');
-  fetch(window.urlJson + "/" + window.alias + "/playlist_sp.json").then( /*#__PURE__*/function () {
-    var _ref7 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee7(res) {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee7$(_context7) {
-        while (1) {
-          switch (_context7.prev = _context7.next) {
-            case 0:
-              return _context7.abrupt("return", res.json());
-
-            case 1:
-            case "end":
-              return _context7.stop();
-          }
-        }
-      }, _callee7);
-    }));
-
-    return function (_x7) {
-      return _ref7.apply(this, arguments);
-    };
-  }()).then( /*#__PURE__*/function () {
-    var _ref8 = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee8(data) {
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee8$(_context8) {
-        while (1) {
-          switch (_context8.prev = _context8.next) {
-            case 0:
-              data.items.forEach(function (item) {
-                var _item$response4 = item.response,
-                    name = _item$response4.name,
-                    description = _item$response4.description,
-                    images = _item$response4.images,
-                    followers = _item$response4.followers,
-                    tracks = _item$response4.tracks,
-                    id = _item$response4.id;
+                    description = _item$response3.description,
+                    images = _item$response3.images,
+                    followers = _item$response3.followers,
+                    tracks = _item$response3.tracks,
+                    id = _item$response3.id;
                 var items = tracks.items;
                 var popularityProm = 0;
                 var valuePopularity = items.map(function (item) {
@@ -1126,22 +1055,19 @@ function listPlayListSP() {
 
             case 3:
             case "end":
-              return _context8.stop();
+              return _context6.stop();
           }
         }
-      }, _callee8);
+      }, _callee6);
     }));
 
-    return function (_x8) {
-      return _ref8.apply(this, arguments);
+    return function (_x6) {
+      return _ref6.apply(this, arguments);
     };
   }());
-}
-
-listTrend();
-listRanking();
-listArtistWeek();
-listPlayListSP();
+} //listTrend();
+//listArtistWeek();
+//listPlayListSP();
 }();
 /******/ })()
 ;
