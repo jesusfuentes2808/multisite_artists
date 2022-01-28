@@ -15,15 +15,17 @@ if (file_exists($filename)) {
     $contentArtist = file_get_contents($filename);
     $data = json_decode($contentArtist);
 } else {
-    $contentArtist = requestUrl($url . "/artist/" . $alias);
-    $data = responseProcessed($contentArtist);
+    $contentArtist = requestUrl($urlJson . "/$alias/artist.json");
+    $data = json_decode($contentArtist);
 }
+
 
 $content = $data->post->post_content;
 
 $title = $data->post->post_title;
 $thumbnail = $data->post_thumbnail;
 $videoYoutubeId = $data->field_custom->video_youtube_id[0];
+$dataSites = $data->artist_all;
 
 $banner = $data->field_custom->html_banner[0];
 $banner = trim($banner);
@@ -70,7 +72,7 @@ if (file_exists($filename)) {
     $titleArtistWeek = $dataArtistWeek->post->post_title;
     $itemsArtistItemWeek = $dataArtistWeek->items;
 } else {
-    $contentArtistWeek = requestUrl(URL_JSON . "/page_artist_item/page_artist_item.json");
+    $contentArtistWeek = requestUrl($urlJson . "/page_artist_item/page_artist_item.json");
     $dataArtistWeek = json_decode($contentArtistWeek);
     $titleArtistWeek = $dataArtistWeek->post->post_title;
     $itemsArtistItemWeek = $dataArtistWeek->items;
@@ -188,7 +190,7 @@ $htmlTrend = itemSpotifyRanking($dataTrend, 'trend');
             </div>
             <button class="vtr__button js-scroll" id="#trend">Descubre tú música</button>
         </div>
-        <!--
+
         <div class="vtr__video__controls">
             <button class="control-play">
                 <img loading="lazy" src="./assets/images/play.svg" alt="Play">
@@ -197,7 +199,7 @@ $htmlTrend = itemSpotifyRanking($dataTrend, 'trend');
                 <img loading="lazy" src="./assets/images/volume.svg" alt="Volumen">
             </button>
         </div>
-        -->
+
     </section>
     <section id="trend" class="vtr__trend bg-purple padding-top padding-bottom">
         <div class="vtr__container">
@@ -825,9 +827,10 @@ $htmlTrend = itemSpotifyRanking($dataTrend, 'trend');
             <div class="vtr__item">
                 <h4>Sitios</h4>
                 <ul>
-                    <?php foreach ($dataSites as $item): ?>
+                    <?php foreach ($dataSites as $item):
+                        ?>
                         <li>
-                            <a href="<?php echo $item->url; ?>" target="_blank"><?php echo $item->title; ?></a>
+                            <a href="<?php echo $item->url[0]; ?>" target="_blank"><?php echo $item->post->post_title; ?></a>
                         </li>
                     <?php endforeach; ?>
                 </ul>
