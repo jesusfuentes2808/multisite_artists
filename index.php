@@ -195,6 +195,10 @@ $htmlTrend = itemSpotifyRanking($dataTrend, 'trend');
             <button class="control-play">
                 <img loading="lazy" src="./assets/images/play.svg" alt="Play">
             </button>
+
+            <button style="color: white" class="control-pause">
+                ||
+            </button>
             <button class="control-volume">
                 <img loading="lazy" src="./assets/images/volume.svg" alt="Volumen">
             </button>
@@ -945,6 +949,25 @@ $htmlTrend = itemSpotifyRanking($dataTrend, 'trend');
     //    after the API code downloads.
     var player;
 
+
+    document.querySelector('.control-play').addEventListener('click', function (event) {
+        player.playVideo();
+    });
+
+    document.querySelector('.control-pause').addEventListener('click', function (event) {
+        player.pauseVideo()
+    });
+
+
+    document.querySelector('.control-volume').addEventListener('click', function (event) {
+        if(player.isMuted()){
+            player.unMute();
+        } else {
+            player.mute()
+        }
+    });
+
+
     function onYouTubeIframeAPIReady() {
         player = new YT.Player('player', {
             height: '100%',
@@ -956,7 +979,11 @@ $htmlTrend = itemSpotifyRanking($dataTrend, 'trend');
                 'onStateChange': onPlayerStateChange
             }
         });
+
+        window.playyt = player;
     }
+
+
 
     // 4. The API will call this function when the video player is ready.
     function onPlayerReady(event) {
