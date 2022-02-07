@@ -118,7 +118,8 @@ $htmlSpotify = itemsSpotify($dataSpotify);
 $htmlTrend = '';
 $filename = dirname(__FILE__) . '/assets/json/in_trend.json';
 $dataTrend = null;
-if (!file_exists($filename)) {
+
+if (file_exists($filename)) {
     $contentTrend = file_get_contents($filename);
     $dataTrend = json_decode($contentTrend);
 }

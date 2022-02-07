@@ -48,7 +48,7 @@
                 <p>lorem ipsum dolor sit amet consectetur adipisicing elit. Aut nihil porro animi, nesciunt laborum dolores eius ab dignissimos perferendis hic quis dolor dicta, consequuntur repellat accusantium sed! Eaque, optio assumenda?</p>
                 <div class="info">
                     <div class="image">
-                        <img loading="lazy" src="./assets/images/img1.jpg" alt="imagen">
+                        <img class="image" loading="lazy" src="./assets/images/img1.jpg" alt="imagen">
                     </div>
                     <div class="text">
                         <h2 class="title">Taconeces Rojos</h2>
@@ -146,5 +146,26 @@
         </div>
     </footer>
     <script src="assets/js/script.js"></script>
+    <script>
+     $(document).ready(function () {
+        const dataTrack = sessionStorage.getItem('data_track');
+        const jsonData = JSON.parse(dataTrack);
+
+        console.log(dataTrack);
+
+        const {id, image, name, popularity, followers} = jsonData.data;
+
+        console.log(image);
+        $(".info .image").attr("src", image);
+        $(".info .title").html(name);
+        $(".info .reproductions").html(followers + " seguidores");
+
+        if( dataTrack ){
+
+        }
+
+    })
+
+    </script>
 </body>
 </html>

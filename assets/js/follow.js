@@ -54,7 +54,11 @@ $("body").on('click', ".follow_track_spotify_link", function (e) {
   e.preventDefault(); //localStorage.setItem('redirect_callback', window.location.href.split('?')[0]);
 
   localStorage.setItem('redirect_callback', window.location.protocol + '//' + window.location.host + '/gracias.html');
-  localStorage.setItem('track_id', $(this).attr('data-id'));
+  localStorage.setItem('track_id', $(this).attr('data-id')); //
+
+  var dataId = $(this).attr('data-id');
+  var type = $(this).attr('data-type');
+  sessionStorage.setItem('data_track', '{"data": ' + window['spt_' + type + '_' + dataId] + ', "type": "' + type + '"}');
   window.location.href = "http://accounts.spotify.com/authorize?client_id=8c470d86b5924553ad2e4f447de50851&redirect_uri=http:%2F%2Fmultisite_artists.test%3A8084%2Fcallback.html&scope=user-library-modify%20user-follow-modify%20playlist-modify-public&response_type=token&state=123";
 });
 $("body").on('click', ".follow_playlist_spotify_link", function (e) {
@@ -62,6 +66,9 @@ $("body").on('click', ".follow_playlist_spotify_link", function (e) {
 
   localStorage.setItem('redirect_callback', window.location.protocol + '//' + window.location.host + '/gracias.html');
   localStorage.setItem('playlist_id', $(this).attr('data-id'));
+  var dataId = $(this).attr('data-id');
+  var type = $(this).attr('data-type');
+  sessionStorage.setItem('data_track', '{"data": ' + window['spt_' + type + '_' + dataId] + ', "type": "' + type + '"}');
   window.location.href = "http://accounts.spotify.com/authorize?client_id=8c470d86b5924553ad2e4f447de50851&redirect_uri=http:%2F%2Fmultisite_artists.test%3A8084%2Fcallback.html&scope=user-library-modify%20user-follow-modify%20playlist-modify-public&response_type=token&state=123";
 });
 /******/ })()

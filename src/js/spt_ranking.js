@@ -8,7 +8,8 @@ function listRanking(){
             return res.json();
         })
         .then(async data => {
-            data.forEach((item) => {
+
+            data.items.forEach((item) => {
                 //console.log("-------------------ITEM RANKING---------------------");
                 //console.log(item.response);
                 const {name, album, artists, popularity} = item.response;
