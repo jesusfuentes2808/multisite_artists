@@ -1,5 +1,5 @@
 .vtr__header {
-	padding: size(15) 0;
+	padding: size(20) 0;
 	position: fixed;
     top: 0;
     left: 0;
@@ -69,10 +69,10 @@
 					display: inline-block;
 					text-decoration: none;
 					color: var(--white);
-					font-size: size(18);
+					font-size: size(16);
 					padding: size(20) 0 size(20) size(20);
 					@include minw($mq-md) {
-						padding: size(25) 0;
+						padding: 0;
 						color: var(--white);
 						position: relative;
 						transition: color ease-in-out .3s;

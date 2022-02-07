@@ -15,6 +15,8 @@ window.$ = window.jQuery = __webpack_require__(/*! jquery */ "./node_modules/jqu
     var openMenu = $('.vtr__header__hamburguer');
     var menu = $('.vtr__header__menu');
     var header = $('.vtr__header');
+    var buttonPlay = $('.vtr__video__controls .control-play');
+    var buttonVolume = $('.vtr__video__controls .control-volume');
     $('.js-scroll').on('click', function () {
       var $this = $(this);
       var linkHref = $this.attr('id');
@@ -28,6 +30,30 @@ window.$ = window.jQuery = __webpack_require__(/*! jquery */ "./node_modules/jqu
       $(this).toggleClass('active');
       menu.toggleClass('active');
       header.toggleClass('active');
+    });
+    buttonPlay.on('click', function (e) {
+      var pause = $(this).attr('data-pause');
+      var play = $(this).attr('data-play');
+      var image = $('.play-image');
+      $(this).toggleClass('isPlay');
+
+      if ($(this).hasClass('isPlay')) {
+        image.attr('src', pause);
+      } else {
+        image.attr('src', play);
+      }
+    });
+    buttonVolume.on('click', function (e) {
+      var mute = $(this).attr('data-mute');
+      var volume = $(this).attr('data-volume');
+      var image = $('.volume-image');
+      $(this).toggleClass('isVolume');
+
+      if ($(this).hasClass('isVolume')) {
+        image.attr('src', mute);
+      } else {
+        image.attr('src', volume);
+      }
     });
   });
 })(jQuery);
