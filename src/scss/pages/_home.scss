@@ -38,12 +38,11 @@
         }
     }
     &__controls {
-        display: none;
         align-items: center;
         position: absolute;
         top: size(90);
         right: 0;
-        z-index: 1;
+        z-index: 1000;
         @include maxw($mq-md) {
             display: flex;
         }
@@ -52,6 +51,7 @@
         }
         img {
             width: size(30);
+            max-height: size(25);
         }
         .control-play {
             img {
