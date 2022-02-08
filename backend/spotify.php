@@ -130,13 +130,13 @@ function templateRanking($id, $name, $artistListFinal, $images, $artistsAll){
                                     <h2 class="title">' . $name . '</h2>
                                     <h3 class="sub-title">' . $artistListFinal . '</h3>
                                 </div>
-                                <a href="#" class="vtr__card__info__add">
+                                <a href="#" data-type="ranking" class="follow_playlist_spotify_link vtr__card__info__add" data-id="' . $id . '" >
                                     <img loading="lazy" src="./assets/images/icon-open-plus.svg" alt="imagen">
                                 </a>
                             </div>
                         </div>
                         <script>
-                            window.spt_ranking_' . $id . ' = \'{"id": "' . $id . '","image": "' . $images[0]->url . '", "name": "' . addslashes($name) . '", $artist_list_final": "' . addslashes($artistListFinal) . '", "artist_all": "' . addslashes($artistsAll) . '"}\';
+                            window.spt_ranking_' . $id . ' = \'{"id": "' . $id . '","image": "' . $images[0]->url . '", "name": "' . addslashes($name) . '", "artist_list_final": "' . addslashes($artistListFinal) . '", "artist_all": "' . addslashes($artistsAll) . '"}\';
                         </script>
                         ';
 }
@@ -155,18 +155,20 @@ function templateTrend($id, $name, $artistListFinal, $images, $artistsAll, $popu
                             </div>
                         </div>
                         <div class="vtr__card__bottom">
-                            <a href="#" class="button follow_track_spotify_link" data-id="' . $id . '">Agregar a mi lista</a>
+                            <a href="#"  data-type="trend" class="button follow_track_spotify_link" data-id="' . $id . '">Agregar a mi lista</a>
                         </div>
                     </div>
                     <script>
-                        window.spt_trend_' . $id . ' = \'{"id": "' . $id . '","image": "' . $images[0]->url . '", "name": "' . addslashes($name) . '", $artist_list_final": "' . addslashes($artistListFinal) . '", "artist_all": "' . addslashes($artistsAll) . '", "popularity": "' . $popularity . '"}\';
+                        window.spt_trend_' . $id . ' = \'{"id": "' . $id . '","image": "' . $images[0]->url . '", "name": "' . addslashes($name) . '", "artist_list_final": "' . str_replace('"', "\\'",stripcslashes(addslashes($artistListFinal))) . '", "artist_all": "' . str_replace('"', "\\'", stripcslashes(addslashes($artistsAll))) . '", "popularity": "' . $popularity . '"}\';
                     </script>
                     ';
 }
 
 function templateItems($id, $name, $images){
     return '<div class="image">
-                <img loading="lazy" src="' . $images[0]->url . '" alt="' . $name . '">
+                <a href="https://open.spotify.com/track/' . $id . '" target="_blank">
+                    <img loading="lazy" src="' . $images[0]->url . '" alt="' . $name . '">
+                </a>
             </div>
             <script>
                 window.spt_item_' . $id . ' = \'{"id": "' . $id . '","image": "' . $images[0]->url . '", "name": "' . addslashes($name) . '"}\';

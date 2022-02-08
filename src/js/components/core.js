@@ -23,7 +23,7 @@ window.$ = window.jQuery = require('jquery');
             header.toggleClass( 'active' );
         });
 
-        buttonPlay.on( 'click', function( e ) {
+        /*buttonPlay.on( 'click', function( e ) {
             const pause = $(this).attr('data-pause');
             const play = $(this).attr('data-play');
             const image = $( '.play-image' );
@@ -34,9 +34,9 @@ window.$ = window.jQuery = require('jquery');
             } else {
                 image.attr( 'src', play );
             }
-        });
+        });*/
 
-        buttonVolume.on( 'click', function( e ) {
+        /*buttonVolume.on( 'click', function( e ) {
             const mute = $(this).attr('data-mute');
             const volume = $(this).attr('data-volume');
             const image = $( '.volume-image' );
@@ -47,6 +47,6 @@ window.$ = window.jQuery = require('jquery');
             } else {
                 image.attr( 'src', volume );
             }
-        });
+        });*/
     });
 }( jQuery ) );

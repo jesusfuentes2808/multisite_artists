@@ -913,7 +913,7 @@ function listArtistWeek() {
                 }
 
                 var artistsAll = artistList.join(',');
-                $('#week_contect').append("\n                            <div class=\"image\">\n                                <img loading=\"lazy\" src=\"".concat(images[0].url, "\" alt=\"").concat(name, "\">\n                            </div>\n                        "));
+                $('#week_contect').append("\n                            <div class=\"image\">\n                                <a href=\"https://open.spotify.com/track/".concat(id, "\" target=\"_blank\">\n                                    <img loading=\"lazy\" src=\"").concat(images[0].url, "\" alt=\"").concat(name, "\">\n                                </a>\n                            </div>\n                        "));
               });
               $("#week_contect").css('display', 'grid');
               $(".week_contect_content__loading").css('display', 'none');

@@ -10,10 +10,11 @@ function listRanking(){
         .then(async data => {
 
             data.items.forEach((item) => {
-                //console.log("-------------------ITEM RANKING---------------------");
-                //console.log(item.response);
-                const {name, album, artists, popularity} = item.response;
+                console.log("-------------------ITEM RANKING---------------------");
+                console.log(item.response);
+                const {id, name, album, artists, popularity} = item.response;
                 const {images} = album;
+                console.log(id);
 
                 const artistList = artists.map((item)=> item.name);
 
@@ -38,16 +39,17 @@ function listRanking(){
                                     <h2 class="title">${name}</h2>
                                     <h3 class="sub-title">${artistListFinal}</h3>
                                 </div>
-                                <a href="#" class="vtr__card__info__add">
+                                <a href="#" data-type="ranking" class="follow_playlist_spotify_link vtr__card__info__add" data-id="${id}">
                                     <img loading="lazy" src="./assets/images/icon-open-plus.svg" alt="imagen">
                                 </a>
                             </div>
                         </div>
                     `);
+
+                window['spt_ranking_'+id] = '{"id": "' + id + '", "image": "' + images[0].url + '", "name": "' + name + '", "artist_all": "' + artistsAll + '", "artist_list_final": "'+artistListFinal+'"}';
             });
 
-
-            $("#ranking_content").css('display', 'grid');
+             $("#ranking_content").css('display', 'grid');
             $(".ranking_content__loading").css('display', 'none');
         });
 }

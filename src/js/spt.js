@@ -53,7 +53,7 @@ function listPlayListSP(){
                                 </div>
                             `);
 
-                window['spt_main_'+id] = '{"id": "' + images[0].url + '", "name": "' + name + ', "followers": "' +followers.total+'", "popularity": "'+promPopularity+'"}';
+                window['spt_main_'+id] = '{"id": "' + id + '" ,"image": "' + images[0].url + '", "name": "' + name + ', "followers": "' +followers.total+'", "popularity": "'+promPopularity+'"}';
             });
 
             $("#spt_content").css('display', 'grid');

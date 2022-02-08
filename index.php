@@ -193,7 +193,31 @@ $htmlTrend = itemSpotifyRanking($dataTrend, 'trend');
         </div>
 
         <div class="vtr__video__controls">
-            <button class="control-play">
+            <button
+                class="control-play isPlay"
+                data-pause="./assets/images/pause.svg"
+                data-play="./assets/images/play.svg"
+            >
+                <img
+                    loading="lazy"
+                    class="play-image"
+                    src="./assets/images/pause.svg"
+                    alt="Play"
+                >
+            </button>
+            <button
+                class="control-volume isVolume"
+                data-mute="./assets/images/mute.svg"
+                data-volume="./assets/images/volume.svg"
+            >
+                <img
+                    loading="lazy"
+                    class="volume-image"
+                    src="./assets/images/volume.svg"
+                    alt="Volumen"
+                >
+            </button>
+            <!--<button class="control-play">
                 <img loading="lazy" src="./assets/images/play.svg" alt="Play">
             </button>
 
@@ -202,7 +226,7 @@ $htmlTrend = itemSpotifyRanking($dataTrend, 'trend');
             </button>
             <button class="control-volume">
                 <img loading="lazy" src="./assets/images/volume.svg" alt="Volumen">
-            </button>
+            </button>-->
         </div>
 
     </section>
@@ -939,31 +963,65 @@ $htmlTrend = itemSpotifyRanking($dataTrend, 'trend');
 <script src="assets/js/follow.js"></script>
 <script src="assets/js/home.js"></script>
 <script>
-    // 2. This code loads the IFrame Player API code asynchronously.
+
+
+    const buttonPlay =  document.querySelector( '.vtr__video__controls .control-play' );
+    const buttonVolume =  document.querySelector( '.vtr__video__controls .control-volume' );
+
+    if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+        const image =  document.querySelector( '.play-image' );
+        const play = buttonPlay.getAttribute('data-play');
+        buttonPlay.classList.remove('isPlay');
+        image.setAttribute( 'src', play );
+    }
+
     var tag = document.createElement('script');
     var video_youtube_id = document.getElementById('video_youtube_id').value;
     tag.src = "https://www.youtube.com/iframe_api";
     var firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-    // 3. This function creates an <iframe> (and YouTube player)
-    //    after the API code downloads.
     var player;
 
+    buttonPlay.addEventListener('click', function (event) {
 
-    document.querySelector('.control-play').addEventListener('click', function (event) {
-        player.playVideo();
+        const image =  document.querySelector( '.play-image' );
+        //$(this).toggleClass( 'isPlay' );
+
+        const pause = this.getAttribute('data-pause');
+        const play = this.getAttribute('data-play');
+
+        if ( buttonPlay.classList.contains('isPlay') ) {
+            buttonPlay.classList.remove('isPlay');
+            image.setAttribute( 'src', play );
+            player.pauseVideo();
+        } else {
+            buttonPlay.classList.add('isPlay');
+            image.setAttribute( 'src', pause );
+            player.playVideo();
+        }
+
     });
 
-    document.querySelector('.control-pause').addEventListener('click', function (event) {
-        player.pauseVideo()
+    buttonVolume.addEventListener('click', function (event) {
+        //player.pauseVideo()
     });
 
 
-    document.querySelector('.control-volume').addEventListener('click', function (event) {
-        if(player.isMuted()){
+    buttonVolume.addEventListener('click', function (event) {
+        const mute = this.getAttribute('data-mute');
+        const image = document.querySelector( '.volume-image' );
+        const volume = this.getAttribute('data-volume');
+
+        //$(this).toggleClass( 'isVolume' );
+
+        if ( $( this ).hasClass('isVolume') ) {
+            this.classList.remove('isVolume');
+            image.setAttribute( 'src', mute );
             player.unMute();
         } else {
+            this.classList.add('isVolume');
+            image.setAttribute( 'src', volume );
             player.mute()
         }
     });

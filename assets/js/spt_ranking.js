@@ -891,14 +891,16 @@ function listRanking() {
           switch (_context2.prev = _context2.next) {
             case 0:
               data.items.forEach(function (item) {
-                //console.log("-------------------ITEM RANKING---------------------");
-                //console.log(item.response);
+                console.log("-------------------ITEM RANKING---------------------");
+                console.log(item.response);
                 var _item$response = item.response,
+                    id = _item$response.id,
                     name = _item$response.name,
                     album = _item$response.album,
                     artists = _item$response.artists,
                     popularity = _item$response.popularity;
                 var images = album.images;
+                console.log(id);
                 var artistList = artists.map(function (item) {
                   return item.name;
                 });
@@ -913,7 +915,8 @@ function listRanking() {
                 }
 
                 var artistsAll = artistList.join(',');
-                $('#ranking_content').append("\n                        <div class=\"vtr__card vtr__card--playlist\">\n                            <div class=\"vtr__card__image\">\n                                <img loading=\"lazy\" src=\"".concat(images[0].url, "\" alt='").concat(artistsAll, "'>\n                            </div>\n                            <div class=\"vtr__card__info\">\n                                <div class=\"vtr__card__info__top\">\n                                    <h2 class=\"title\">").concat(name, "</h2>\n                                    <h3 class=\"sub-title\">").concat(artistListFinal, "</h3>\n                                </div>\n                                <a href=\"#\" class=\"vtr__card__info__add\">\n                                    <img loading=\"lazy\" src=\"./assets/images/icon-open-plus.svg\" alt=\"imagen\">\n                                </a>\n                            </div>\n                        </div>\n                    "));
+                $('#ranking_content').append("\n                        <div class=\"vtr__card vtr__card--playlist\">\n                            <div class=\"vtr__card__image\">\n                                <img loading=\"lazy\" src=\"".concat(images[0].url, "\" alt='").concat(artistsAll, "'>\n                            </div>\n                            <div class=\"vtr__card__info\">\n                                <div class=\"vtr__card__info__top\">\n                                    <h2 class=\"title\">").concat(name, "</h2>\n                                    <h3 class=\"sub-title\">").concat(artistListFinal, "</h3>\n                                </div>\n                                <a href=\"#\" data-type=\"ranking\" class=\"follow_playlist_spotify_link vtr__card__info__add\" data-id=\"").concat(id, "\">\n                                    <img loading=\"lazy\" src=\"./assets/images/icon-open-plus.svg\" alt=\"imagen\">\n                                </a>\n                            </div>\n                        </div>\n                    "));
+                window['spt_ranking_' + id] = '{"id": "' + id + '", "image": "' + images[0].url + '", "name": "' + name + '", "artist_all": "' + artistsAll + '", "artist_list_final": "' + artistListFinal + '"}';
               });
               $("#ranking_content").css('display', 'grid');
               $(".ranking_content__loading").css('display', 'none');

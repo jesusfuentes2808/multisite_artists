@@ -31,30 +31,29 @@ window.$ = window.jQuery = __webpack_require__(/*! jquery */ "./node_modules/jqu
       menu.toggleClass('active');
       header.toggleClass('active');
     });
-    buttonPlay.on('click', function (e) {
-      var pause = $(this).attr('data-pause');
-      var play = $(this).attr('data-play');
-      var image = $('.play-image');
-      $(this).toggleClass('isPlay');
+    /*buttonPlay.on( 'click', function( e ) {
+        const pause = $(this).attr('data-pause');
+        const play = $(this).attr('data-play');
+        const image = $( '.play-image' );
+        $(this).toggleClass( 'isPlay' );
+         if ( $( this ).hasClass('isPlay') ) {
+            image.attr( 'src', pause );
+        } else {
+            image.attr( 'src', play );
+        }
+    });*/
 
-      if ($(this).hasClass('isPlay')) {
-        image.attr('src', pause);
-      } else {
-        image.attr('src', play);
-      }
-    });
-    buttonVolume.on('click', function (e) {
-      var mute = $(this).attr('data-mute');
-      var volume = $(this).attr('data-volume');
-      var image = $('.volume-image');
-      $(this).toggleClass('isVolume');
-
-      if ($(this).hasClass('isVolume')) {
-        image.attr('src', mute);
-      } else {
-        image.attr('src', volume);
-      }
-    });
+    /*buttonVolume.on( 'click', function( e ) {
+        const mute = $(this).attr('data-mute');
+        const volume = $(this).attr('data-volume');
+        const image = $( '.volume-image' );
+        $(this).toggleClass( 'isVolume' );
+         if ( $( this ).hasClass('isVolume') ) {
+            image.attr( 'src', mute );
+        } else {
+            image.attr( 'src', volume );
+        }
+    });*/
   });
 })(jQuery);
 

@@ -30,7 +30,9 @@ function listArtistWeek(){
 
                 $('#week_contect').append(`
                             <div class="image">
-                                <img loading="lazy" src="${images[0].url}" alt="${name}">
+                                <a href="https://open.spotify.com/track/${id}" target="_blank">
+                                    <img loading="lazy" src="${images[0].url}" alt="${name}">
+                                </a>
                             </div>
                         `);
             });

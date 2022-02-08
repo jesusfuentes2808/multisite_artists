@@ -39,9 +39,11 @@ function listTrend(){
                             </div>
                         </div>
                         <div class="vtr__card__bottom">
-                            <a href="#" class="button follow_track_spotify_link" data-id="${id}">Agregar a mi lista</a>
+                            <a href="#" class="button follow_track_spotify_link" data-id="${id}" data-type="trend">Agregar a mi lista</a>
                         </div>
                     </div>`);
+
+                window['spt_trend_'+id] = '{"id": "' + id + '", "image": "' + images[0].url + '", "name": "' + name + '", "artist_all": "' + artistsAll.replace(/"/g, "\'") + '", "artist_list_final": "'+artistListFinal.replace(/\\"/g, "\\'")+'"}';
             });
 
             $("#trend_content").css('display', 'grid');
