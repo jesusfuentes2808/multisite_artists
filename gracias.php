@@ -17,7 +17,7 @@
                 <img src="./assets/images/logo.svg" alt="Logo" loading="lazy">
             </a>
             <nav class="vtr__header__menu">
-                <ul class="menu">
+                <!--<ul class="menu">
                     <li>
                         <a href="#">Demo link</a>
                     </li>
@@ -27,7 +27,7 @@
                     <li>
                         <a href="#">Demo link</a>
                     </li>
-                </ul>
+                </ul>-->
             </nav>
             <button class="vtr__header__hamburguer">
                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 60 40">
