@@ -39,14 +39,10 @@ function itemsSpotify($dataSpotify){
                                            <span class="text">Seguidores</span>
                                        </div>
                                        <div class="popular">
-                                           <div class="boxs">
-                                               <div class="box"></div>
-                                               <div class="box"></div>
-                                               <div class="box"></div>
-                                               <div class="box"></div>
-                                               <div class="box"></div>
-                                           </div>
-                                           <span class="text">Popularidad: ' . $promPopularity . ' % </span>
+                                            <div class="starRatingContainer" data-popular="'.$promPopularity.'%">
+                                                <div class="vtr__rating"></div>
+                                            </div>
+                                           <span class="text">Popularidad</span>
                                        </div>
                                    </div>
                                 </div>

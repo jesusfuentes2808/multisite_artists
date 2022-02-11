@@ -914,7 +914,11 @@ function listPlayListYT() {
     return function (_x2) {
       return _ref2.apply(this, arguments);
     };
-  }());
+  }())["catch"](function (error) {
+    $("#ytb_content").css('display', 'grid');
+    $(".ytb_content__loading").css('display', 'none');
+    $("#ytb_content").append("<div class=\"vtr__card\">\n                    <div class=\"vtr__card__image\">\n                        <img loading=\"lazy\" src=\"https://www.themonkeydigital.com/wp-content/uploads/2021/10/cab1.png\" alt=\"imagen\">\n                        <div class=\"type\">\n                            <img loading=\"lazy\" src=\"./assets/images/play-youtube.svg\" alt=\"imagen\">\n                        </div>\n                    </div>\n                    <div class=\"vtr__card__info\">\n                        <div class=\"vtr__card__info__top\">\n                            <h2 class=\"title\">The Monkey Digital</h2>\n                            <h3 class=\"sub-title\">The Monkey Digital</h3>\n                            <!--<small class=\"reproductions\">350,000 Reproducciones</small>-->\n                        </div>\n                    </div>\n                    <div class=\"vtr__card__bottom\">\n                         <a href=\"https://www.themonkeydigital.com\" class=\"button\">Ir a sitio</a>\n                    </div>\n                </div>");
+  });
 }
 
 listPlayListYT();

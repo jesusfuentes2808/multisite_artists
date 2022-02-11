@@ -1,3 +1,26 @@
+<?php
+require('./backend/helper.php');
+require('./backend/request.php');
+require('./backend/youtube.php');
+require('./backend/spotify.php');
+
+$url = URL;
+$alias = ALIAS;
+$urlJson = URL_JSON;
+
+// ARTIST MAIN CONTENT
+$filename = dirname(__FILE__) . '/assets/json/artist.json';
+
+if (file_exists($filename)) {
+    $contentArtist = file_get_contents($filename);
+    $data = json_decode($contentArtist);
+} else {
+    $contentArtist = requestUrl($urlJson . "/$alias/artist.json");
+    $data = json_decode($contentArtist);
+}
+$dataSites = $data->artist_all;
+
+?>
 <!doctype html>
 <html lang="es">
 <head>
@@ -48,22 +71,36 @@
                 <p>lorem ipsum dolor sit amet consectetur adipisicing elit. Aut nihil porro animi, nesciunt laborum dolores eius ab dignissimos perferendis hic quis dolor dicta, consequuntur repellat accusantium sed! Eaque, optio assumenda?</p>
                 <div class="info">
                     <div class="image">
-                        <img class="image" loading="lazy" src="./assets/images/img1.jpg" alt="imagen">
+                        <img class="image" loading="lazy" src="" alt="imagen">
                     </div>
                     <div class="text">
-                        <h2 class="title">Taconeces Rojos</h2>
-                        <h3 class="sub-title">Sebastian Yatra</h3>
-                        <small class="reproductions">350,000 Reproducciones</small>
+                        <h2 class="title"></h2>
+                        <h3 class="sub-title"></h3>
+                        <small class="reproductions"></small>
                     </div>
                 </div>
                 <a href="/" class="vtr__button">Regresar al inicio</a>
             </div>
         </section>
     </main>
+
     <footer class="vtr__footer">
+
         <div class="vtr__container">
+            <hr />
             <div class="vtr__grid vtr__grid-gap-20 vtr__grid-col-6">
                 <div class="vtr__item">
+                    <h4>Sitios</h4>
+                    <ul>
+                        <?php foreach ($dataSites as $item):
+                            ?>
+                            <li>
+                                <a href="<?php echo $item->url[0]; ?>" target="_blank"><?php echo $item->post->post_title; ?></a>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+                <!--<div class="vtr__item">
                     <h4>Ed Sheeran</h4>
                     <ul>
                         <li><a href="#">Enlace 1</a></li>
@@ -107,17 +144,9 @@
                         <li><a href="#">Enlace 3</a></li>
                         <li><a href="#">Enlace 4</a></li>
                     </ul>
-                </div>
-                <div class="vtr__item">
-                    <h4>Ed Sheeran</h4>
-                    <ul>
-                        <li><a href="#">Enlace 1</a></li>
-                        <li><a href="#">Enlace 2</a></li>
-                        <li><a href="#">Enlace 3</a></li>
-                        <li><a href="#">Enlace 4</a></li>
-                    </ul>
-                </div>
+                </div>-->
             </div>
+
             <div class="vtr__footer__bottom">
                 <p>© 2021 Derechos reservados</p>
                 <ul>
@@ -146,6 +175,7 @@
         </div>
     </footer>
     <script src="assets/js/script.js"></script>
+    <script src="assets/js/follow.js"></script>
     <script>
      $(document).ready(function () {
         const dataTrack = sessionStorage.getItem('data_track');
@@ -157,21 +187,22 @@
             $(".vtr__thanks__content h1").html("¡Gracias por seguir esta lista!");
             $(".info .image").attr("src", image);
             $(".info .title").html(name);
-            $(".info .reproductions").html(followers + " seguidores");
+            $(".info .sub-title").html("Popularidad: " + popularity + "%");
+            $(".info .reproductions").html("Seguidores: " + followers);
         } else if (type === 'ranking'){
             const {id, image, name, artist_all, artist_list_final} = jsonData.data;
             $(".vtr__thanks__content h1").html("¡Gracias por seguir esta pista!");
             $(".info .image").attr("src", image);
             $(".info .title").html(name);
             $(".info .sub-title").html(artist_list_final);
-            $(".info .reproductions").html(1+ " seguidores");
+            //$(".info .reproductions").html("Seguidores: ");
         } else if (type === 'trend'){
-            const {id, image, name, artist_all, artist_list_final} = jsonData.data;
+            const {id, image, name, artist_all, popularity, artist_list_final} = jsonData.data;
             $(".vtr__thanks__content h1").html("¡Gracias por seguir esta pista!");
             $(".info .image").attr("src", image);
             $(".info .title").html(name);
             $(".info .sub-title").html(artist_list_final);
-            $(".info .reproductions").html(1+ " seguidores");
+            $(".info .reproductions").html("Popularidad: " + popularity + "%");
         }
 
 

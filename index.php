@@ -19,30 +19,42 @@ if (file_exists($filename)) {
     $data = json_decode($contentArtist);
 }
 
+$banner = '';
+$bannerSec = '';
+$videoYoutubeId = 'kFs0xdjGXwU';
+$title = 'Artistas';
+$description = 'Artistas';
+$keywords = 'artistas';
+$content = 'Creamos un equipo en torno a sus necesidades y brindamos a nuestros clientes producciones de alta calidad <a href="https://www.themonkeydigital.com/">The Monkey Digital</a>';
+$thumbnail = 'https://www.themonkeydigital.com/wp-content/uploads/2021/10/cab1.png';
+$dataSites = [];
 
-$content = $data->post->post_content;
+if($data){
+    $content = $data->post->post_content;
 
-$title = $data->post->post_title;
-$thumbnail = $data->post_thumbnail;
-$videoYoutubeId = $data->field_custom->video_youtube_id[0];
-$dataSites = $data->artist_all;
+    $title = $data->post->post_title;
+    $thumbnail = $data->post_thumbnail;
+    $videoYoutubeId = $data->field_custom->video_youtube_id[0];
+    $dataSites = $data->artist_all;
 
-$banner = $data->field_custom->html_banner[0];
-$banner = trim($banner);
+    $banner = $data->field_custom->html_banner[0];
+    $banner = trim($banner);
 
-$bannerSec = $data->field_custom->html_banner_sec[0];
-$bannerSec = trim($bannerSec);
+    $bannerSec = $data->field_custom->html_banner_sec[0];
+    $bannerSec = trim($bannerSec);
 
-    // SEO
-    $title = $data->field_custom->seo_title[0];
-    $title = trim($title);
+        // SEO
+        $title = $data->field_custom->seo_title[0];
+        $title = trim($title);
 
-    $description = $data->field_custom->seo_description[0];
-    $description = trim($description);
+        $description = $data->field_custom->seo_description[0];
+        $description = trim($description);
 
-    $keywords = $data->field_custom->seo_keywords[0];
-    $keywords = trim($keywords);
-    // END SEO
+        $keywords = $data->field_custom->seo_keywords[0];
+        $keywords = trim($keywords);
+        // END SEO
+}
+
 
 // END ARTIST MAIN CONTENT
 
@@ -131,7 +143,7 @@ $htmlTrend = itemSpotifyRanking($dataTrend, 'trend');
 <html lang="es">
 <head>
     <meta charset="utf-8">
-    <meta name="description" content="<?php echo $content ?>">
+    <meta name="description" content="<?php echo $description ?>">
     <meta name="keywords" content="<?php echo $keywords ?>">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
@@ -948,7 +960,7 @@ $htmlTrend = itemSpotifyRanking($dataTrend, 'trend');
 <script src="assets/js/spt.js"></script>
 <?php endif; ?>
 
-<?php if ( is_null($contentRanking) ) : ?>
+<?php if ( is_null($dataRanking ) ) : ?>
 <script src="assets/js/spt_ranking.js"></script>
 <?php endif; ?>
 

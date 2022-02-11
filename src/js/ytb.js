@@ -34,7 +34,29 @@ function listPlayListYT(){
             });
             $("#ytb_content").css('display', 'grid');
             $(".ytb_content__loading").css('display', 'none');
-        });
+        }).catch((error) => {
+
+            $("#ytb_content").css('display', 'grid');
+            $(".ytb_content__loading").css('display', 'none');
+            $("#ytb_content").append(`<div class="vtr__card">
+                    <div class="vtr__card__image">
+                        <img loading="lazy" src="https://www.themonkeydigital.com/wp-content/uploads/2021/10/cab1.png" alt="imagen">
+                        <div class="type">
+                            <img loading="lazy" src="./assets/images/play-youtube.svg" alt="imagen">
+                        </div>
+                    </div>
+                    <div class="vtr__card__info">
+                        <div class="vtr__card__info__top">
+                            <h2 class="title">The Monkey Digital</h2>
+                            <h3 class="sub-title">The Monkey Digital</h3>
+                            <!--<small class="reproductions">350,000 Reproducciones</small>-->
+                        </div>
+                    </div>
+                    <div class="vtr__card__bottom">
+                         <a href="https://www.themonkeydigital.com" class="button">Ir a sitio</a>
+                    </div>
+                </div>`);
+    });
 }
 
 listPlayListYT();

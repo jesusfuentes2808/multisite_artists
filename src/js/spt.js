@@ -34,15 +34,11 @@ function listPlayListSP(){
                                                    <span class="number">${followers.total}</span>
                                                    <span class="text">Seguidores</span>
                                                </div>
-                                               <div class="popular">
-                                                   <div class="boxs">
-                                                       <div class="box"></div>
-                                                       <div class="box"></div>
-                                                       <div class="box"></div>
-                                                       <div class="box"></div>
-                                                       <div class="box"></div>
-                                                   </div>
-                                                   <span class="text">Popularidad: ${promPopularity} % </span>
+                                                <div class="popular">
+                                                    <div class="starRatingContainer" data-popular="${promPopularity}%">
+                                                        <div class="vtr__rating"></div>
+                                                    </div>
+                                                   <span class="text">Popularidad</span>
                                                </div>
                                            </div>
                                         </div>
@@ -58,7 +54,31 @@ function listPlayListSP(){
 
             $("#spt_content").css('display', 'grid');
             $(".spt_content_content__loading").css('display', 'none');
-        });
+        }).catch((error) => {
+            $("#spt_content").css('display', 'grid');
+            $(".spt_content_content__loading").css('display', 'none');
+            $("#spt_content").append( `
+                <div class="vtr__card">
+                    <div class="vtr__card__image">
+                        <img loading="lazy" src="https://www.themonkeydigital.com/wp-content/uploads/2021/10/cab1.png" alt="imagen">
+                        <div class="type">
+                            <img loading="lazy" src="./assets/images/play-spotify.svg" alt="imagen">
+                        </div>
+                    </div>
+                    <div class="vtr__card__info">
+                        <div class="vtr__card__info__top">
+                            <h2 class="title text-center">The Monkey Digital</h2>
+                           <div class="follo-popu">
+                               
+                           </div>
+                        </div>
+                    </div>
+                    <div class="vtr__card__bottom">
+                        <a href="https://www.themonkeydigital.com" class="button">Ir a sitio</a>
+                    </div>
+                </div>
+            `);
+    });
 }
 
 listPlayListSP();

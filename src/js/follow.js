@@ -23,9 +23,9 @@ function fetchFollow(id, type){
         console.log("trackCustom|");
         url = 'https://api.spotify.com/v1/playlists/' + id + '/followers'
     }
-    console.log("trackCustom");
-    console.log(type);
-    console.log(url);
+    //console.log("trackCustom");
+    //console.log(type);
+    //console.log(url);
 
     //fetch('https://api.spotify.com/v1/playlists/' + playList + '/followers',
     fetch(url,
@@ -51,7 +51,7 @@ function fetchFollow(id, type){
 $("body").on('click', ".follow_track_spotify_link",  function(e){
     e.preventDefault();
     //localStorage.setItem('redirect_callback', window.location.href.split('?')[0]);
-    localStorage.setItem('redirect_callback', window.location.protocol+'//'+window.location.host+'/gracias.html');
+    localStorage.setItem('redirect_callback', window.location.protocol+'//'+window.location.host+'/gracias.php');
     localStorage.setItem('track_id', $(this).attr('data-id'));
     //
     const dataId = $(this).attr('data-id');
@@ -63,7 +63,7 @@ $("body").on('click', ".follow_track_spotify_link",  function(e){
 $("body").on('click', ".follow_playlist_spotify_link",  function(e){
     e.preventDefault();
     //localStorage.setItem('redirect_callback', window.location.href.split('?')[0]);
-    localStorage.setItem('redirect_callback', window.location.protocol+'//'+window.location.host+'/gracias.html');
+    localStorage.setItem('redirect_callback', window.location.protocol+'//'+window.location.host+'/gracias.php');
     localStorage.setItem('playlist_id', $(this).attr('data-id'));
 
     const dataId = $(this).attr('data-id');
