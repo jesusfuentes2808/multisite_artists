@@ -2,6 +2,15 @@ var url_string = window.location.href;
 var tokenIndex = url_string.indexOf("=");
 var tokenIndexEnd = url_string.indexOf("&");
 var accessToken = url_string.substring(tokenIndex + 1, tokenIndexEnd);
+var urlEncode = window.urlMain;
+var urlEncode = window.location.protocol+'//'+window.location.host;
+
+var lastCharUrlEncode = urlEncode.substr(urlEncode.length - 1);
+if(lastCharUrlEncode === '/'){
+    urlEncode = urlEncode.slice(0, -1) + '';
+}
+
+urlEncode = encodeURIComponent(urlEncode);
 
 const track_id = localStorage.getItem('track_id');
 const playlist_id = localStorage.getItem('playlist_id');
@@ -28,7 +37,7 @@ function fetchFollow(id, type){
     //console.log(url);
 
     //fetch('https://api.spotify.com/v1/playlists/' + playList + '/followers',
-    fetch(url,
+    /*fetch(url,
         {
             method: 'PUT',
             headers: {
@@ -45,7 +54,7 @@ function fetchFollow(id, type){
     }).finally(function(){
         localStorage.removeItem('track_id');
         localStorage.removeItem('playlist_id');
-    });
+    });*/
 }
 
 $("body").on('click', ".follow_track_spotify_link",  function(e){
@@ -57,18 +66,24 @@ $("body").on('click', ".follow_track_spotify_link",  function(e){
     const dataId = $(this).attr('data-id');
     const type = $(this).attr('data-type');
     sessionStorage.setItem('data_track', '{"data": '+window['spt_'+type+'_'+dataId]+', "type": "'+type+'"}');
-    window.location.href="http://accounts.spotify.com/authorize?client_id=8c470d86b5924553ad2e4f447de50851&redirect_uri=http:%2F%2Fmultisite_artists.test%3A8084%2Fcallback.html&scope=user-library-modify%20user-follow-modify%20playlist-modify-public&response_type=token&state=123"
+    //window.location.href="http://accounts.spotify.com/authorize?client_id=8c470d86b5924553ad2e4f447de50851&redirect_uri=http:%2F%2Fmultisite_artists.test%3A8084%2Fcallback.html&scope=user-library-modify%20user-follow-modify%20playlist-modify-public&response_type=token&state=123"
+    //window.location.href="http://accounts.spotify.com/authorize?client_id=8c470d86b5924553ad2e4f447de50851&redirect_uri=https:%2F%2Fnichmusic.com%2Fcallback.html&scope=user-library-modify%20user-follow-modify%20playlist-modify-public&response_type=token&state=123"
+    var redirect="http://accounts.spotify.com/authorize?client_id=fd9a7c5422764952af875b49a47d120a&redirect_uri=" + urlEncode + "%2Fcallback.html&scope=user-library-modify%20user-follow-modify%20playlist-modify-public&response_type=token&state=123"
+    window.open(redirect, '_blank');
 });
 
 $("body").on('click', ".follow_playlist_spotify_link",  function(e){
     e.preventDefault();
-    //localStorage.setItem('redirect_callback', window.location.href.split('?')[0]);
+    //localStorage.setItem('redirect_callback', window.location.href.split('?')[0]);redirect_callback
     localStorage.setItem('redirect_callback', window.location.protocol+'//'+window.location.host+'/gracias.php');
     localStorage.setItem('playlist_id', $(this).attr('data-id'));
 
     const dataId = $(this).attr('data-id');
     const type = $(this).attr('data-type');
     sessionStorage.setItem('data_track', '{"data": '+window['spt_'+type+'_'+dataId]+', "type": "'+type+'"}');
-    window.location.href="http://accounts.spotify.com/authorize?client_id=8c470d86b5924553ad2e4f447de50851&redirect_uri=http:%2F%2Fmultisite_artists.test%3A8084%2Fcallback.html&scope=user-library-modify%20user-follow-modify%20playlist-modify-public&response_type=token&state=123"
+    //window.location.href="http://accounts.spotify.com/authorize?client_id=8c470d86b5924553ad2e4f447de50851&redirect_uri=http:%2F%2Fmultisite_artists.test%3A8084%2Fcallback.html&scope=user-library-modify%20user-follow-modify%20playlist-modify-public&response_type=token&state=123"
+    //window.location.href="http://accounts.spotify.com/authorize?client_id=8c470d86b5924553ad2e4f447de50851&redirect_uri=https:%2F%2Fnichmusic.com%2Fcallback.html&scope=user-library-modify%20user-follow-modify%20playlist-modify-public&response_type=token&state=123"
+    var redirect = "http://accounts.spotify.com/authorize?client_id=fd9a7c5422764952af875b49a47d120a&redirect_uri=" + urlEncode + "%2Fcallback.html&scope=user-library-modify%20user-follow-modify%20playlist-modify-public&response_type=token&state=123"
+    window.open(redirect, '_blank');
 });
 

@@ -6,7 +6,7 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQU
 if(isset($_POST)){
     if(!empty($_POST['g-recaptcha-response']))
     {
-        $secret = '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe';
+        $secret = '6LcHgKAeAAAAAKvS2A2HEoKcEksVrKuP-GEzeZ2D';
         $verifyResponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$secret.'&response='.$_POST['g-recaptcha-response']);
         $responseData = json_decode($verifyResponse);
 

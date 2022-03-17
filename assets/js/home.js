@@ -95,6 +95,9 @@ $("#form_user").submit(function (e) {
         document.getElementById('email').value = '';
         document.getElementById('telephone').value = '';
         document.getElementById('message').value = '';
+        grecaptcha.reset();
+      })["catch"](function (error) {
+        console.log(error);
       });
     }
   });

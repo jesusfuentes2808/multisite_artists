@@ -540,7 +540,7 @@ a {
 .vtr__card__image {
   width: 100%;
   position: relative;
-  border-radius: 0.625rem;
+  border-radius: 0rem;
   overflow: hidden;
 }
 .vtr__card__image > img {
@@ -1356,6 +1356,7 @@ a {
 .vtr__video {
   height: 100vh;
   position: relative;
+  background-color: #000000;
 }
 .vtr__video iframe,
 .vtr__video video {
@@ -1464,7 +1465,7 @@ a {
   max-width: 48rem;
 }
 .vtr__artist__week .vtr__grid .image {
-  border-radius: 0.9375rem;
+  /*border-radius: size(15);*/
   overflow: hidden;
 }
 .vtr__artist__week .info h2, .vtr__artist__week .info h3 {
@@ -1723,6 +1724,22 @@ a {
   display: none;
 }
 
+.card__spotify {
+  width: 80%;
+  background: #000000;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  margin-top: 15px;
+  border-radius: 0.625rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.card__spotify img {
+  width: 80px;
+  margin: 0 auto;
+}
+
 .vtr__thanks {
   min-height: 100vh;
   position: relative;
@@ -1820,7 +1837,7 @@ a {
   }
 }
 .vtr__thanks__content .info .image {
-  border-radius: 0.625rem;
+  /*border-radius: size(10);*/
   overflow: hidden;
 }
 .vtr__thanks__content .info .image > img {

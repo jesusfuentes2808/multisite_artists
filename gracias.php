@@ -25,6 +25,7 @@ $dataSites = $data->artist_all;
 <html lang="es">
 <head>
     <meta charset="utf-8">
+    <meta name="robots" content="noindex, nofollow">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=edge"/>
 	<meta name="theme-color" content="#ffffff">
@@ -32,8 +33,19 @@ $dataSites = $data->artist_all;
     <link rel="icon" type="image/png" sizes="144x144" href="./assets/images/favicon.png">
     <link rel="stylesheet" href="./assets/css/style.css">
     <title>Vive tu ritmo</title>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-56Q5ZQV');</script>
+    <!-- End Google Tag Manager -->
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-56Q5ZQV"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
     <header class="vtr__header">
         <div class="vtr__container">
             <a class="vtr__header__logo" href="#">
@@ -68,7 +80,7 @@ $dataSites = $data->artist_all;
         <section class="vtr__thanks bg-purple">
             <div class="vtr__thanks__content">
                 <h1>¡Gracias por seguir esta lista!</h1>
-                <p>lorem ipsum dolor sit amet consectetur adipisicing elit. Aut nihil porro animi, nesciunt laborum dolores eius ab dignissimos perferendis hic quis dolor dicta, consequuntur repellat accusantium sed! Eaque, optio assumenda?</p>
+                <p>Disfruta de las mejores y más actuales canciones de tu género urbano favorito.</p>
                 <div class="info">
                     <div class="image">
                         <img class="image" loading="lazy" src="" alt="imagen">
@@ -79,7 +91,7 @@ $dataSites = $data->artist_all;
                         <small class="reproductions"></small>
                     </div>
                 </div>
-                <a href="/" class="vtr__button">Regresar al inicio</a>
+                <a href="https://viveturitmo.com" id="redirect_button" class="vtr__button">ViveTuRitmo.com</a>
             </div>
         </section>
     </main>
@@ -178,10 +190,21 @@ $dataSites = $data->artist_all;
     <script src="assets/js/follow.js"></script>
     <script>
      $(document).ready(function () {
+
+
+         var url_string = window.location.href;
+         var tokenIndex = url_string.indexOf("=");
+         var tokenIndexEnd = url_string.indexOf("&");
+         var accessToken = url_string.substring(tokenIndex + 1, tokenIndexEnd);
+
+         let playList = '';
+         let url = '';
+
         const dataTrack = sessionStorage.getItem('data_track');
         console.log(dataTrack);
         const jsonData = JSON.parse(dataTrack);
         const {type} = jsonData;
+
         if(type === 'main'){
             const {id, image, name, popularity, followers} = jsonData.data;
             $(".vtr__thanks__content h1").html("¡Gracias por seguir esta lista!");
@@ -189,6 +212,8 @@ $dataSites = $data->artist_all;
             $(".info .title").html(name);
             $(".info .sub-title").html("Popularidad: " + popularity + "%");
             $(".info .reproductions").html("Seguidores: " + followers);
+            playList = id;
+            url = 'https://api.spotify.com/v1/playlists/' + playList + '/followers';
         } else if (type === 'ranking'){
             const {id, image, name, artist_all, artist_list_final} = jsonData.data;
             $(".vtr__thanks__content h1").html("¡Gracias por seguir esta pista!");
@@ -196,6 +221,8 @@ $dataSites = $data->artist_all;
             $(".info .title").html(name);
             $(".info .sub-title").html(artist_list_final);
             //$(".info .reproductions").html("Seguidores: ");
+            playList = id;
+            url = '	https://api.spotify.com/v1/me/tracks?ids='+id;
         } else if (type === 'trend'){
             const {id, image, name, artist_all, popularity, artist_list_final} = jsonData.data;
             $(".vtr__thanks__content h1").html("¡Gracias por seguir esta pista!");
@@ -203,17 +230,54 @@ $dataSites = $data->artist_all;
             $(".info .title").html(name);
             $(".info .sub-title").html(artist_list_final);
             $(".info .reproductions").html("Popularidad: " + popularity + "%");
+            playList = id;
+            url = '	https://api.spotify.com/v1/me/tracks?ids='+id;
         }
 
 
 
-        if( dataTrack ){
+        if( dataTrack && accessToken !== '' ){
 
+            fetch(url,
+                {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': 'Bearer ' + accessToken,
+                        'Content-Type': "application/json",
+                    },
+                }
+            ).then(function (result) {
+                console.log("SUCCESS - " + playList);
+                updateClock();
+                console.log(result);
+            }).catch(function (error) {
+                console.log("ERROR - " + playList);
+                console.log(error);
+            });
+
+            var totalTime = 3;
+
+            let updateClock = function () {
+                console.log(totalTime);
+                document.getElementById('redirect_button').innerHTML = "ViveTuRitmo.com " + totalTime + " seg.";
+                if(totalTime==0){
+                    window.location.replace("https://viveturitmo.com");
+                }else{
+                    totalTime-=1;
+                    setTimeout(updateClock,1000);
+                }
+            };
+
+
+
+            /*setTimeOut(function(){
+
+            }, 5000);*/
         } else {
             //window.location.href =  window.location.protocol+'//'+window.location.host;
         }
 
-    })
+    });
 
     </script>
 </body>

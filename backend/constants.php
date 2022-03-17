@@ -1,4 +1,5 @@
 <?php
+const URL_MAIN = 'http://artistas.test:8084/';
 const URL = 'http://artistas.test:8084/wp-json/v1';
 const URL_JSON = 'http://artistas.test:8084/wp-content/json';
 const ALIAS = 'ricardomontaner_123';

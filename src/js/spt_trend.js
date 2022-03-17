@@ -2,7 +2,8 @@ function listTrend(){
     $("#trend_content").css('display', 'none');
     $(".in_trend_content__loading").css('display', 'block');
 
-    fetch(window.urlJson + "/in_trend/in_trend.json")
+    //fetch(window.urlJson + "/trend")
+    fetch(window.url + "/trend")
         .then(async res => {
             return res.json();
         })
@@ -27,16 +28,23 @@ function listTrend(){
 
                 $('#trend_content').append(
                     `<div class="vtr__card">
-                        <div class="vtr__card__image">
-                            <img loading="lazy" src="${images[0].url}" alt='${artistsAll}'>
-                        </div>
-                        <div class="vtr__card__info">
-                            <div class="vtr__card__info__top">
-                                <h2 class="title">${name}</h2>
-                                <h3 class="sub-title" >${artistListFinal}</h3>
-                                <!--<small class="reproductions">350,000 Reproducciones</small>-->
-                                <small class="reproductions">Popularidad: ${popularity} %</small>
+                        <a href="https://open.spotify.com/track/${id}" target="_blank" style="display: inline-block;z-index: 11111;position: relative;">
+                            <div class="vtr__card__image">
+                                    <img loading="lazy" src="${images[0].url}" alt='${artistsAll}'>
                             </div>
+                        </a>
+                        <div class="vtr__card__info">
+                            <a href="https://open.spotify.com/track/${id}" target="_blank">
+                                <div class="vtr__card__info__top">
+                                    <h2 class="title">${name}</h2>
+                                    <h3 class="sub-title" >${artistListFinal}</h3>
+                                    <!--<small class="reproductions">350,000 Reproducciones</small>-->
+                                    <small class="reproductions">Popularidad: ${popularity} %</small>
+                                </div>
+                                <div class="card__spotify">
+                                       <img src="/assets/images/Spotify_Logo_Green.png" alt="spotify">
+                                </div>
+                            </a>
                         </div>
                         <div class="vtr__card__bottom">
                             <a href="#" class="button follow_track_spotify_link" data-id="${id}" data-type="trend">Agregar a mi lista</a>

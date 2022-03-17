@@ -24,31 +24,39 @@ function itemsSpotify($dataSpotify){
         $promPopularity = number_format($promPopularity, 2, '.', '');
 
         $htmlSpotify .= '<div class="vtr__card">
-                            <div class="vtr__card__image">
-                                <img loading="lazy" src="' . $images[0]->url . '" alt="imagen">
-                                <div class="type">
-                                    <img loading="lazy" src="./assets/images/play-spotify.svg" alt="imagen">
+                            <a href="https://open.spotify.com/playlist/' . $id . '" target="_blank" style="display: inline-block;z-index: 11111;position: relative;">
+                                <div class="vtr__card__image">
+                                    <img loading="lazy" src="' . $images[0]->url . '" alt="imagen">
+                                    <!--<div class="type">
+                                        <img loading="lazy" src="./assets/images/play-spotify.svg" alt="imagen">
+                                    </div>-->
                                 </div>
-                            </div>
+                            </a>
                             <div class="vtr__card__info">
-                                <div class="vtr__card__info__top">
-                                    <h2 class="title text-center">' . $name . '</h2>
-                                   <div class="follo-popu">
-                                       <div class="followers">
-                                           <span class="number">' . $followers->total . '</span>
-                                           <span class="text">Seguidores</span>
+                                <a href="https://open.spotify.com/playlist/' . $id . '" target="_blank">
+                                    <div class="vtr__card__info__top">
+                                        <h2 class="title text-center">' . $name . '</h2>
+                                       <div class="follo-popu">
+                                           <div class="followers">
+                                               <span class="number">' . $followers->total . '</span>
+                                               <span class="text">Seguidores</span>
+                                           </div>
+                                           <div class="popular">
+                                                <div class="starRatingContainer" data-popular="'.$promPopularity.'%">
+                                                    <div class="vtr__rating"></div>
+                                                </div>
+                                               <span class="text">Popularidad</span>
+                                           </div>
                                        </div>
-                                       <div class="popular">
-                                            <div class="starRatingContainer" data-popular="'.$promPopularity.'%">
-                                                <div class="vtr__rating"></div>
-                                            </div>
-                                           <span class="text">Popularidad</span>
-                                       </div>
-                                   </div>
-                                </div>
+                                    </div>
+                                    <div class="card__spotify">
+                                           <img src="/assets/images/Spotify_Logo_Green.png" alt="spotify">
+                                    </div>
+                                </a>
                             </div>
+                            
                             <div class="vtr__card__bottom">
-                                <a href="#" data-type="main" class="button follow_playlist_spotify_link" data-id="' . $id . '">Agregar a mi lista</a>
+                                <a href="#" data-type="main" class="button follow_playlist_spotify_link" data-id="' . $id . '">Suscribirme al playlist</a>
                             </div>
                         </div>
                         <script>
@@ -139,16 +147,23 @@ function templateRanking($id, $name, $artistListFinal, $images, $artistsAll){
 
 function templateTrend($id, $name, $artistListFinal, $images, $artistsAll, $popularity){
     return '<div class="vtr__card">
-                        <div class="vtr__card__image">
-                            <img loading="lazy" src="' . $images[0]->url . '" alt="' . $artistsAll . '">
-                        </div>
-                        <div class="vtr__card__info">
-                            <div class="vtr__card__info__top">
-                                <h2 class="title">' . $name . '</h2>
-                                <h3 class="sub-title" >' . $artistListFinal . '</h3>
-                                <!--<small class="reproductions">350,000 Reproducciones</small>-->
-                                <small class="reproductions">Popularidad: ' . $popularity . ' %</small>
+                        <a href="https://open.spotify.com/track/' . $id . '" target="_blank" style="display: inline-block;z-index: 11111;position: relative;">
+                            <div class="vtr__card__image">
+                                <img loading="lazy" src="' . $images[0]->url . '" alt="' . $artistsAll . '">
                             </div>
+                        </a>
+                        <div class="vtr__card__info">
+                            <a href="https://open.spotify.com/track/' . $id . '" target="_blank">
+                                <div class="vtr__card__info__top">
+                                    <h2 class="title">' . $name . '</h2>
+                                    <h3 class="sub-title" >' . $artistListFinal . '</h3>
+                                    <!--<small class="reproductions">350,000 Reproducciones</small>-->
+                                    <small class="reproductions">Popularidad: ' . $popularity . ' %</small>
+                                </div>
+                                <div class="card__spotify">
+                                       <img src="/assets/images/Spotify_Logo_Green.png" alt="spotify">
+                                </div>
+                            </a>
                         </div>
                         <div class="vtr__card__bottom">
                             <a href="#"  data-type="trend" class="button follow_track_spotify_link" data-id="' . $id . '">Agregar a mi lista</a>

@@ -864,8 +864,9 @@ function listRanking() {
   $("#ranking_content").css('display', 'none');
   $(".ranking_content__loading").css('display', 'block'); //fetch(window.urlJson + "/" + window.alias + "/.json")
   //fetch(window.urlJson + "/ranking/ranking.json")
+  //fetch(window.url + "/ranking/ranking.json")
 
-  fetch(window.urlJson + "/ranking/ranking.json").then( /*#__PURE__*/function () {
+  fetch(window.url + "/ranking").then( /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(res) {
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {

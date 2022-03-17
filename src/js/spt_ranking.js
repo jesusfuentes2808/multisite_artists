@@ -3,7 +3,8 @@ function listRanking(){
     $(".ranking_content__loading").css('display', 'block');
     //fetch(window.urlJson + "/" + window.alias + "/.json")
     //fetch(window.urlJson + "/ranking/ranking.json")
-    fetch(window.urlJson + "/ranking/ranking.json")
+    //fetch(window.url + "/ranking/ranking.json")
+    fetch(window.url + "/ranking")
         .then(async res => {
             return res.json();
         })

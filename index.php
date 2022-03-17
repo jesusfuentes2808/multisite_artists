@@ -7,6 +7,7 @@ require('./backend/spotify.php');
 $url = URL;
 $alias = ALIAS;
 $urlJson = URL_JSON;
+$urlMain = URL_MAIN;
 
 // ARTIST MAIN CONTENT
 $filename = dirname(__FILE__) . '/assets/json/artist.json';
@@ -53,6 +54,28 @@ if($data){
         $keywords = $data->field_custom->seo_keywords[0];
         $keywords = trim($keywords);
         // END SEO
+
+        // COLOR
+        $seccion_1 = $data->field_custom->seccion_1[0];
+        $seccion_1 = trim($seccion_1);
+
+        $seccion_2 = $data->field_custom->seccion_2[0];
+        $seccion_2 = trim($seccion_2);
+
+        $seccion_3 = $data->field_custom->seccion_3[0];
+        $seccion_3 = trim($seccion_3);
+
+        $seccion_4 = $data->field_custom->seccion_4[0];
+        $seccion_4 = trim($seccion_4);
+
+        $seccion_5 = $data->field_custom->seccion_5[0];
+        $seccion_5 = trim($seccion_5);
+
+        $seccion_6 = $data->field_custom->seccion_6[0];
+        $seccion_6 = trim($seccion_6);
+
+        $seccion_7 = $data->field_custom->seccion_7[0];
+        $seccion_7 = trim($seccion_7);
 }
 
 
@@ -150,49 +173,32 @@ $htmlTrend = itemSpotifyRanking($dataTrend, 'trend');
     <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=edge"/>
     <meta name="theme-color" content="#ffffff">
     <meta name="msapplication-TileColor" content="#ffffff">
+    <link rel=”canonical” href=”https://nichmusic.com/”>
     <link rel="icon" type="image/png" sizes="144x144" href="./assets/images/favicon.png">
     <link rel="stylesheet" href="./assets/css/style.css">
     <title><?php echo $title ?></title>
     <script>
         window.url = "<?php echo $url; ?>";
         window.urlJson = "<?php echo $urlJson; ?>";
+        window.urlMain = "<?php echo $urlMain; ?>";
         window.alias = "<?php echo $alias; ?>";
         console.log(window.urlJson + "/" + window.alias + "/playlist_yt.json");
     </script>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-K5BSHHM');</script>
+    <!-- End Google Tag Manager -->
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K5BSHHM"
+                  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 <input type="hidden" id="video_youtube_id" value="<?php echo $videoYoutubeId; ?>">
-<!--
-<header class="vtr__header">
-    <div class="vtr__container">
-        <a class="vtr__header__logo" href="#">
-            <img src="./assets/images/logo.svg" alt="Logo" loading="lazy">
-        </a>
-        <nav class="vtr__header__menu">
-            <ul class="menu">
-                <li>
-                    <a href="#">Demo link</a>
-                </li>
-                <li>
-                    <a href="#">Demo link</a>
-                </li>
-                <li>
-                    <a href="#">Demo link</a>
-                </li>
-            </ul>
-        </nav>
-        <button class="vtr__header__hamburguer">
-            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 60 40">
-                <g stroke="#fff" stroke-width="3">
-                    <path id="top-line" d="M10,10 L50,10 Z" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
-                    <path id="middle-line" d="M10,20 L50,20 Z" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
-                    <path id="bottom-line" d="M10,30 L50,30 Z" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
-                </g>
-            </svg>
-        </button>
-    </div>
-</header>
--->
+
 <main>
     <section class="vtr__video">
         <!--<iframe src="https://www.youtube.com/embed/ZhIsAZO5gl0?autoplay=1&mute=1&loop=1&controls=0"></iframe>-->
@@ -229,20 +235,10 @@ $htmlTrend = itemSpotifyRanking($dataTrend, 'trend');
                     alt="Volumen"
                 >
             </button>
-            <!--<button class="control-play">
-                <img loading="lazy" src="./assets/images/play.svg" alt="Play">
-            </button>
-
-            <button style="color: white" class="control-pause">
-                ||
-            </button>
-            <button class="control-volume">
-                <img loading="lazy" src="./assets/images/volume.svg" alt="Volumen">
-            </button>-->
         </div>
 
     </section>
-    <section id="trend" class="vtr__trend bg-purple padding-top padding-bottom">
+    <section id="trend" class="vtr__trend bg-purple padding-top-35 padding-bottom"  style="<?php echo ($seccion_1 !== '')? 'background-color:'.$seccion_1 : '' ?>">
         <div class="vtr__container">
             <?php if ($banner !== ''): ?>
                 <div class="vtr__advertising">
@@ -259,53 +255,6 @@ $htmlTrend = itemSpotifyRanking($dataTrend, 'trend');
                         <?php if ( ! is_null($dataTrend) ) : ?>
                             <?php echo $htmlTrend; ?>
                         <?php endif ?>
-                        <!--
-                        <div class="vtr__card">
-                            <div class="vtr__card__image">
-                                <img loading="lazy" src="./assets/images/img1.jpg" alt="imagen">
-                            </div>
-                            <div class="vtr__card__info">
-                                <div class="vtr__card__info__top">
-                                    <h2 class="title">Taonoces Rojos</h2>
-                                    <h3 class="sub-title">Sebastian Yatra</h3>
-                                    <small class="reproductions">350,000 Reproducciones</small>
-                                </div>
-                            </div>
-                            <div class="vtr__card__bottom">
-                                <a href="#" class="button">Agregar a mi lista</a>
-                            </div>
-                        </div>
-                        <div class="vtr__card">
-                            <div class="vtr__card__image">
-                                <img loading="lazy" src="./assets/images/img2.png" alt="imagen">
-                            </div>
-                            <div class="vtr__card__info">
-                                <div class="vtr__card__info__top">
-                                    <h2 class="title">Yonaguni</h2>
-                                    <h3 class="sub-title">Toto</h3>
-                                    <small class="reproductions">350,000 Reproducciones</small>
-                                </div>
-                            </div>
-                            <div class="vtr__card__bottom">
-                                <a href="#" class="button">Agregar a mi lista</a>
-                            </div>
-                        </div>
-                        <div class="vtr__card">
-                            <div class="vtr__card__image">
-                                <img loading="lazy" src="./assets/images/img3.png" alt="imagen">
-                            </div>
-                            <div class="vtr__card__info">
-                                <div class="vtr__card__info__top">
-                                    <h2 class="title">Demo para saber la altura</h2>
-                                    <h3 class="sub-title">Maluma</h3>
-                                    <small class="reproductions">350,000 Reproducciones</small>
-                                </div>
-                            </div>
-                            <div class="vtr__card__bottom">
-                                <a href="#" class="button">Agregar a mi lista</a>
-                            </div>
-                        </div>
-                        -->
                     </div>
                 </div>
                 <div class="vtr__col__4 bg-blur mt-30-mb  overflow-y">
@@ -322,7 +271,7 @@ $htmlTrend = itemSpotifyRanking($dataTrend, 'trend');
             </div>
 
             <div class="padding-top-50">
-                <h2 class="vtr__title vtr__title--line"><span>Recien agregadas</span></h2>
+                <h2 class="vtr__title vtr__title--line"><span>Lo más reciente en Youtube</span></h2>
                 <div class="vtr__loading ytb_content__loading">
                     <img loading="lazy" src="./assets/images/loading.svg" alt="cargando">
                 </div>
@@ -354,7 +303,7 @@ $htmlTrend = itemSpotifyRanking($dataTrend, 'trend');
             <?php endif ?>
         </div>
     </section>
-    <section class="vtr__bio">
+    <section class="vtr__bio" style="<?php echo ($seccion_2 !== '')? 'position: initial; background-color:'.$seccion_2 : '' ?>">
         <div class="vtr__container">
             <div class="vtr__flex vtr__flex__space-between padding-top-50">
                 <div class="vtr__col__8">
@@ -367,9 +316,9 @@ $htmlTrend = itemSpotifyRanking($dataTrend, 'trend');
             </div>
         </div>
     </section>
-    <section class="vtr__trend bg-purple padding-top padding-bottom">
+    <section class="vtr__trend bg-purple padding-top padding-bottom" style="<?php echo ($seccion_3 !== '')? 'background-color:'.$seccion_3 : '' ?>">
         <div class="vtr__container">
-            <h2 class="vtr__title vtr__title--line"><span>Nuevos lanzamientos</span></h2>
+            <h2 class="vtr__title vtr__title--line"><span>Nuevos Lanzamientos en Spotify</span></h2>
             <div class="vtr__loading spt_content_content__loading">
                 <img loading="lazy" src="./assets/images/loading.svg" alt="cargando">
             </div>
@@ -377,336 +326,14 @@ $htmlTrend = itemSpotifyRanking($dataTrend, 'trend');
                 <?php if( !empty($dataSpotify) ): ?>
                     <?php echo $htmlSpotify; ?>
                 <?php endif; ?>
-                <!--
-                <div class="vtr__card">
-                    <div class="vtr__card__image">
-                        <img loading="lazy" src="./assets/images/img8.jpg" alt="imagen">
-                        <div class="type">
-                            <img loading="lazy" src="./assets/images/play-spotify.svg" alt="imagen">
-                        </div>
-                    </div>
-                    <div class="vtr__card__info">
-                        <div class="vtr__card__info__top">
-                            <h2 class="title text-center">Taonoces Rojos</h2>
-                           <div class="follo-popu">
-                               <div class="followers">
-                                   <span class="number">1.450.000</span>
-                                   <span class="text">Seguidores</span>
-                               </div>
-                               <div class="popular">
-                                   <div class="boxs">
-                                       <div class="box"></div>
-                                       <div class="box"></div>
-                                       <div class="box"></div>
-                                       <div class="box"></div>
-                                       <div class="box"></div>
-                                   </div>
-                                   <span class="text">Popularidad</span>
-                               </div>
-                           </div>
-                        </div>
-                    </div>
-                    <div class="vtr__card__bottom">
-                        <a href="#" class="button">Agregar a mi lista</a>
-                    </div>
-                </div>
-                <div class="vtr__card">
-                    <div class="vtr__card__image">
-                        <img loading="lazy" src="./assets/images/img7.jpg" alt="imagen">
-                        <div class="type">
-                            <img loading="lazy" src="./assets/images/play-spotify.svg" alt="imagen">
-                        </div>
-                    </div>
-                    <div class="vtr__card__info">
-                        <div class="vtr__card__info__top">
-                            <h2 class="title text-center">Taonoces Rojos</h2>
-                           <div class="follo-popu">
-                               <div class="followers">
-                                   <span class="number">1.450.000</span>
-                                   <span class="text">Seguidores</span>
-                               </div>
-                               <div class="popular">
-                                   <div class="boxs">
-                                       <div class="box"></div>
-                                       <div class="box"></div>
-                                       <div class="box"></div>
-                                       <div class="box"></div>
-                                       <div class="box"></div>
-                                   </div>
-                                   <span class="text">Popularidad</span>
-                               </div>
-                           </div>
-                        </div>
-                    </div>
-                    <div class="vtr__card__bottom">
-                        <a href="#" class="button">Agregar a mi lista</a>
-                    </div>
-                </div>
-                <div class="vtr__card">
-                    <div class="vtr__card__image">
-                        <img loading="lazy" src="./assets/images/img6.png" alt="imagen">
-                        <div class="type">
-                            <img loading="lazy" src="./assets/images/play-spotify.svg" alt="imagen">
-                        </div>
-                    </div>
-                    <div class="vtr__card__info">
-                        <div class="vtr__card__info__top">
-                            <h2 class="title text-center">Taonoces Rojos</h2>
-                           <div class="follo-popu">
-                               <div class="followers">
-                                   <span class="number">1.450.000</span>
-                                   <span class="text">Seguidores</span>
-                               </div>
-                               <div class="popular">
-                                   <div class="boxs">
-                                       <div class="box"></div>
-                                       <div class="box"></div>
-                                       <div class="box"></div>
-                                       <div class="box"></div>
-                                       <div class="box"></div>
-                                   </div>
-                                   <span class="text">Popularidad</span>
-                               </div>
-                           </div>
-                        </div>
-                    </div>
-                    <div class="vtr__card__bottom">
-                        <a href="#" class="button">Agregar a mi lista</a>
-                    </div>
-                </div>
-                <div class="vtr__card">
-                    <div class="vtr__card__image">
-                        <img loading="lazy" src="./assets/images/img5.png" alt="imagen">
-                        <div class="type">
-                            <img loading="lazy" src="./assets/images/play-spotify.svg" alt="imagen">
-                        </div>
-                    </div>
-                    <div class="vtr__card__info">
-                        <div class="vtr__card__info__top">
-                            <h2 class="title text-center">Taonoces Rojos</h2>
-                           <div class="follo-popu">
-                               <div class="followers">
-                                   <span class="number">1.450.000</span>
-                                   <span class="text">Seguidores</span>
-                               </div>
-                               <div class="popular">
-                                   <div class="boxs">
-                                       <div class="box"></div>
-                                       <div class="box"></div>
-                                       <div class="box"></div>
-                                       <div class="box"></div>
-                                       <div class="box"></div>
-                                   </div>
-                                   <span class="text">Popularidad</span>
-                               </div>
-                           </div>
-                        </div>
-                    </div>
-                    <div class="vtr__card__bottom">
-                        <a href="#" class="button">Agregar a mi lista</a>
-                    </div>
-                </div>
-                <div class="vtr__card">
-                    <div class="vtr__card__image">
-                        <img loading="lazy" src="./assets/images/img2.png" alt="imagen">
-                        <div class="type">
-                            <img loading="lazy" src="./assets/images/play-spotify.svg" alt="imagen">
-                        </div>
-                    </div>
-                    <div class="vtr__card__info">
-                        <div class="vtr__card__info__top">
-                            <h2 class="title text-center">Taonoces Rojos</h2>
-                           <div class="follo-popu">
-                               <div class="followers">
-                                   <span class="number">1.450.000</span>
-                                   <span class="text">Seguidores</span>
-                               </div>
-                               <div class="popular">
-                                   <div class="boxs">
-                                       <div class="box"></div>
-                                       <div class="box"></div>
-                                       <div class="box"></div>
-                                       <div class="box"></div>
-                                       <div class="box"></div>
-                                   </div>
-                                   <span class="text">Popularidad</span>
-                               </div>
-                           </div>
-                        </div>
-                    </div>
-                    <div class="vtr__card__bottom">
-                        <a href="#" class="button">Agregar a mi lista</a>
-                    </div>
-                </div>
-                <div class="vtr__card">
-                    <div class="vtr__card__image">
-                        <img loading="lazy" src="./assets/images/img8.jpg" alt="imagen">
-                        <div class="type">
-                            <img loading="lazy" src="./assets/images/play-spotify.svg" alt="imagen">
-                        </div>
-                    </div>
-                    <div class="vtr__card__info">
-                        <div class="vtr__card__info__top">
-                            <h2 class="title text-center">Taonoces Rojos</h2>
-                           <div class="follo-popu">
-                               <div class="followers">
-                                   <span class="number">1.450.000</span>
-                                   <span class="text">Seguidores</span>
-                               </div>
-                               <div class="popular">
-                                   <div class="boxs">
-                                       <div class="box"></div>
-                                       <div class="box"></div>
-                                       <div class="box"></div>
-                                       <div class="box"></div>
-                                       <div class="box"></div>
-                                   </div>
-                                   <span class="text">Popularidad</span>
-                               </div>
-                           </div>
-                        </div>
-                    </div>
-                    <div class="vtr__card__bottom">
-                        <a href="#" class="button">Agregar a mi lista</a>
-                    </div>
-                </div>
-                <div class="vtr__card">
-                    <div class="vtr__card__image">
-                        <img loading="lazy" src="./assets/images/img7.jpg" alt="imagen">
-                        <div class="type">
-                            <img loading="lazy" src="./assets/images/play-spotify.svg" alt="imagen">
-                        </div>
-                    </div>
-                    <div class="vtr__card__info">
-                        <div class="vtr__card__info__top">
-                            <h2 class="title text-center">Taonoces Rojos</h2>
-                           <div class="follo-popu">
-                               <div class="followers">
-                                   <span class="number">1.450.000</span>
-                                   <span class="text">Seguidores</span>
-                               </div>
-                               <div class="popular">
-                                   <div class="boxs">
-                                       <div class="box"></div>
-                                       <div class="box"></div>
-                                       <div class="box"></div>
-                                       <div class="box"></div>
-                                       <div class="box"></div>
-                                   </div>
-                                   <span class="text">Popularidad</span>
-                               </div>
-                           </div>
-                        </div>
-                    </div>
-                    <div class="vtr__card__bottom">
-                        <a href="#" class="button">Agregar a mi lista</a>
-                    </div>
-                </div>
-                <div class="vtr__card">
-                    <div class="vtr__card__image">
-                        <img loading="lazy" src="./assets/images/img6.png" alt="imagen">
-                        <div class="type">
-                            <img loading="lazy" src="./assets/images/play-spotify.svg" alt="imagen">
-                        </div>
-                    </div>
-                    <div class="vtr__card__info">
-                        <div class="vtr__card__info__top">
-                            <h2 class="title text-center">Taonoces Rojos</h2>
-                           <div class="follo-popu">
-                               <div class="followers">
-                                   <span class="number">1.450.000</span>
-                                   <span class="text">Seguidores</span>
-                               </div>
-                               <div class="popular">
-                                   <div class="boxs">
-                                       <div class="box"></div>
-                                       <div class="box"></div>
-                                       <div class="box"></div>
-                                       <div class="box"></div>
-                                       <div class="box"></div>
-                                   </div>
-                                   <span class="text">Popularidad</span>
-                               </div>
-                           </div>
-                        </div>
-                    </div>
-                    <div class="vtr__card__bottom">
-                        <a href="#" class="button">Agregar a mi lista</a>
-                    </div>
-                </div>
-                <div class="vtr__card">
-                    <div class="vtr__card__image">
-                        <img loading="lazy" src="./assets/images/img5.png" alt="imagen">
-                        <div class="type">
-                            <img loading="lazy" src="./assets/images/play-spotify.svg" alt="imagen">
-                        </div>
-                    </div>
-                    <div class="vtr__card__info">
-                        <div class="vtr__card__info__top">
-                            <h2 class="title text-center">Taonoces Rojos</h2>
-                           <div class="follo-popu">
-                               <div class="followers">
-                                   <span class="number">1.450.000</span>
-                                   <span class="text">Seguidores</span>
-                               </div>
-                               <div class="popular">
-                                   <div class="boxs">
-                                       <div class="box"></div>
-                                       <div class="box"></div>
-                                       <div class="box"></div>
-                                       <div class="box"></div>
-                                       <div class="box"></div>
-                                   </div>
-                                   <span class="text">Popularidad</span>
-                               </div>
-                           </div>
-                        </div>
-                    </div>
-                    <div class="vtr__card__bottom">
-                        <a href="#" class="button">Agregar a mi lista</a>
-                    </div>
-                </div>
-                <div class="vtr__card">
-                    <div class="vtr__card__image">
-                        <img loading="lazy" src="./assets/images/img2.png" alt="imagen">
-                        <div class="type">
-                            <img loading="lazy" src="./assets/images/play-spotify.svg" alt="imagen">
-                        </div>
-                    </div>
-                    <div class="vtr__card__info">
-                        <div class="vtr__card__info__top">
-                            <h2 class="title text-center">Taonoces Rojos</h2>
-                           <div class="follo-popu">
-                               <div class="followers">
-                                   <span class="number">1.450.000</span>
-                                   <span class="text">Seguidores</span>
-                               </div>
-                               <div class="popular">
-                                   <div class="boxs">
-                                       <div class="box"></div>
-                                       <div class="box"></div>
-                                       <div class="box"></div>
-                                       <div class="box"></div>
-                                       <div class="box"></div>
-                                   </div>
-                                   <span class="text">Popularidad</span>
-                               </div>
-                           </div>
-                        </div>
-                    </div>
-                    <div class="vtr__card__bottom">
-                        <a href="#" class="button">Agregar a mi lista</a>
-                    </div>
-                </div>-->
             </div>
         </div>
     </section>
-    <section class="vtr__instagram padding-top padding-bottom">
+    <section class="vtr__instagram padding-top-35 padding-bottom" style="<?php echo ($seccion_4 !== '')? 'background-color:'.$seccion_4 : '' ?>">
         <div class="vtr__container">
-            <h2>Instagram</h2>
+            <!--<h2>Instagram</h2>-->
             <script src="https://apps.elfsight.com/p/platform.js" defer></script>
-            <div class="elfsight-app-199c6011-c594-45f2-b081-9107b41a8355"></div>
-            <!--
+            <div class="elfsight-app-c49cd216-7ac3-4a2c-8a96-a7812e187146"></div><!--
             <div class="vtr__grid vtr__grid-gap-20 vtr__grid-col-4">
                 <a href="#" class="item">
                     <img loading="lazy" src="./assets/images/instagram1.jpg" alt="imagen">
@@ -816,7 +443,14 @@ $htmlTrend = itemSpotifyRanking($dataTrend, 'trend');
             -->
         </div>
     </section>
-    <section class="vtr__contact padding-top padding-bottom">
+    <section class="bg-purple padding-top padding-bottom" style="<?php echo ($seccion_5 !== '')? 'background-color:'.$seccion_5 : '' ?>">
+        <div class="vtr__container">
+            <div class="content">
+                <iframe src="https://discord.com/widget?id=921063903612514354&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+            </div>
+        </div>
+    </section>
+    <section class="vtr__contact padding-top padding-bottom" style="<?php echo ($seccion_6 !== '')? 'position: initial; background-color:'.$seccion_6 : '' ?>">
         <div class="vtr__container">
             <div class="content">
                 <h2>Contáctanos</h2>
@@ -839,7 +473,7 @@ $htmlTrend = itemSpotifyRanking($dataTrend, 'trend');
                     <div class="input">
                         <textarea name="message" id="message" placeholder="Mensaje"></textarea>
                     </div>
-                    <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
+                    <div class="g-recaptcha" data-sitekey="6LcHgKAeAAAAACGU9z4-Fr6dix-z47HcAWobdAAr"></div>
                     <div class="input">
 
                         <span id="recaptcha_error" class="error_message"></span>
@@ -856,13 +490,11 @@ $htmlTrend = itemSpotifyRanking($dataTrend, 'trend');
         </button>
         <div class="vtr__modal__container">
             <h2>¡Gracias!</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste voluptatem sit consequatur provident quos
-                alias rerum, quas ipsam nostrum eligendi molestiae blanditiis quam quis harum cupiditate? Ipsa
-                consequatur voluptate natus.</p>
+            <p>Gracias por visitar nuestra comunidad e inscribirte. Aquí encontraras las últimas novedades tu artista favorito. Pronto responderemos tu consulta.</p>
         </div>
     </div>
 </main>
-<footer class="vtr__footer">
+<footer class="vtr__footer" style="<?php echo ($seccion_7 !== '')? 'background-color:'.$seccion_7 : '' ?>">
     <div class="vtr__container">
         <div class="vtr__grid vtr__grid-gap-20 vtr__grid-col-6">
             <div class="vtr__item">
@@ -876,53 +508,6 @@ $htmlTrend = itemSpotifyRanking($dataTrend, 'trend');
                     <?php endforeach; ?>
                 </ul>
             </div>
-            <!--
-            <div class="vtr__item">
-                <h4>Ed Sheeran</h4>
-                <ul>
-                    <li><a href="#">Enlace 1</a></li>
-                    <li><a href="#">Enlace 2</a></li>
-                    <li><a href="#">Enlace 3</a></li>
-                    <li><a href="#">Enlace 4</a></li>
-                </ul>
-            </div>
-            <div class="vtr__item">
-                <h4>Ed Sheeran</h4>
-                <ul>
-                    <li><a href="#">Enlace 1</a></li>
-                    <li><a href="#">Enlace 2</a></li>
-                    <li><a href="#">Enlace 3</a></li>
-                    <li><a href="#">Enlace 4</a></li>
-                </ul>
-            </div>
-            <div class="vtr__item">
-                <h4>Ed Sheeran</h4>
-                <ul>
-                    <li><a href="#">Enlace 1</a></li>
-                    <li><a href="#">Enlace 2</a></li>
-                    <li><a href="#">Enlace 3</a></li>
-                    <li><a href="#">Enlace 4</a></li>
-                </ul>
-            </div>
-            <div class="vtr__item">
-                <h4>Ed Sheeran</h4>
-                <ul>
-                    <li><a href="#">Enlace 1</a></li>
-                    <li><a href="#">Enlace 2</a></li>
-                    <li><a href="#">Enlace 3</a></li>
-                    <li><a href="#">Enlace 4</a></li>
-                </ul>
-            </div>
-            <div class="vtr__item">
-                <h4>Ed Sheeran</h4>
-                <ul>
-                    <li><a href="#">Enlace 1</a></li>
-                    <li><a href="#">Enlace 2</a></li>
-                    <li><a href="#">Enlace 3</a></li>
-                    <li><a href="#">Enlace 4</a></li>
-                </ul>cluding versions of Lorem Ipsum.
-            </div>
-            -->
         </div>
         <div class="vtr__footer__bottom">
             <p>© <?php echo date("Y"); ?> Derechos reservados</p>
@@ -975,16 +560,26 @@ $htmlTrend = itemSpotifyRanking($dataTrend, 'trend');
 <script src="assets/js/follow.js"></script>
 <script src="assets/js/home.js"></script>
 <script>
-
-
     const buttonPlay =  document.querySelector( '.vtr__video__controls .control-play' );
     const buttonVolume =  document.querySelector( '.vtr__video__controls .control-volume' );
-
+    let isMobile = false;
+    const widthDisplay = $(window).width();
     if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
         const image =  document.querySelector( '.play-image' );
         const play = buttonPlay.getAttribute('data-play');
         buttonPlay.classList.remove('isPlay');
         image.setAttribute( 'src', play );
+        isMobile = true;
+    }
+
+    if(isMobile){
+        //$(".vtr__video .logo").css("display","none");
+        //$(".vtr__video .vtr__button").css("display","none");
+        //$(".vtr__video").css("height","auto");
+        //$(".vtr__video").css("padding","20px 0");
+        $(".vtr__video__content img").css("width","10.625rem");
+        $(".vtr__video").css("background","black");
+        $(".vtr__video").css("height",((widthDisplay/2) + 150) + 'px' );
     }
 
     var tag = document.createElement('script');
@@ -1011,6 +606,15 @@ $htmlTrend = itemSpotifyRanking($dataTrend, 'trend');
             buttonPlay.classList.add('isPlay');
             image.setAttribute( 'src', pause );
             player.playVideo();
+        }
+
+        if(isMobile){
+            $(".vtr__video .logo").css("display","none");
+            $(".vtr__video .vtr__button").css("display","none");
+            //$(".vtr__video").css("height","auto");
+            //$(".vtr__video").css("padding","20px 0");
+            $(".vtr__video").css("background","black");
+            $(".vtr__video").css("height",((widthDisplay/2) + 150) + 'px' );
         }
 
     });
@@ -1092,5 +696,26 @@ $htmlTrend = itemSpotifyRanking($dataTrend, 'trend');
 </script>
 <script src='https://www.google.com/recaptcha/api.js' async defer></script>
 <input id="url_form" type="hidden" value="<?php echo $urlSubmit; ?>">
+<!-- GetResponse Analytics -->
+<!--<script type="text/javascript">
+    (function(i, s, o, g, r, a, m){
+        i.grpr = 'https://us-ms.gr-cdn.com/getresponse-QoMqo/push-notification/iZq-pr.js';
+        i['__GetResponseAnalyticsObject'] = r;
+        i[r] = i[r] || function() {(i[r].q = i[r].q || []).push(arguments)};
+        a = s.createElement(o);
+        m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m);
+    })(window, document, 'script', 'https://ga.getresponse.com/script/ga.js?v=v2wp&wpid=NyswVKxcJFAApPS5wYw0MKx5NPmwc&grid=sBDcBX0BafXENA3E%3D', 'GrTracking');
+
+    // Creates a default GetResponse Tracker with automatic cookie domain configuration.
+    GrTracking('setDomain', 'auto');
+
+    // Sends a pageview hit from the tracker just created.
+    // always load current window.location.href - usefull for single page applications
+    GrTracking('push');
+</script>-->
+<!-- End GetResponse Analytics -->
 </body>
 </html>

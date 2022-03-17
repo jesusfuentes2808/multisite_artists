@@ -862,8 +862,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 function listTrend() {
   $("#trend_content").css('display', 'none');
-  $(".in_trend_content__loading").css('display', 'block');
-  fetch(window.urlJson + "/in_trend/in_trend.json").then( /*#__PURE__*/function () {
+  $(".in_trend_content__loading").css('display', 'block'); //fetch(window.urlJson + "/trend")
+
+  fetch(window.url + "/trend").then( /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(res) {
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {
@@ -910,7 +911,7 @@ function listTrend() {
                 }
 
                 var artistsAll = artistList.join(',');
-                $('#trend_content').append("<div class=\"vtr__card\">\n                        <div class=\"vtr__card__image\">\n                            <img loading=\"lazy\" src=\"".concat(images[0].url, "\" alt='").concat(artistsAll, "'>\n                        </div>\n                        <div class=\"vtr__card__info\">\n                            <div class=\"vtr__card__info__top\">\n                                <h2 class=\"title\">").concat(name, "</h2>\n                                <h3 class=\"sub-title\" >").concat(artistListFinal, "</h3>\n                                <!--<small class=\"reproductions\">350,000 Reproducciones</small>-->\n                                <small class=\"reproductions\">Popularidad: ").concat(popularity, " %</small>\n                            </div>\n                        </div>\n                        <div class=\"vtr__card__bottom\">\n                            <a href=\"#\" class=\"button follow_track_spotify_link\" data-id=\"").concat(id, "\" data-type=\"trend\">Agregar a mi lista</a>\n                        </div>\n                    </div>"));
+                $('#trend_content').append("<div class=\"vtr__card\">\n                        <a href=\"https://open.spotify.com/track/".concat(id, "\" target=\"_blank\" style=\"display: inline-block;z-index: 11111;position: relative;\">\n                            <div class=\"vtr__card__image\">\n                                    <img loading=\"lazy\" src=\"").concat(images[0].url, "\" alt='").concat(artistsAll, "'>\n                            </div>\n                        </a>\n                        <div class=\"vtr__card__info\">\n                            <a href=\"https://open.spotify.com/track/").concat(id, "\" target=\"_blank\">\n                                <div class=\"vtr__card__info__top\">\n                                    <h2 class=\"title\">").concat(name, "</h2>\n                                    <h3 class=\"sub-title\" >").concat(artistListFinal, "</h3>\n                                    <!--<small class=\"reproductions\">350,000 Reproducciones</small>-->\n                                    <small class=\"reproductions\">Popularidad: ").concat(popularity, " %</small>\n                                </div>\n                                <div class=\"card__spotify\">\n                                       <img src=\"/assets/images/Spotify_Logo_Green.png\" alt=\"spotify\">\n                                </div>\n                            </a>\n                        </div>\n                        <div class=\"vtr__card__bottom\">\n                            <a href=\"#\" class=\"button follow_track_spotify_link\" data-id=\"").concat(id, "\" data-type=\"trend\">Agregar a mi lista</a>\n                        </div>\n                    </div>"));
                 window['spt_trend_' + id] = '{"id": "' + id + '", "image": "' + images[0].url + '", "name": "' + name + '", "artist_all": "' + artistsAll.replace(/"/g, "\'") + '", "artist_list_final": "' + artistListFinal.replace(/\\"/g, "\\'") + '"}';
               });
               $("#trend_content").css('display', 'grid');
