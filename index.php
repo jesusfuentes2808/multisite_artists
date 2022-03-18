@@ -55,27 +55,91 @@ if($data){
         $keywords = trim($keywords);
         // END SEO
 
+        $discord  = '';
+        if(isset($data->field_custom->discord)){
+            $discord = $data->field_custom->discord[0];
+            $discord = trim($discord);
+        }
+
+
+        $instagram  = '';
+        if(isset($data->field_custom->instagram)){
+            $instagram = $data->field_custom->instagram[0];
+            $instagram = trim($instagram);
+        }
+
+
+        $getResponse1  = '';
+        if(isset($data->field_custom->getresponse_url_1)){
+            $getResponse1 = $data->field_custom->getresponse_url_1[0];
+            $getResponse1 = trim($getResponse1);
+        }
+
+        $getResponse2  = '';
+        if(isset($data->field_custom->getresponse_url_2)){
+            $getResponse2 = $data->field_custom->getresponse_url_2[0];
+            $getResponse2 = trim($getResponse2);
+        }
+
+        $telegram  = '#';
+        if(isset($data->field_custom->telegram_url)){
+            $telegram = $data->field_custom->telegram_url[0];
+            $telegram = trim($telegram);
+        }
+
+        $gtm = '';
+        if(isset($data->field_custom->gtm)){
+            $gtm = $data->field_custom->gtm[0];
+            $gtm = trim($gtm);
+        }
+
         // COLOR
-        $seccion_1 = $data->field_custom->seccion_1[0];
-        $seccion_1 = trim($seccion_1);
+        $seccion_1 = '';
+        if(isset($data->field_custom->seccion_1)) {
+            $seccion_1 = $data->field_custom->seccion_1[0];
+            $seccion_1 = trim($seccion_1);
+        }
 
-        $seccion_2 = $data->field_custom->seccion_2[0];
-        $seccion_2 = trim($seccion_2);
+        $seccion_2 = '';
+        if(isset($data->field_custom->seccion_2)) {
+            $seccion_2 = $data->field_custom->seccion_2[0];
+            $seccion_2 = trim($seccion_2);
+        }
 
-        $seccion_3 = $data->field_custom->seccion_3[0];
-        $seccion_3 = trim($seccion_3);
 
-        $seccion_4 = $data->field_custom->seccion_4[0];
-        $seccion_4 = trim($seccion_4);
+        $seccion_3 = '';
+        if(isset($data->field_custom->seccion_3)) {
+            $seccion_3 = $data->field_custom->seccion_3[0];
+            $seccion_3 = trim($seccion_3);
+        }
 
-        $seccion_5 = $data->field_custom->seccion_5[0];
-        $seccion_5 = trim($seccion_5);
 
-        $seccion_6 = $data->field_custom->seccion_6[0];
-        $seccion_6 = trim($seccion_6);
+        $seccion_4 = '';
+        if(isset($data->field_custom->seccion_4)) {
+            $seccion_4 = $data->field_custom->seccion_4[0];
+            $seccion_4 = trim($seccion_4);
+        }
 
-        $seccion_7 = $data->field_custom->seccion_7[0];
-        $seccion_7 = trim($seccion_7);
+
+        $seccion_5 = '';
+        if(isset($data->field_custom->seccion_5)) {
+            $seccion_5 = $data->field_custom->seccion_5[0];
+            $seccion_5 = trim($seccion_5);
+        }
+
+
+        $seccion_6 = '';
+        if(isset($data->field_custom->seccion_6)) {
+            $seccion_6 = $data->field_custom->seccion_6[0];
+            $seccion_6 = trim($seccion_6);
+        }
+
+        $seccion_7 = '';
+        if(isset($data->field_custom->seccion_7)) {
+            $seccion_7 = $data->field_custom->seccion_7[0];
+            $seccion_7 = trim($seccion_7);
+        }
+
 }
 
 
@@ -160,7 +224,6 @@ if (file_exists($filename)) {
 }
 
 $htmlTrend = itemSpotifyRanking($dataTrend, 'trend');
-
 ?>
 <!doctype html>
 <html lang="es">
@@ -184,30 +247,69 @@ $htmlTrend = itemSpotifyRanking($dataTrend, 'trend');
         window.alias = "<?php echo $alias; ?>";
         console.log(window.urlJson + "/" + window.alias + "/playlist_yt.json");
     </script>
+    <?php
+        if(!empty($gtm)):
+    ?>
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
                 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
             j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-K5BSHHM');</script>
+        })(window,document,'script','dataLayer','<?php echo $gtm ?>');</script>
     <!-- End Google Tag Manager -->
+    <?php
+        endif;
+    ?>
+    <?php
+    if(!empty($getResponse1) && !empty($getResponse2)):
+        ?>
+    <!-- GetResponse Analytics -->
+    <script type="text/javascript">
+        (function(i, s, o, g, r, a, m){
+            i.grpr = '<?php echo $getResponse1; ?>';
+            i['__GetResponseAnalyticsObject'] = r;
+            i[r] = i[r] || function() {(i[r].q = i[r].q || []).push(arguments)};
+            a = s.createElement(o);
+            m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m);
+        })(window, document, 'script', '<?php echo $getResponse2; ?>', 'GrTracking');
+
+        // Creates a default GetResponse Tracker with automatic cookie domain configuration.
+        GrTracking('setDomain', 'auto');
+
+        // Sends a pageview hit from the tracker just created.
+        // always load current window.location.href - usefull for single page applications
+        GrTracking('push');
+    </script>
+    <!-- End GetResponse Analytics -->
+    <?php endif; ?>
 </head>
 <body>
+<?php
+if(!empty($gtm)):
+?>
 <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K5BSHHM"
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=<?php echo $gtm ?>"
                   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
+<?php
+endif;
+?>
 <input type="hidden" id="video_youtube_id" value="<?php echo $videoYoutubeId; ?>">
 
 <main>
     <section class="vtr__video">
         <!--<iframe src="https://www.youtube.com/embed/ZhIsAZO5gl0?autoplay=1&mute=1&loop=1&controls=0"></iframe>-->
         <div id="player"></div>
-        <div class="vtr__video__content">
+        <div class="vtr__video__content" >
             <div class="logo">
-                <img loading="lazy" src="./assets/images/logo.svg" alt="Logo">
+                <!--<img loading="lazy" src="./assets/images/logo.svg" alt="Logo">-->
             </div>
-            <button class="vtr__button js-scroll" id="#trend">Descubre tú música</button>
+            <a href="<?php echo $telegram ?>" target="_blank">
+                <button class="vtr__button js-scroll" id="trend" style="background: #039be5;">Unete a la comunidad Telegram</button>
+            </a>
         </div>
 
         <div class="vtr__video__controls">
@@ -303,7 +405,19 @@ $htmlTrend = itemSpotifyRanking($dataTrend, 'trend');
             <?php endif ?>
         </div>
     </section>
-    <section class="vtr__bio" style="<?php echo ($seccion_2 !== '')? 'position: initial; background-color:'.$seccion_2 : '' ?>">
+    <?php
+    if($seccion_2):
+        ?>
+        <style>
+            .vtr__bio:after{
+                background: none;
+                opacity: 1;
+            }
+        </style>
+    <?php
+    endif;
+    ?>
+    <section class="vtr__bio" style="<?php echo ($seccion_2 !== '')? 'position: sticky; background-color:'.$seccion_2 : '' ?>">
         <div class="vtr__container">
             <div class="vtr__flex vtr__flex__space-between padding-top-50">
                 <div class="vtr__col__8">
@@ -329,128 +443,50 @@ $htmlTrend = itemSpotifyRanking($dataTrend, 'trend');
             </div>
         </div>
     </section>
+    <?php
+    if(! empty($instagram) ):
+    ?>
     <section class="vtr__instagram padding-top-35 padding-bottom" style="<?php echo ($seccion_4 !== '')? 'background-color:'.$seccion_4 : '' ?>">
         <div class="vtr__container">
             <!--<h2>Instagram</h2>-->
-            <script src="https://apps.elfsight.com/p/platform.js" defer></script>
-            <div class="elfsight-app-c49cd216-7ac3-4a2c-8a96-a7812e187146"></div><!--
-            <div class="vtr__grid vtr__grid-gap-20 vtr__grid-col-4">
-                <a href="#" class="item">
-                    <img loading="lazy" src="./assets/images/instagram1.jpg" alt="imagen">
-                    <div class="actions">
-                        <div class="actions__like">
-                            <img loading="lazy" src="./assets/images/corazon.svg" alt="imagen">
-                            <span class="number">20</span>
-                        </div>
-                        <div class="actions__comment">
-                            <img loading="lazy" src="./assets/images/comentario.svg" alt="imagen">
-                            <span class="number">100</span>
-                        </div>
-                    </div>
-                </a>
-                <a href="#" class="item">
-                    <img loading="lazy" src="./assets/images/instagram2.jpg" alt="imagen">
-                    <div class="actions">
-                        <div class="actions__like">
-                            <img loading="lazy" src="./assets/images/corazon.svg" alt="imagen">
-                            <span class="number">20</span>
-                        </div>
-                        <div class="actions__comment">
-                            <img loading="lazy" src="./assets/images/comentario.svg" alt="imagen">
-                            <span class="number">100</span>
-                        </div>
-                    </div>
-                </a>
-                <a href="#" class="item">
-                    <img loading="lazy" src="./assets/images/instagram3.jpg" alt="imagen">
-                    <div class="actions">
-                        <div class="actions__like">
-                            <img loading="lazy" src="./assets/images/corazon.svg" alt="imagen">
-                            <span class="number">20</span>
-                        </div>
-                        <div class="actions__comment">
-                            <img loading="lazy" src="./assets/images/comentario.svg" alt="imagen">
-                            <span class="number">100</span>
-                        </div>
-                    </div>
-                </a>
-                <a href="#" class="item">
-                    <img loading="lazy" src="./assets/images/instagram4.jpg" alt="imagen">
-                    <div class="actions">
-                        <div class="actions__like">
-                            <img loading="lazy" src="./assets/images/corazon.svg" alt="imagen">
-                            <span class="number">20</span>
-                        </div>
-                        <div class="actions__comment">
-                            <img loading="lazy" src="./assets/images/comentario.svg" alt="imagen">
-                            <span class="number">100</span>
-                        </div>
-                    </div>
-                </a>
-                <a href="#" class="item">
-                    <img loading="lazy" src="./assets/images/instagram5.jpg" alt="imagen">
-                    <div class="actions">
-                        <div class="actions__like">
-                            <img loading="lazy" src="./assets/images/corazon.svg" alt="imagen">
-                            <span class="number">20</span>
-                        </div>
-                        <div class="actions__comment">
-                            <img loading="lazy" src="./assets/images/comentario.svg" alt="imagen">
-                            <span class="number">100</span>
-                        </div>
-                    </div>
-                </a>
-                <a href="#" class="item">
-                    <img loading="lazy" src="./assets/images/instagram6.jpg" alt="imagen">
-                    <div class="actions">
-                        <div class="actions__like">
-                            <img loading="lazy" src="./assets/images/corazon.svg" alt="imagen">
-                            <span class="number">20</span>
-                        </div>
-                        <div class="actions__comment">
-                            <img loading="lazy" src="./assets/images/comentario.svg" alt="imagen">
-                            <span class="number">100</span>
-                        </div>
-                    </div>
-                </a>
-                <a href="#" class="item">
-                    <img loading="lazy" src="./assets/images/instagram7.jpg" alt="imagen">
-                    <div class="actions">
-                        <div class="actions__like">
-                            <img loading="lazy" src="./assets/images/corazon.svg" alt="imagen">
-                            <span class="number">20</span>
-                        </div>
-                        <div class="actions__comment">
-                            <img loading="lazy" src="./assets/images/comentario.svg" alt="imagen">
-                            <span class="number">100</span>
-                        </div>
-                    </div>
-                </a>
-                <a href="#" class="item">
-                    <img loading="lazy" src="./assets/images/instagram8.jpg" alt="imagen">
-                    <div class="actions">
-                        <div class="actions__like">
-                            <img loading="lazy" src="./assets/images/corazon.svg" alt="imagen">
-                            <span class="number">20</span>
-                        </div>
-                        <div class="actions__comment">
-                            <img loading="lazy" src="./assets/images/comentario.svg" alt="imagen">
-                            <span class="number">100</span>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            -->
+            <?php echo $instagram; ?>
         </div>
     </section>
+    <?php
+    endif;
+    ?>
+
+
+    <?php
+    if(! empty($discord) ):
+    ?>
     <section class="bg-purple padding-top padding-bottom" style="<?php echo ($seccion_5 !== '')? 'background-color:'.$seccion_5 : '' ?>">
         <div class="vtr__container">
             <div class="content">
+                <?php echo $discord ?>
+                <!--
                 <iframe src="https://discord.com/widget?id=921063903612514354&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+                -->
             </div>
         </div>
     </section>
-    <section class="vtr__contact padding-top padding-bottom" style="<?php echo ($seccion_6 !== '')? 'position: initial; background-color:'.$seccion_6 : '' ?>">
+    <?php
+    endif;
+    ?>
+
+    <?php
+    if($seccion_6):
+        ?>
+    <style>
+        .vtr__contact:after{
+            background: none;
+            opacity: 1;
+        }
+    </style>
+    <?php
+    endif;
+    ?>
+    <section class="vtr__contact padding-top padding-bottom" style="<?php echo ($seccion_6 !== '')? 'position: sticky; background-color:'.$seccion_6 : '' ?>">
         <div class="vtr__container">
             <div class="content">
                 <h2>Contáctanos</h2>
@@ -696,26 +732,6 @@ $htmlTrend = itemSpotifyRanking($dataTrend, 'trend');
 </script>
 <script src='https://www.google.com/recaptcha/api.js' async defer></script>
 <input id="url_form" type="hidden" value="<?php echo $urlSubmit; ?>">
-<!-- GetResponse Analytics -->
-<!--<script type="text/javascript">
-    (function(i, s, o, g, r, a, m){
-        i.grpr = 'https://us-ms.gr-cdn.com/getresponse-QoMqo/push-notification/iZq-pr.js';
-        i['__GetResponseAnalyticsObject'] = r;
-        i[r] = i[r] || function() {(i[r].q = i[r].q || []).push(arguments)};
-        a = s.createElement(o);
-        m = s.getElementsByTagName(o)[0];
-        a.async = 1;
-        a.src = g;
-        m.parentNode.insertBefore(a, m);
-    })(window, document, 'script', 'https://ga.getresponse.com/script/ga.js?v=v2wp&wpid=NyswVKxcJFAApPS5wYw0MKx5NPmwc&grid=sBDcBX0BafXENA3E%3D', 'GrTracking');
 
-    // Creates a default GetResponse Tracker with automatic cookie domain configuration.
-    GrTracking('setDomain', 'auto');
-
-    // Sends a pageview hit from the tracker just created.
-    // always load current window.location.href - usefull for single page applications
-    GrTracking('push');
-</script>-->
-<!-- End GetResponse Analytics -->
 </body>
 </html>

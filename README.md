@@ -13,3 +13,5 @@ Proyecto en web
 2. Crear un sitio de Google Analytics
 3. Setear Captcha: https://www.google.com/recaptcha/about/
 4. Setear cors en WP
+5. Setear GetResponse
+6. Setar sitemap.xml
